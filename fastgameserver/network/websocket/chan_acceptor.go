@@ -2,7 +2,6 @@ package websocket
 
 import (
 	"fmt"
-	"server"
 	"sync"
 	"time"
 	"trainserver/util/logger"
