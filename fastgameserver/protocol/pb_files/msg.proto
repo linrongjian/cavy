@@ -1,0 +1,78 @@
+syntax = "proto2";
+option go_package = "../pb";
+
+enum Cmd {
+	/* -- test -- */
+	Test = 0;
+
+	// 继承点点点消息
+	/* -- Business : 1-500 -- */
+	ShowRedot = 3; //显示红点
+	Ping = 4; //Ping 消息 收到ping 消息后需要立即返回Pong消息
+	Pong = 5; //Pong 消息
+
+	/* -- Push : 501-700 -- */
+	MsgSubscribe = 501;   //订阅消息
+	MsgUnsubscribe = 502; //取消订阅消息
+	FriendChat = 503;  //好友聊天
+	WorldChat = 504;   //世界聊天
+	Announce = 505;    //公告
+	ApplyFriend = 506; //好友申请
+
+	BroadCast = 507;  //广播
+	KickBlackList = 508; //踢掉黑名单玩家
+	KickSealPlayer = 509; //踢掉封号玩家
+	Recharge = 510; //支付到账
+
+	CrossWorldChat = 511;   //跨服聊天
+	// GODDESS 700-1000
+	// OPFriendChat = 503;  //好友聊天
+	// OPWorldChat = 504;   //世界聊天
+	// OPAnnounce = 505;    //公告
+
+	/* -- 服务器内部使用 10000 以上 -- */
+}
+
+enum GameId {
+	TrainGame = 2;  // 咸鱼
+}
+
+// HTTP 请求返回头
+message HTTPResponse{
+	optional int32 result = 1; // 结果码 - 0:成功 other:失败
+	optional string msg = 2; // 错误信息 - 失败时读取
+	optional bytes data = 3; // 消息包体 - 成功时读取
+}
+
+// 推送协议头
+message PushMessage{
+	required string id = 1;//消息ID
+	required Cmd cmd = 2;//消息码
+	required bytes data = 3;//数据
+}
+
+// 消息头
+message Message{
+	required Cmd cmd = 1;//命令码
+	required bytes data = 2;//数据
+}
+
+// 推送消息确认
+message PushMessageConfirm{
+	required string id = 1;//消息ID
+}
+
+// 订阅频道
+message Subscribe{
+	repeated string channel = 1;//频道
+}
+
+// 取消订阅
+message Unsubscribe{
+	repeated string channel = 1;//频道
+}
+
+// 心跳消息
+message HeartBeat {
+	required int32 nowTime = 1;//心跳发送时间
+}
