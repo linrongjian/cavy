@@ -1,10 +1,9 @@
-package websocket
+package ws
 
 import (
+	"github.com/gorilla/websocket"
 	"sync"
 	"time"
-
-	"github.com/gorilla/websocket"
 )
 
 const (

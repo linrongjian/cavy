@@ -1,0 +1,36 @@
+syntax = "proto2";
+option go_package = "../pb";
+
+enum MessageCode {
+	// DDD
+
+	/* -- test -- */
+	OpTest = 0;
+
+	/* -- Business : 1-500 -- */
+    OPUpdateProps = 1;  //更新道具
+    OPUpdateLevel = 2; //更新等级
+    OPShowRedot = 3; //显示红点
+    OPPing = 4; //Ping 消息 收到ping 消息后需要立即返回Pong消息
+    OPPong = 5; //Pong 消息 
+	OPUpdateClient = 6; //客户端更新
+
+	
+	/* -- Push : 501-700 -- */
+	OPSubscribe = 501;   //订阅消息
+	OPUnsubscribe = 502; //取消订阅消息
+	OPFriendChat = 503;  //好友聊天
+	OPWorldChat = 504;   //世界聊天
+	OPAnnounce = 505;    //公告
+	OPApplyFriend = 506; //好友申请
+    OPBroadCast = 507; //广播
+    OPKickBlackList = 508; //踢掉黑名单玩家
+    OPKickSealPlayer = 509; //踢掉封号玩家
+    OPRecharge = 510; //支付未到账
+
+
+
+	// GODDESS 700-1000
+
+	/* -- 服务器内部使用 10000 以上 -- */
+}

@@ -1,0 +1,12 @@
+syntax = "proto2";
+option go_package = "../pb";
+
+
+import "message_code.proto";
+import "business.proto";
+
+// 属性消息
+message Attribute {
+    required string name = 1; //属性名称
+    required int32 value = 2; //属性值
+}

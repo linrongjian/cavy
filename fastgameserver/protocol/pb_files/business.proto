@@ -1,0 +1,145 @@
+syntax = "proto2";
+option go_package = "../pb";
+
+
+// 模块类型
+enum ModuleType {
+	// DDD  0-99
+	MTTest = 0;      //测试
+	MTAuth = 1;		 //验证
+	MTPush = 2;		 //推送
+	MTHero = 3;		 //英雄
+	MTBattle = 4;    //战役
+	MTFriend = 5;    //好友
+	MTRank = 6;      //排行
+	MTWareHouse = 7; //仓库守卫
+	MTShop = 8;      //商城
+	MTChat = 9;      //聊天
+	MTLottery = 10;  //抽奖
+	MTShare = 11;    //分享
+    MTGuide = 12;    //新手引导
+	MTTask = 13;     //任务
+
+	// GODDESS 100-200
+	MTGAuth = 100;   //登录
+	MTGUpload = 101; //上传存档
+	MTGMail = 102;   //邮件
+	MTGSignIn = 103;//签到
+	MTGShare = 104;//分享
+    MTGFreeca = 105;//福利卡
+    MTGFuben = 106;//副本
+    MTGArean = 107;//竞技场
+    MTGLottery = 108;//抽奖
+    MTGActivity = 109;//活动
+    MTGOffline = 110;//离线时间
+    MTGVip = 111;//vip
+    MTGRecharge = 112;//首充
+}
+
+// 道具信息
+message Prop
+{
+	required string id = 1;	  //道具id
+	required int32 count = 2; //道具数量
+}
+
+// 英雄
+message Hero
+{
+	required string id = 1;	           //英雄ID
+	required int32 level = 2;	       //等级
+	required int32 quality = 3;	       //品级
+	required int32 star = 4;	       //星阶
+	required int32 skillLevel = 5;     //技能ID（升级后ID不同）
+	required string helmetId= 6;	   //头盔道具id
+	required string breastplateId = 7; //胸甲道具id
+	required string shoesId = 8;       //鞋子道具id
+	required string weaponId = 9;      //武器道具id
+    required int32 fightScore = 10; //战斗力
+}
+
+// 登录返回
+message LoginRsp
+{
+	required int64 playerId = 1;        //用户ID
+	required string nick = 2;	        //用户昵称
+	required string portrait = 3;	    //头像
+	required int32 level = 4;           //等级
+	required int32 experience = 5;      //经验
+	repeated Prop props = 7;            //道具列表
+	required string curCustomsPass = 8; //关卡, 为0时表示新手
+	repeated Hero heros = 9;            //英雄列表
+	repeated string battleArray = 10;   //战役阵容
+    repeated string reddot = 11;        //红点标识tag 以字符串标识与推送的红点tag一致
+    required string CurGuide = 12;      //当前引导Id
+    repeated string HistoryGuide = 13;  //历史引导
+}
+
+// 路由信息
+message Route
+{
+	required ModuleType type = 1;	//模块名称
+	required string path = 2;	    //模块对应的路径名称
+}
+
+// 策略
+message Schedule 
+{
+	repeated string addrs = 1;   //服务器地址列表  ip:port
+	repeated Route routes = 2;	 //路由信息
+	required string signKey = 3; //签名key
+}
+
+// 战斗结果类型
+enum BattleResultType {
+	BRTWin = 1;	 //胜利
+	BRTFail = 2; //失败
+}
+
+// 战斗结果
+message BattleResult
+{
+	required BattleResultType result = 1; //结果
+}
+
+// 上报战役进度
+message UploadBattleProgress
+{
+    optional string curStageId = 1;                 // 当前关卡id
+    optional BattleResult battleResult = 2;         // 用于校验战斗
+}
+
+// 战役信息
+message BattleInterface
+{
+    optional string curStageId = 1;         // 当前关卡id
+    optional int32 nextRecvWaittime = 2;    // 下次领取剩余等待时间(单位s)
+    optional int32 money = 3;               // 挂机金币
+    optional int32 experience = 4;          // 挂机经验
+    repeated Prop prop = 5;                 // 挂机道具
+	optional int32 maxmoney = 6;            // 挂机金币最大值
+	optional int32 maxexperience  = 7;      // 挂机经验最大值
+}
+
+// 怪物掉落配置
+message MonsterDrop
+{
+    optional string monsterId = 1;       // 怪物id
+    repeated Prop prop = 2;              // 掉落道具
+}
+
+// 关卡掉落
+message StageDrop
+{
+    optional string stageId = 1;                     // 关卡id
+    optional int32 stageMoney = 2;                   // 关卡通关金币
+    optional int32 stageExperience = 3;              // 关卡通关经验
+    repeated MonsterDrop monsterdrop = 4;            // 关卡怪物掉落
+    optional bool afterMonsterExist = 5;             // 是否触发战后意外奖励
+    optional MonsterDrop afterMonsterdrop = 6;       // 战后意外奖励怪物掉落
+}
+
+// 获取玩家挂机道具奖励
+message AfkProps {
+    repeated Prop props = 1;
+}

@@ -1,10 +1,12 @@
-package websocket
+package ws
 
 import (
+	"fastgameserver/fastgameserver/logger"
+	"fastgameserver/fastgameserver/network/channel"
+	"fastgameserver/fastgameserver/protocol/pb"
 	"fmt"
 	"sync"
 	"time"
-	"trainserver/util/logger"
 
 	"github.com/golang/protobuf/proto"
 	"github.com/gorilla/websocket"
@@ -108,11 +110,11 @@ func (c *Conn) WaitWebSocket(recv func(c *Conn, cmd pb.Cmd, data []byte)) {
 	c.wg.Wait()
 }
 
-func (c *Conn) Rev(*server.GameMessage) error {
+func (c *Conn) Rev(*channel.GMessage) error {
 	return nil
 }
 
-func (c *Conn) Send(m *server.GameMessage) error {
+func (c *Conn) Send(m *channel.GMessage) error {
 
 	if c.Ws == nil {
 		msg := fmt.Sprintf("Send Ws is nil")

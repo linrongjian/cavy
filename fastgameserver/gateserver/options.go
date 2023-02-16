@@ -6,14 +6,16 @@ import (
 )
 
 type Options struct {
-	Rds         *redis.Store
+	Rds *redis.Store
+	//mysql
+	//mq
 	BeforeStart []func() error
 	BeforeStop  []func() error
 	AfterStart  []func() error
 	AfterStop   []func() error
 
 	Context context.Context
-	Cancel  context.CancelFunc
+	cancel  context.CancelFunc
 
 	Signal bool
 }
