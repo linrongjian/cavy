@@ -17,8 +17,6 @@ import (
 
 	"os"
 	"runtime"
-
-	_ "MiniGamePushServer/handles/connect"
 )
 
 var (
