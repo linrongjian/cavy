@@ -19,9 +19,8 @@ const (
 var (
 	rootRouter = httprouter.New()
 	rootPath   = ""
-
-	Ctx    context.Context
-	cancel context.CancelFunc
+	Ctx        context.Context
+	cancel     context.CancelFunc
 )
 
 // GetVersion 版本号
@@ -33,14 +32,12 @@ func echoVersion(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	w.Write([]byte(fmt.Sprintf("version:%v", versionCode)))
 }
 
-// CreateHTTPServer 启动服务器
 func CreateHTTPServer() {
 	rootRouter.Handle("GET", rootPath+"/version", echoVersion)
 
 	go acceptHTTPRequest()
 }
 
-// acceptHTTPRequest 监听和接受HTTP
 func acceptHTTPRequest() {
 	var h http.Handler
 	if Opts.Test {

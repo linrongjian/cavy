@@ -1,4 +1,4 @@
-package server
+package httpserver
 
 import (
 	"context"
@@ -8,7 +8,6 @@ import (
 	"fastgameserver/fastgameserver/store/mysql"
 	"fastgameserver/fastgameserver/util"
 	"io/ioutil"
-	"net/http"
 	"net/url"
 
 	"github.com/go-redis/redis/v8"
@@ -18,10 +17,10 @@ import (
 )
 
 type Context struct {
-	Rds       redis.Conn   //redis 连接对象
-	Db        *xorm.Engine //mysql连接对象
-	MqChannel *mq.Channel  //mq 通道
-	UserID    string       //当前请求的用户ID
+	Rds       redis.Conn
+	Db        *xorm.Engine
+	MqChannel *mq.Channel
+	UserID    string
 	Query     url.Values
 	Params    httprouter.Params
 	Body      []byte
@@ -32,7 +31,6 @@ type Context struct {
 
 type Handle func(*Context)
 
-// newReqContext 新建一个context
 func newReqContext(r *http.Request, requiredUserID bool) (*Context, error) {
 	userID := ""
 
@@ -111,7 +109,7 @@ func wrapGetHandleInternal(h Handle, requiredUserID bool) httprouter.Handle {
 		ctx.Params = params
 		ctx.r = r
 		ctx.W = w
-		ctx.Ctx = Ctx
+		ctx.Ctx = http.Ctx
 		ctx.Db = mysql.DbConnect
 		h(ctx)
 	}
