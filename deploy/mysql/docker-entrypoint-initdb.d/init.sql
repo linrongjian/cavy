@@ -1,2 +1,1 @@
-create database backstage;
-create database minigame;
+create database game;

@@ -1,0 +1,13 @@
+syntax = "proto2";
+option go_package = "../pb";
+
+package pb;
+
+service ZLGameRPC {
+	rpc Stream(stream ZLGameMessage) returns (stream ZLGameMessage) {}
+}
+
+message ZLGameMessage {
+	map<string, string> header = 1;
+	bytes body = 2;
+}

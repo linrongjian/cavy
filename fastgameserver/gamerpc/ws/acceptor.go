@@ -1,8 +1,8 @@
 package ws
 
 import (
+	"fastgameserver/fastgameserver/gamerpc"
 	"fastgameserver/fastgameserver/logger"
-	"fastgameserver/fastgameserver/network/channel"
 	"fastgameserver/fastgameserver/protocol/pb"
 	"fmt"
 	"sync"
@@ -110,11 +110,11 @@ func (c *Conn) WaitWebSocket(recv func(c *Conn, cmd pb.Cmd, data []byte)) {
 	c.wg.Wait()
 }
 
-func (c *Conn) Rev(*channel.GMessage) error {
+func (c *Conn) Rev(*gamerpc.Message) error {
 	return nil
 }
 
-func (c *Conn) Send(m *channel.GMessage) error {
+func (c *Conn) Send(m *gamerpc.Message) error {
 
 	if c.Ws == nil {
 		msg := fmt.Sprintf("Send Ws is nil")

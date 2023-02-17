@@ -1,4 +1,4 @@
-package channel
+package gamerpc
 
 import (
 	"context"

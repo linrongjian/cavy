@@ -1,17 +1,18 @@
-package server
+package zlgame
 
 import (
+	"fastgameserver/fastgameserver/gamerpc/mq"
+	"fastgameserver/fastgameserver/gameserver"
 	"fastgameserver/fastgameserver/logger"
-	"fastgameserver/fastgameserver/network/mq"
 	"fastgameserver/fastgameserver/protocol/pb"
-	"fastgameserver/fastgameserver/server"
 	"fmt"
 	"sync"
 	"sync/atomic"
 	"time"
 
 	"github.com/golang/protobuf/proto"
-	"github.com/gorilla/websocket"
+
+	"fastgameserver/fastgameserver/gamerpc/ws"
 )
 
 const (
@@ -23,7 +24,7 @@ const (
 // Player 用户接口
 type Player struct {
 	id        string
-	ws        *websocket.Conn
+	ws        *ws.Conn
 	mqChannel *mq.Channel
 	wg        *sync.WaitGroup
 	session   string
@@ -36,7 +37,7 @@ var (
 )
 
 // NewPlayer 创建用户
-func NewPlayer(playerID string, session string, conn *websocket.Conn) *Player {
+func NewPlayer(playerID string, session string, conn *ws.Conn) *Player {
 	lock.Lock()
 	defer lock.Unlock()
 
@@ -88,7 +89,7 @@ func NewPlayer(playerID string, session string, conn *websocket.Conn) *Player {
 	}
 
 	// 注意，这里是单服通知
-	subKey := fmt.Sprintf("allplayer-%v", server.Opts.ServerID)
+	subKey := fmt.Sprintf("allplayer-%v", gameserver.Conf.ServerID)
 	// log.Infof("subkey:%v", subKey)
 	err = mqChannel.Subscribe(subKey)
 	if err != nil {

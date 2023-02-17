@@ -1,14 +1,12 @@
-package gateserver
+package loginserver
 
 import (
 	"context"
-	"fastgameserver/fastgameserver/gameserver"
 	"fastgameserver/fastgameserver/store/redis"
 )
 
 type Options struct {
-	Game gameserver.Game
-	Rds  *redis.Store
+	Rds *redis.Store
 	//mysql
 	//mq
 	BeforeStart []func() error
@@ -17,6 +15,7 @@ type Options struct {
 	AfterStop   []func() error
 
 	Context context.Context
+	cancel  context.CancelFunc
 
 	Signal bool
 }
