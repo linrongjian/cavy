@@ -1,4 +1,4 @@
-package gate
+package gateserver
 
 import (
 	"fastgameserver/fastgameserver/gameserver"
