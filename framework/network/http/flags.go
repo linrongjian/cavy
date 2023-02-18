@@ -4,14 +4,14 @@ import "github.com/urfave/cli/v2"
 
 var (
 	Opts = &struct {
-		Port string
+		Port int
 		Test bool
 	}{}
 
 	Flags = []cli.Flag{
-		&cli.StringFlag{
+		&cli.IntFlag{
 			Name:        "HTTP_PORT",
-			Value:       "7001",
+			Value:       7001,
 			Usage:       "-HTTP_PORT 7001",
 			EnvVars:     []string{"HTTP_PORT"},
 			Destination: &Opts.Port,

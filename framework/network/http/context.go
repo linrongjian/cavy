@@ -13,8 +13,8 @@ import (
 
 	"github.com/go-redis/redis/v8"
 	"github.com/go-xorm/xorm"
-	"github.com/golang/protobuf/proto"
 	"github.com/julienschmidt/httprouter"
+	"google.golang.org/protobuf/proto"
 )
 
 type Context struct {

@@ -20,7 +20,6 @@ var (
 	rootRouter = httprouter.New()
 	rootPath   = ""
 	Ctx        context.Context
-	cancel     context.CancelFunc
 )
 
 // GetVersion 版本号

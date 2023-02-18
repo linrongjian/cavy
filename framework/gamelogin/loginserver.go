@@ -1,8 +1,8 @@
 package gamelogin
 
 import (
-	"fastgameserver/fastgameserver/game"
-	"fastgameserver/fastgameserver/logger"
+	"fastgameserver/framework/game"
+	"fastgameserver/framework/logger"
 	"os"
 	"os/signal"
 )
