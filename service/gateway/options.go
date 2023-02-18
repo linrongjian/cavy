@@ -2,13 +2,12 @@ package gateway
 
 import (
 	"context"
-	"fastgameserver/core/fastserver"
 	"fastgameserver/core/store/redis"
 )
 
 type Options struct {
-	Game fastserver.Game
-	Rds  *redis.Store
+	// Server baseserver.Server
+	Rds *redis.Store
 	//mysql
 	//mq
 	BeforeStart []func() error

@@ -1,14 +1,14 @@
 package auth
 
 import (
-	"fastgameserver/core/fastserver"
+	"fastgameserver/core/baseserver"
 	"fastgameserver/core/logger"
 	"os"
 	"os/signal"
 )
 
 type LoginServer interface {
-	fastserver.Server
+	baseserver.IServer
 
 	Init(...Option) error
 

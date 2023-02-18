@@ -1,4 +1,4 @@
-package fastserver
+package baseserver
 
 import "github.com/urfave/cli/v2"
 

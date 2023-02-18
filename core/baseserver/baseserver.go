@@ -1,4 +1,4 @@
-package fastserver
+package baseserver
 
 import (
 	"fastgameserver/core/logger"
@@ -7,18 +7,18 @@ import (
 )
 
 var (
-	Instance *Game = nil
+	Instance *CServer = nil
 )
 
-type Game interface {
-	Server
+type CServer interface {
+	IServer
 
 	Init(...Option) error
 
 	Options() Options
 }
 
-type Server interface {
+type IServer interface {
 	Run() error
 
 	Stop() error
@@ -71,7 +71,7 @@ func (g *game) Init(opts ...Option) error {
 	return nil
 }
 
-func NewGame(opts ...Option) Game {
+func NewGame(opts ...Option) IServer {
 	options := Options{}
 	for _, o := range opts {
 		o(&options)

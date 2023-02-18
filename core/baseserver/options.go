@@ -1,4 +1,4 @@
-package fastserver
+package baseserver
 
 type Options struct {
 }
