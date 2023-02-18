@@ -39,7 +39,7 @@ func CreateHTTPServer() {
 
 func acceptHTTPRequest() {
 	var h http.Handler
-	if Opts.Test {
+	if Conf.Test {
 		// 支持客户端跨域访问
 		c := cors.New(cors.Options{
 			AllowOriginFunc: func(origin string) bool {
@@ -57,7 +57,7 @@ func acceptHTTPRequest() {
 
 	http.Handle("/", h)
 
-	portStr := fmt.Sprintf(":%d", Opts.Port)
+	portStr := fmt.Sprintf(":%d", Conf.Port)
 	s := &http.Server{
 		Addr:           portStr,
 		Handler:        nil,
@@ -66,10 +66,10 @@ func acceptHTTPRequest() {
 		MaxHeaderBytes: 1 << 10,
 	}
 
-	logger.Infof("Http server listen at:%d\n", Opts.Port)
+	logger.Infof("Http server listen at:%d\n", Conf.Port)
 
 	err := s.ListenAndServe()
 	if err != nil {
-		logger.Errorf("Http server ListenAndServe %d failed:%s\n", Opts.Port, err)
+		logger.Errorf("Http server ListenAndServe %d failed:%s\n", Conf.Port, err)
 	}
 }

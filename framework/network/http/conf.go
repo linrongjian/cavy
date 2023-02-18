@@ -2,26 +2,31 @@ package gamehttp
 
 import "github.com/urfave/cli/v2"
 
+type Config struct {
+	Port int  `csv:"noHolidaysTime"`
+	Test bool `csv:"holidaysTime"`
+}
+
 var (
-	Opts = &struct {
-		Port int
-		Test bool
-	}{}
+	Conf = Config{
+		Port: 5001,
+		Test: true,
+	}
 
 	Flags = []cli.Flag{
 		&cli.IntFlag{
 			Name:        "HTTP_PORT",
-			Value:       7001,
+			Value:       5001,
 			Usage:       "-HTTP_PORT 7001",
 			EnvVars:     []string{"HTTP_PORT"},
-			Destination: &Opts.Port,
+			Destination: &Conf.Port,
 		},
 		&cli.BoolFlag{
 			Name:        "HTTP_TEST",
 			Value:       true,
 			Usage:       "-HTTP_TEST true",
 			EnvVars:     []string{"HTTP_TEST"},
-			Destination: &Opts.Test,
+			Destination: &Conf.Test,
 		},
 	}
 )

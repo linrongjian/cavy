@@ -2,7 +2,7 @@ package client
 
 import (
 	"context"
-	"fastgameserver/fastgameserver/store/redis"
+	"fastgameserver/framework/store/redis"
 )
 
 type Options struct {

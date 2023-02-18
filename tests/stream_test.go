@@ -1,7 +1,7 @@
-package fastgrpc
+package tests
 
 import (
-	"fastgameserver/fastgameserver/network/gamerpc"
+	"fastgameserver/framework/network/gamerpc"
 	"net"
 	"testing"
 )
@@ -19,7 +19,7 @@ func expectedPort(t *testing.T, expected string, lsn gamerpc.Acceptor) {
 }
 
 func TestGRPCZLGameRpcPortRange(t *testing.T) {
-	tp := NewZLGameRpc()
+	tp := gamerpc.NewGameRpc()
 
 	lsn1, err := tp.Listen(":44444-44448")
 	if err != nil {
@@ -44,7 +44,7 @@ func TestGRPCZLGameRpcPortRange(t *testing.T) {
 }
 
 func TestGRPCZLGameRpcCommunication(t *testing.T) {
-	tr := NewZLGameRpc()
+	tr := fastgrpc.NewZLGameRpc()
 
 	l, err := tr.Listen(":0")
 	if err != nil {

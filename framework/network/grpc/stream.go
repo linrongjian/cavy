@@ -2,8 +2,8 @@ package fastgrpc
 
 import (
 	"crypto/tls"
-	"fastgameserver/fastgameserver/network/gamerpc"
-	"fastgameserver/fastgameserver/util"
+	"fastgameserver/framework/network/gamerpc"
+	"fastgameserver/framework/util"
 	"net"
 )
 

@@ -1,9 +1,14 @@
 package main
 
-import "fastgameserver/framework/gamegate"
+import (
+	"fastgameserver/framework/gamegate"
+	"fastgameserver/framework/logger"
+)
 
 func main() {
 	g := gamegate.NewGateServer()
-	g.Init()
+	if g.Init() != nil {
+		logger.Error("gate init err")
+	}
 	g.Run()
 }

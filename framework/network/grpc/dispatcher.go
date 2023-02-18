@@ -1,8 +1,8 @@
 package fastgrpc
 
 import (
-	"fastgameserver/fastgameserver/network/gamerpc"
-	"fastgameserver/fastgameserver/protocol/pbgrpc"
+	"fastgameserver/framework/network/gamerpc"
+	"fastgameserver/framework/protocol/pbgrpc"
 
 	"google.golang.org/grpc/peer"
 )

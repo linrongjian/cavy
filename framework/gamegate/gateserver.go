@@ -49,6 +49,8 @@ func (g *gateServer) Init(opts ...Option) error {
 		o(&g.opts)
 	}
 
+	gamehttp.RegisterGetHandleNoUserID("/", onConnectHandle) //获取入口信息
+
 	// cmd.AddFlags(defaultFlags)
 	// cmd.AddFlags(redis.Flags)
 	// cmd.AddFlags(mq.Flags)

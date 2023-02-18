@@ -3,9 +3,9 @@ package fastgrpc
 import (
 	"context"
 	"crypto/tls"
-	"fastgameserver/fastgameserver/network/gamerpc"
-	"fastgameserver/fastgameserver/protocol/pbgrpc"
-	"fastgameserver/fastgameserver/util"
+	"fastgameserver/framework/network/gamerpc"
+	"fastgameserver/framework/protocol/pbgrpc"
+	"fastgameserver/framework/util"
 	"net"
 
 	"google.golang.org/grpc"

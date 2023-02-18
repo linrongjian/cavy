@@ -2,10 +2,9 @@ package fastgrpc
 
 import (
 	"crypto/tls"
+	"fastgameserver/framework/network/gamerpc"
+	"fastgameserver/framework/protocol/pbgrpc"
 	"net"
-
-	"fastgameserver/fastgameserver/network/gamerpc"
-	"fastgameserver/fastgameserver/protocol/pbgrpc"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
