@@ -1,6 +1,6 @@
 # ServerEngin
 
-基于go语言的高性能服务器框架
+Go language high-performance server framework
 
 
 ## Core
@@ -9,22 +9,22 @@
 
 - Client
 
-  通信客户端
+  Communication Clients
   
 
 - Server
 
-  通信服务端
+  Communication Server
   
 
 - Transport
 
-  通信接口基类
+  Communication interface base class
   
 
 - Protocols
 
-  支持协议类型
+  Supported Protocol Types
   
 
 	- grpcwrap
@@ -35,17 +35,18 @@
 
 ### Router
 
-通信路由
+Communications Routing
+
 
 
 ### Store
 
-数据存储
+Data Storage
 
 
 ### Baseserver
 
-服务器基类
+Server Base Classes
 
 
 - Run()
@@ -53,31 +54,31 @@
 
 ## Service
 
-服务组件
+Service Components
 
 
 ### Gateway
 
-网关组件
+Gateway components
 
 
 ### Business
 
-业务逻辑组件
+Business Logic Components
 
 
 ### Center
 
-中控组件
+Center console control components
 
 
 ### Backend
 
-后台管理组件
+Backend management components
 
 
 ### Auth
 
-账号组件
+Account Components
 
 
