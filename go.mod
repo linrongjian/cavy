@@ -14,7 +14,8 @@ require (
 	github.com/satori/go.uuid v1.2.0
 	github.com/sirupsen/logrus v1.2.0
 	github.com/streadway/amqp v1.0.0
-	google.golang.org/protobuf v1.26.0
+	google.golang.org/grpc v1.53.0
+	google.golang.org/protobuf v1.28.1
 )
 
 require (
@@ -28,14 +29,14 @@ require (
 	golang.org/x/crypto v0.0.0-20190325154230-a5d413f7728c // indirect
 	golang.org/x/net v0.6.0 // indirect
 	golang.org/x/sys v0.5.0 // indirect
-	google.golang.org/appengine v1.6.0 // indirect
+	golang.org/x/text v0.7.0 // indirect
+	google.golang.org/appengine v1.6.7 // indirect
+	google.golang.org/genproto v0.0.0-20230110181048-76db0878b65f // indirect
 	xorm.io/builder v0.3.6 // indirect
 	xorm.io/core v0.7.2-0.20190928055935-90aeac8d08eb // indirect
 )
 
 require (
-	github.com/garyburd/redigo v1.6.4
-	github.com/go-redis/redis v6.15.9+incompatible
 	github.com/go-xorm/xorm v0.7.9
 	github.com/urfave/cli/v2 v2.24.3
 	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c // indirect

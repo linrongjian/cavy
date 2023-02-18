@@ -1,9 +1,9 @@
 package main
 
-import "fastgameserver/fastgameserver/loginserver"
+import "fastgameserver/framework/gamelogin"
 
 func main() {
-	g := loginserver.NewLoginServer()
+	g := gamelogin.NewLoginServer()
 	g.Init()
 	g.Run()
 }

@@ -1,0 +1,13 @@
+syntax = "proto3";
+option go_package = "../pbgrpc";
+
+package pbgrpc;
+
+service PbGameRPC {
+	rpc Stream(stream PbGMessage) returns (stream PbGMessage) {}
+}
+
+message PbGMessage {
+	map<string, string> header = 1;
+	optional bytes body = 2;
+}

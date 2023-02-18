@@ -1,9 +1,9 @@
 package main
 
-import "fastgameserver/fastgameserver/gateserver"
+import "fastgameserver/framework/gamegate"
 
 func main() {
-	g := gateserver.NewGateServer()
+	g := gamegate.NewGateServer()
 	g.Init()
 	g.Run()
 }
