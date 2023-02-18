@@ -1,12 +1,13 @@
 package tests
 
 import (
-	"fastgameserver/framework/network/gamerpc"
+	"fastgameserver/core/network/protocols/grpcwrap"
+	"fastgameserver/core/network/transport"
 	"net"
 	"testing"
 )
 
-func expectedPort(t *testing.T, expected string, lsn gamerpc.Acceptor) {
+func expectedPort(t *testing.T, expected string, lsn transport.Acceptor) {
 	_, port, err := net.SplitHostPort(lsn.Addr())
 	if err != nil {
 		t.Errorf("Expected address to be `%s`, got error: %v", expected, err)
@@ -19,7 +20,7 @@ func expectedPort(t *testing.T, expected string, lsn gamerpc.Acceptor) {
 }
 
 func TestGRPCZLGameRpcPortRange(t *testing.T) {
-	tp := gamerpc.NewGameRpc()
+	tp := grpcwrap.NewGameRpc()
 
 	lsn1, err := tp.Listen(":44444-44448")
 	if err != nil {
@@ -44,7 +45,7 @@ func TestGRPCZLGameRpcPortRange(t *testing.T) {
 }
 
 func TestGRPCZLGameRpcCommunication(t *testing.T) {
-	tr := fastgrpc.NewZLGameRpc()
+	tr := grpcwrap.NewGameRpc()
 
 	l, err := tr.Listen(":0")
 	if err != nil {
@@ -52,11 +53,11 @@ func TestGRPCZLGameRpcCommunication(t *testing.T) {
 	}
 	defer l.Close()
 
-	fn := func(zlgsock gamerpc.Channel) {
+	fn := func(zlgsock transport.Channel) {
 		defer zlgsock.Close()
 
 		for {
-			var m gamerpc.GMessage
+			var m transport.Message
 			if err := zlgsock.Recv(&m); err != nil {
 				return
 			}
@@ -85,7 +86,7 @@ func TestGRPCZLGameRpcCommunication(t *testing.T) {
 	}
 	defer c.Close()
 
-	m := gamerpc.GMessage{
+	m := transport.Message{
 		Header: map[string]string{
 			"X-Content-Type": "application/json",
 		},
@@ -96,7 +97,7 @@ func TestGRPCZLGameRpcCommunication(t *testing.T) {
 		t.Errorf("Unexpected send err: %v", err)
 	}
 
-	var rm gamerpc.GMessage
+	var rm transport.Message
 
 	if err := c.Recv(&rm); err != nil {
 		t.Errorf("Unexpected recv err: %v", err)

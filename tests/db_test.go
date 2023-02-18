@@ -1,8 +1,8 @@
 package tests
 
 import (
-	"fastgameserver/framework/logger"
-	"fastgameserver/framework/store/redis"
+	"fastgameserver/core/logger"
+	"fastgameserver/core/store/redis"
 	"os"
 
 	"github.com/urfave/cli/v2"

@@ -1,12 +1,12 @@
 package main
 
 import (
-	"fastgameserver/framework/gamegate"
-	"fastgameserver/framework/logger"
+	"fastgameserver/core/logger"
+	"fastgameserver/service/gateway"
 )
 
 func main() {
-	g := gamegate.NewGateServer()
+	g := gateway.NewGateServer()
 	if g.Init() != nil {
 		logger.Error("gate init err")
 	}

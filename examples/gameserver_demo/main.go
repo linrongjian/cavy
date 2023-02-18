@@ -1,9 +1,9 @@
 package main
 
-import "fastgameserver/framework/gamelogic"
+import "fastgameserver/service/business"
 
 func main() {
-	g := gamelogic.NewLogicServer()
+	g := business.NewLogicServer()
 	g.Init()
 	g.Run()
 }
