@@ -1,4 +1,4 @@
-package baseserver
+package app
 
 import (
 	"fastgameserver/core/logger"
@@ -6,19 +6,17 @@ import (
 	"os/signal"
 )
 
-var (
-	Instance *CServer = nil
-)
+var ()
 
-type CServer interface {
-	IServer
+type App interface {
+	IApp
 
 	Init(...Option) error
 
 	Options() Options
 }
 
-type IServer interface {
+type IApp interface {
 	Run() error
 
 	Stop() error
@@ -26,11 +24,11 @@ type IServer interface {
 
 type Option func(*Options)
 
-type game struct {
+type app struct {
 	opts Options
 }
 
-func (g *game) Run() error {
+func (g *app) Run() error {
 
 	c := make(chan os.Signal, 1)
 	signal.Notify(c, os.Interrupt, os.Kill)
@@ -40,15 +38,15 @@ func (g *game) Run() error {
 	return nil
 }
 
-func (g *game) Stop() error {
+func (g *app) Stop() error {
 	return nil
 }
 
-func (g *game) Options() Options {
+func (g *app) Options() Options {
 	return g.opts
 }
 
-func (g *game) Init(opts ...Option) error {
+func (g *app) Init(opts ...Option) error {
 	for _, o := range opts {
 		o(&g.opts)
 	}
@@ -71,12 +69,12 @@ func (g *game) Init(opts ...Option) error {
 	return nil
 }
 
-func NewGame(opts ...Option) IServer {
+func NewGame(opts ...Option) IApp {
 	options := Options{}
 	for _, o := range opts {
 		o(&options)
 	}
-	return &game{
+	return &app{
 		opts: options,
 	}
 }

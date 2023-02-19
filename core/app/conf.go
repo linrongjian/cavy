@@ -1,4 +1,4 @@
-package baseserver
+package app
 
 import "github.com/urfave/cli/v2"
 

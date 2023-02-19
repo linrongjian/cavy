@@ -1,7 +1,7 @@
 package gateway
 
 import (
-	"fastgameserver/core/baseserver"
+	"fastgameserver/core/app"
 	"fastgameserver/core/logger"
 	"fastgameserver/core/network/protocols/mqwrap"
 	"fastgameserver/core/network/protocols/wswrap"
@@ -88,7 +88,7 @@ func NewPlayer(playerID string, session string, conn *wswrap.GWsConn) *Player {
 	}
 
 	// 注意，这里是单服通知
-	subKey := fmt.Sprintf("allplayer-%v", baseserver.Conf.ServerID)
+	subKey := fmt.Sprintf("allplayer-%v", app.Conf.ServerID)
 	// log.Infof("subkey:%v", subKey)
 	err = mqChannel.Subscribe(subKey)
 	if err != nil {
