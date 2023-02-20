@@ -1,4 +1,4 @@
-package baseserver
+package app
 
 type Options struct {
 }

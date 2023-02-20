@@ -1,14 +1,14 @@
 package business
 
 import (
-	"fastgameserver/core/baseserver"
+	"fastgameserver/core/app"
 	"fastgameserver/core/logger"
 	"os"
 	"os/signal"
 )
 
 type BusinessServer interface {
-	baseserver.IServer
+	app.IApp
 
 	Init(...Option) error
 

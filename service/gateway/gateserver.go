@@ -1,7 +1,7 @@
 package gateway
 
 import (
-	"fastgameserver/core/baseserver"
+	"fastgameserver/core/app"
 	"fastgameserver/core/logger"
 	"fastgameserver/core/network/protocols/httpwrap"
 	"os"
@@ -9,7 +9,7 @@ import (
 )
 
 type GateServer interface {
-	baseserver.IServer
+	app.IApp
 
 	Init(...Option) error
 
