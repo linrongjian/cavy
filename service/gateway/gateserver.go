@@ -69,6 +69,22 @@ func (g *gateServer) Init(opts ...Option) error {
 	return nil
 }
 
+func (g *gateServer) getOnlineCount() int {
+	return 1
+}
+
+func (g *gateServer) kickUser(userId string) {
+	// return this.wsGateway.kick(userId);
+}
+
+func (g *gateServer) broadcast(data interface{}) {
+	// return this.wsGateway.broadcast(data);
+}
+
+func (g *gateServer) notify(userId string, data interface{}) {
+	// return this.wsGateway.notify(userId, data)
+}
+
 func NewGateServer(opts ...Option) GateServer {
 	options := Options{}
 	for _, o := range opts {

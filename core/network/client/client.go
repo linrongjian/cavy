@@ -6,7 +6,7 @@ import (
 
 type gameKey struct{}
 
-type GClient interface {
+type IClient interface {
 	Name() string
 	Init(...Option)
 	Options() Options
@@ -20,12 +20,12 @@ type Event interface {
 
 type Publisher = Event
 
-func FromContext(ctx context.Context) (GClient, bool) {
-	s, ok := ctx.Value(gameKey{}).(GClient)
+func FromContext(ctx context.Context) (IClient, bool) {
+	s, ok := ctx.Value(gameKey{}).(IClient)
 	return s, ok
 }
 
-func NewContext(ctx context.Context, s GClient) context.Context {
+func NewContext(ctx context.Context, s IClient) context.Context {
 	return context.WithValue(ctx, gameKey{}, s)
 }
 
