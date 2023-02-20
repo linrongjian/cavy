@@ -1,7 +1,7 @@
 package log
 
 import (
-	"fastgameserver/core/util"
+	"fastserver/core/util"
 	"sync"
 
 	"github.com/google/uuid"

@@ -1,6 +1,6 @@
 package main
 
-import "fastgameserver/service/business"
+import "fastserver/service/business"
 
 func main() {
 	g := business.NewLogicServer()

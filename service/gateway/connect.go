@@ -1,10 +1,10 @@
 package gateway
 
 import (
-	"fastgameserver/core/logger"
-	"fastgameserver/core/network/protocols/httpwrap"
-	"fastgameserver/core/network/protocols/wswrap"
-	"fastgameserver/core/protocol/pb"
+	"fastserver/core/logger"
+	"fastserver/core/network/protocols/httpwrap"
+	"fastserver/core/network/protocols/wswrap"
+	"fastserver/core/protocol/pb"
 	"math/rand"
 	"strconv"
 

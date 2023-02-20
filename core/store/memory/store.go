@@ -2,7 +2,7 @@ package memory
 
 import (
 	"errors"
-	"fastgameserver/core/util"
+	"fastserver/core/util"
 	"sync"
 	"time"
 )

@@ -1,11 +1,11 @@
 package gateway
 
 import (
-	"fastgameserver/core/app"
-	"fastgameserver/core/logger"
-	"fastgameserver/core/network/protocols/mqwrap"
-	"fastgameserver/core/network/protocols/wswrap"
-	"fastgameserver/core/protocol/pb"
+	"fastserver/core/app"
+	"fastserver/core/logger"
+	"fastserver/core/network/protocols/mqwrap"
+	"fastserver/core/network/protocols/wswrap"
+	"fastserver/core/protocol/pb"
 	"fmt"
 	"sync"
 	"sync/atomic"

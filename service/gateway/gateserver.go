@@ -1,9 +1,9 @@
 package gateway
 
 import (
-	"fastgameserver/core/app"
-	"fastgameserver/core/logger"
-	"fastgameserver/core/network/protocols/httpwrap"
+	"fastserver/core/app"
+	"fastserver/core/logger"
+	"fastserver/core/network/protocols/httpwrap"
 	"os"
 	"os/signal"
 )

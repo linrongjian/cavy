@@ -1,7 +1,7 @@
 package app
 
 import (
-	"fastgameserver/core/logger"
+	"fastserver/core/logger"
 	"os"
 	"os/signal"
 )

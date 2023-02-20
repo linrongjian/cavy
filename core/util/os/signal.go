@@ -1,7 +1,7 @@
 package os
 
 import (
-	"fastgameserver/core/logger"
+	"fastserver/core/logger"
 	"os"
 	"runtime"
 	"runtime/pprof"

@@ -2,11 +2,11 @@ package httpwrap
 
 import (
 	"context"
-	"fastgameserver/core/logger"
-	"fastgameserver/core/network/protocols/mqwrap"
-	"fastgameserver/core/protocol/pb"
-	"fastgameserver/core/store/mysql"
-	"fastgameserver/core/util"
+	"fastserver/core/logger"
+	"fastserver/core/network/protocols/mqwrap"
+	"fastserver/core/protocol/pb"
+	"fastserver/core/store/mysql"
+	"fastserver/core/util"
 	"io/ioutil"
 	"net/http"
 	"net/url"

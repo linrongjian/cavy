@@ -2,8 +2,8 @@ package grpcwrap
 
 import (
 	"crypto/tls"
-	"fastgameserver/core/network/transport"
-	"fastgameserver/core/util"
+	"fastserver/core/network/transport"
+	"fastserver/core/util"
 	"net"
 )
 

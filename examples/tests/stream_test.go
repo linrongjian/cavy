@@ -1,8 +1,8 @@
 package tests
 
 import (
-	"fastgameserver/core/network/protocols/grpcwrap"
-	"fastgameserver/core/network/transport"
+	"fastserver/core/network/protocols/grpcwrap"
+	"fastserver/core/network/transport"
 	"net"
 	"testing"
 )

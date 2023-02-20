@@ -1,9 +1,9 @@
 package wswrap
 
 import (
-	"fastgameserver/core/logger"
-	"fastgameserver/core/network/transport"
-	"fastgameserver/core/protocol/pb"
+	"fastserver/core/logger"
+	"fastserver/core/network/transport"
+	"fastserver/core/protocol/pb"
 	"fmt"
 	"sync"
 	"time"

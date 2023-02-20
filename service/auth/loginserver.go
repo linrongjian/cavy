@@ -1,8 +1,8 @@
 package auth
 
 import (
-	baseserver "fastgameserver/core/app"
-	"fastgameserver/core/logger"
+	baseserver "fastserver/core/app"
+	"fastserver/core/logger"
 	"os"
 	"os/signal"
 )

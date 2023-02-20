@@ -1,8 +1,8 @@
 package gateway
 
 import (
-	"fastgameserver/core/network/protocols/wswrap"
-	"fastgameserver/core/protocol/pb"
+	"fastserver/core/network/protocols/wswrap"
+	"fastserver/core/protocol/pb"
 
 	"github.com/golang/protobuf/proto"
 )

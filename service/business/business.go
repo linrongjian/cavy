@@ -1,8 +1,8 @@
 package business
 
 import (
-	"fastgameserver/core/app"
-	"fastgameserver/core/logger"
+	"fastserver/core/app"
+	"fastserver/core/logger"
 	"os"
 	"os/signal"
 )

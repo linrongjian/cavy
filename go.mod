@@ -1,4 +1,4 @@
-module fastgameserver
+module fastserver
 
 go 1.19
 

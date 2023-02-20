@@ -1,7 +1,7 @@
 package mysql
 
 import (
-	"fastgameserver/core/logger"
+	"fastserver/core/logger"
 	"flag"
 	"fmt"
 

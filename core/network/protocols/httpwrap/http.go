@@ -2,7 +2,7 @@ package httpwrap
 
 import (
 	"context"
-	"fastgameserver/core/logger"
+	"fastserver/core/logger"
 	"net/http"
 	"time"
 

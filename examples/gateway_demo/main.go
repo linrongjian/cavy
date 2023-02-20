@@ -1,8 +1,8 @@
 package main
 
 import (
-	"fastgameserver/core/logger"
-	"fastgameserver/service/gateway"
+	"fastserver/core/logger"
+	"fastserver/service/gateway"
 )
 
 func main() {

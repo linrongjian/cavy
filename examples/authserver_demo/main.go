@@ -1,6 +1,6 @@
 package main
 
-import "fastgameserver/service/auth"
+import "fastserver/service/auth"
 
 func main() {
 	g := auth.NewLoginServer()

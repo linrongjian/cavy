@@ -2,7 +2,7 @@ package redis
 
 import (
 	"context"
-	"fastgameserver/core/util"
+	"fastserver/core/util"
 	"fmt"
 	"sync"
 	"time"

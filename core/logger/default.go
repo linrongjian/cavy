@@ -2,7 +2,7 @@ package logger
 
 import (
 	"context"
-	"fastgameserver/core/logger/log"
+	"fastserver/core/logger/log"
 	"fmt"
 	"os"
 	"runtime"
