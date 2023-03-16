@@ -2,9 +2,6 @@ package logicserver
 
 import (
 	"fastserver/core/app"
-	"fastserver/core/logger"
-	"os"
-	"os/signal"
 )
 
 type LogicServer interface {
@@ -21,10 +18,7 @@ type logicServer struct {
 }
 
 func (s *logicServer) Run() error {
-	c := make(chan os.Signal, 1)
-	signal.Notify(c, os.Interrupt, os.Kill)
-	sig := <-c
-	logger.Info("Leaf closing down (signal: %v)", sig)
+	s.App.Run()
 	return nil
 }
 

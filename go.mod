@@ -12,7 +12,6 @@ require (
 	github.com/julienschmidt/httprouter v1.2.0
 	github.com/rs/cors v1.8.3
 	github.com/satori/go.uuid v1.2.0
-	github.com/sirupsen/logrus v1.2.0
 	github.com/streadway/amqp v1.0.0
 	google.golang.org/grpc v1.53.0
 	google.golang.org/protobuf v1.28.1
@@ -22,11 +21,9 @@ require (
 	github.com/cespare/xxhash/v2 v2.2.0 // indirect
 	github.com/cpuguy83/go-md2man/v2 v2.0.2 // indirect
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
-	github.com/konsorten/go-windows-terminal-sequences v1.0.1 // indirect
 	github.com/redis/go-redis/v9 v9.0.1 // indirect
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
 	github.com/xrash/smetrics v0.0.0-20201216005158-039620a65673 // indirect
-	golang.org/x/crypto v0.0.0-20190325154230-a5d413f7728c // indirect
 	golang.org/x/net v0.6.0 // indirect
 	golang.org/x/sys v0.5.0 // indirect
 	golang.org/x/text v0.7.0 // indirect
@@ -38,7 +35,6 @@ require (
 
 require (
 	github.com/go-xorm/xorm v0.7.9
-	github.com/urfave/cli v1.22.12
 	github.com/urfave/cli/v2 v2.24.3
 	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c // indirect
 )
