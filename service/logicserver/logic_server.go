@@ -1,4 +1,4 @@
-package business
+package logicserver
 
 import (
 	"fastserver/core/app"
@@ -7,45 +7,38 @@ import (
 	"os/signal"
 )
 
-type BusinessServer interface {
-	app.IApp
-
+type LogicServer interface {
+	app.Server
 	Init(...Option) error
-
 	Options() Options
 }
 
 type Option func(*Options)
 
 type logicServer struct {
+	*app.App
 	opts Options
 }
 
-func (g *logicServer) Run() error {
-
-	// Ctx = s.Options().Context
-	// CreateHTTPServer()
-	// ClearOnline()
-
+func (s *logicServer) Run() error {
 	c := make(chan os.Signal, 1)
 	signal.Notify(c, os.Interrupt, os.Kill)
 	sig := <-c
 	logger.Info("Leaf closing down (signal: %v)", sig)
-
 	return nil
 }
 
-func (g *logicServer) Stop() error {
+func (s *logicServer) Stop() error {
 	return nil
 }
 
-func (g *logicServer) Options() Options {
-	return g.opts
+func (s *logicServer) Options() Options {
+	return s.opts
 }
 
-func (g *logicServer) Init(opts ...Option) error {
+func (s *logicServer) Init(opts ...Option) error {
 	for _, o := range opts {
-		o(&g.opts)
+		o(&s.opts)
 	}
 
 	// cmd.AddFlags(defaultFlags)
@@ -66,12 +59,16 @@ func (g *logicServer) Init(opts ...Option) error {
 	return nil
 }
 
-func NewLogicServer(opts ...Option) BusinessServer {
+func NewLogicServer(opts ...Option) LogicServer {
 	options := Options{}
 	for _, o := range opts {
 		o(&options)
 	}
+
+	app := app.NewApp()
+	app.Init()
 	return &logicServer{
+		App:  app,
 		opts: options,
 	}
 }

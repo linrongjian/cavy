@@ -4,77 +4,66 @@ import (
 	"fastserver/core/logger"
 	"os"
 	"os/signal"
+
+	"github.com/urfave/cli/v2"
 )
 
-var ()
+// type IApp interface {
+// 	Init(...Option) error
+// 	Options() Options
+// }
 
-type App interface {
-	IApp
-
-	Init(...Option) error
-
-	Options() Options
-}
-
-type IApp interface {
+type Server interface {
 	Run() error
-
 	Stop() error
 }
 
 type Option func(*Options)
 
-type app struct {
+type App struct {
 	opts Options
+	cli  *cli.App
 }
 
-func (g *app) Run() error {
-
+func (a *App) Run() error {
 	c := make(chan os.Signal, 1)
 	signal.Notify(c, os.Interrupt, os.Kill)
 	sig := <-c
 	logger.Info("Leaf closing down (signal: %v)", sig)
-
 	return nil
 }
 
-func (g *app) Stop() error {
+func (a *App) InitComplete() error {
+	a.cli.Run(os.Args)
 	return nil
 }
 
-func (g *app) Options() Options {
-	return g.opts
+func (a *App) Stop() error {
+	return nil
 }
 
-func (g *app) Init(opts ...Option) error {
+func (a *App) Options() Options {
+	return a.opts
+}
+
+func (a *App) Init(opts ...Option) error {
 	for _, o := range opts {
-		o(&g.opts)
+		o(&a.opts)
 	}
-
-	// cmd.AddFlags(defaultFlags)
-	// cmd.AddFlags(redis.Flags)
-	// cmd.AddFlags(mq.Flags)
-	// cmd.AddFlags(mysql.Flags)
-	// if err := s.opts.Cmd.Init(); err != nil {
-	// logger.Fatal(err)
-	// }
-	//mq.Startup()
-	// mysql.Startup()
-
-	// err := redis.Connect()
-	// if err != nil {
-	// 	logger.Fatal(err)
-	// }
-	// s.opts.Rds = redis.S()
+	a.cli = cli.NewApp()
 	return nil
 }
 
-func NewGame(opts ...Option) IApp {
+func (a *App) AddFlags(flags []cli.Flag) {
+	a.cli.Flags = append(a.cli.Flags, flags...)
+}
+
+func NewApp(opts ...Option) *App {
 	options := Options{}
 	for _, o := range opts {
 		o(&options)
 	}
-	return &app{
+	return &App{
 		opts: options,
 	}
 }

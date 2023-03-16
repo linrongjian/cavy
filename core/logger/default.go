@@ -15,7 +15,7 @@ import (
 func init() {
 	lvl, err := GetLevel(os.Getenv("MICRO_LOG_LEVEL"))
 	if err != nil {
-		lvl = InfoLevel
+		lvl = DebugLevel
 	}
 
 	DefaultLogger = NewLogger(WithLevel(lvl))

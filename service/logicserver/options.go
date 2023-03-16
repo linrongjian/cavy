@@ -1,4 +1,4 @@
-package business
+package logicserver
 
 type Options struct {
 }

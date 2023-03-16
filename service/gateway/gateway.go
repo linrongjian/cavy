@@ -4,29 +4,33 @@ import (
 	"fastserver/core/app"
 	"fastserver/core/logger"
 	"fastserver/core/network/protocols/httpwrap"
+	"fastserver/core/network/protocols/mqwrap"
 	"os"
 	"os/signal"
 )
 
 type GateServer interface {
-	app.IApp
-
+	app.Server
 	Init(...Option) error
-
 	Options() Options
 }
 
 type Option func(*Options)
 
 type gateServer struct {
+	*app.App
 	opts Options
 }
 
-func (g *gateServer) Run() error {
+func (s *gateServer) Run() error {
+
+	s.App.Run()
 
 	// Ctx = s.Options().Context
 	httpwrap.CreateHTTPServer()
 	// ClearOnline()
+
+	mqwrap.Startup()
 
 	c := make(chan os.Signal, 1)
 	signal.Notify(c, os.Interrupt, os.Kill)
@@ -36,20 +40,22 @@ func (g *gateServer) Run() error {
 	return nil
 }
 
-func (g *gateServer) Stop() error {
+func (s *gateServer) Stop() error {
 	return nil
 }
 
-func (g *gateServer) Options() Options {
-	return g.opts
+func (s *gateServer) Options() Options {
+	return s.opts
 }
 
-func (g *gateServer) Init(opts ...Option) error {
+func (s *gateServer) Init(opts ...Option) error {
 	for _, o := range opts {
-		o(&g.opts)
+		o(&s.opts)
 	}
 
 	httpwrap.RegisterGetHandleNoUserID("/", onConnectHandle) //获取入口信息
+
+	s.AddFlags(mqwrap.Flags)
 
 	// cmd.AddFlags(defaultFlags)
 	// cmd.AddFlags(redis.Flags)
@@ -69,19 +75,19 @@ func (g *gateServer) Init(opts ...Option) error {
 	return nil
 }
 
-func (g *gateServer) getOnlineCount() int {
+func (s *gateServer) getOnlineCount() int {
 	return 1
 }
 
-func (g *gateServer) kickUser(userId string) {
+func (s *gateServer) kickUser(userId string) {
 	// return this.wsGateway.kick(userId);
 }
 
-func (g *gateServer) broadcast(data interface{}) {
+func (s *gateServer) broadcast(data interface{}) {
 	// return this.wsGateway.broadcast(data);
 }
 
-func (g *gateServer) notify(userId string, data interface{}) {
+func (s *gateServer) notify(userId string, data interface{}) {
 	// return this.wsGateway.notify(userId, data)
 }
 
@@ -90,7 +96,10 @@ func NewGateServer(opts ...Option) GateServer {
 	for _, o := range opts {
 		o(&options)
 	}
+	app := app.NewApp()
+	app.Init()
 	return &gateServer{
+		App:  app,
 		opts: options,
 	}
 }

@@ -1,23 +1,22 @@
 package auth
 
 import (
-	baseserver "fastserver/core/app"
+	"fastserver/core/app"
 	"fastserver/core/logger"
 	"os"
 	"os/signal"
 )
 
 type LoginServer interface {
-	baseserver.IApp
-
+	app.Server
 	Init(...Option) error
-
 	Options() Options
 }
 
 type Option func(*Options)
 
 type loginServer struct {
+	*app.App
 	opts Options
 }
 

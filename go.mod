@@ -38,6 +38,7 @@ require (
 
 require (
 	github.com/go-xorm/xorm v0.7.9
+	github.com/urfave/cli v1.22.12
 	github.com/urfave/cli/v2 v2.24.3
 	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c // indirect
 )

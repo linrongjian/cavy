@@ -1,4 +1,4 @@
-package business
+package logicserver
 
 type Conf struct {
 	ServerID string `csv:"cfgId"`

@@ -1,9 +1,9 @@
 package mqwrap
 
 import (
+	"fastserver/core/logger"
 	"fmt"
 
-	log "github.com/sirupsen/logrus"
 	"github.com/streadway/amqp"
 )
 
@@ -46,21 +46,15 @@ var (
 	}
 )
 
-func mqStartup() {
-	// if Opts.Host == "" || servercfg.MQAccount == "" || servercfg.MQPassword == "" {
-	// 	log.Panic("Must specify the MqServer info in config json")
-	// 	return
-	// }
-	// log.Infof("connect mq addr:%s account:%s password:%s", servercfg.MQIP, servercfg.MQAccount, servercfg.MQPassword)
-
+func Startup() {
+	logger.Infof("connect mq addr:%s account:%s password:%s", Opts.Host, Opts.Account, Opts.Password)
 	url := fmt.Sprintf("amqp://%s:%s@%s/", Opts.Account, Opts.Password, Opts.Host)
 	conn, err := amqp.Dial(url)
 	if err != nil {
-		log.Panicf("Conn MQ URL:%s err:%v", url, err)
+		logger.Errorf("Conn MQ URL:%s err:%v", url, err)
 	}
 	mqConnect = conn
 	mqChannel, _ = NewChannel(TopicChannelType, "")
-
 }
 
 func (c channelType) String() string {
@@ -83,13 +77,13 @@ func NewChannel(kind channelType, name string) (*MqChannel, error) {
 	channel.kind = kind
 
 	if mqConnect == nil {
-		log.Error("MQ Connect is Null")
+		logger.Errorf("MQ Connect is Null")
 		return nil, fmt.Errorf("MQ Connect is Null")
 	}
 
 	ch, err := mqConnect.Channel()
 	if err != nil {
-		log.Errorf("NewChannel err:%v", err)
+		logger.Errorf("NewChannel err:%v", err)
 		return nil, err
 	}
 	channel.ch = ch
@@ -97,31 +91,31 @@ func NewChannel(kind channelType, name string) (*MqChannel, error) {
 	if kind == TopicChannelType {
 		err = ch.ExchangeDeclare(kind.Name(), kind.String(), true, false, false, false, nil)
 		if err != nil {
-			log.Errorf("ExchangeDeclare err:%v", err)
+			logger.Errorf("ExchangeDeclare err:%v", err)
 			return nil, err
 		}
 		queue, err := ch.QueueDeclare("", false, false, true, false, nil)
 		if err != nil {
-			log.Errorf("QueueDeclare err:%v", err)
+			logger.Errorf("QueueDeclare err:%v", err)
 			return nil, err
 		}
 		channel.queue = queue
 	} else if kind == FanoutChannelType {
 		err := ch.ExchangeDeclare(kind.Name(), kind.String(), true, false, false, false, nil)
 		if err != nil {
-			log.Errorf("ExchangeDeclare err:%v", err)
+			logger.Errorf("ExchangeDeclare err:%v", err)
 			return nil, err
 		}
 		queue, err := ch.QueueDeclare("", false, false, true, false, nil)
 		if err != nil {
-			log.Errorf("QueueDeclare err:%v", err)
+			logger.Errorf("QueueDeclare err:%v", err)
 			return nil, err
 		}
 		channel.queue = queue
 	} else if kind == WorkerChannelType {
 		queue, err := ch.QueueDeclare(name, true, false, false, false, nil)
 		if err != nil {
-			log.Errorf("QueueDeclare err:%v", err)
+			logger.Errorf("QueueDeclare err:%v", err)
 			return nil, err
 		}
 		channel.queue = queue
@@ -141,7 +135,7 @@ func (c *MqChannel) Close() {
 
 // Publish 广播
 func (c *MqChannel) Publish(key string, msg []byte) error {
-	log.Debugf("Publish %s msgLen %d", key, len(msg))
+	logger.Debugf("Publish %s msgLen %d", key, len(msg))
 	amqpMsg := amqp.Publishing{
 		ContentType: "text/plain",
 		Body:        msg,
@@ -149,24 +143,24 @@ func (c *MqChannel) Publish(key string, msg []byte) error {
 	if c.kind == TopicChannelType {
 		err := c.ch.Publish(c.kind.Name(), key, false, false, amqpMsg)
 		if err != nil {
-			log.Errorf("Topic Publish err:%v", err)
+			logger.Errorf("Topic Publish err:%v", err)
 			return err
 		}
 	} else if c.kind == FanoutChannelType {
 		err := c.ch.Publish(c.kind.Name(), "", false, false, amqpMsg)
 		if err != nil {
-			log.Errorf("Fanout Publish err:%v", err)
+			logger.Errorf("Fanout Publish err:%v", err)
 			return err
 		}
 	} else if c.kind == WorkerChannelType {
 		amqpMsg.DeliveryMode = amqp.Persistent
 		err := c.ch.Publish(c.kind.Name(), c.queue.Name, false, false, amqpMsg)
 		if err != nil {
-			log.Errorf("Worker Publish err:%v", err)
+			logger.Errorf("Worker Publish err:%v", err)
 			return err
 		}
 	} else {
-		log.Errorf("Publish kind type:%v err", c.kind)
+		logger.Errorf("Publish kind type:%v err", c.kind)
 		return fmt.Errorf("Publish kind type:%v err", c.kind)
 	}
 
@@ -175,19 +169,19 @@ func (c *MqChannel) Publish(key string, msg []byte) error {
 
 // Subscribe 订阅
 func (c *MqChannel) Subscribe(key string) error {
-	log.Infof("Subscribe %s", key)
+	logger.Infof("Subscribe %s", key)
 	if c.kind == TopicChannelType {
 		err := c.ch.QueueBind(c.queue.Name, key, c.kind.Name(), false, nil)
 		if err != nil {
-			log.Errorf("Topic Subscribe err:%v", err)
+			logger.Errorf("Topic Subscribe err:%v", err)
 			return err
 		}
 		return nil
 	} else if c.kind == FanoutChannelType {
-		log.Errorf("Fanou Subscribe")
+		logger.Errorf("Fanou Subscribe")
 		return nil
 	} else if c.kind == WorkerChannelType {
-		log.Errorf("Worker Subscribe")
+		logger.Errorf("Worker Subscribe")
 		return nil
 	}
 
@@ -196,19 +190,19 @@ func (c *MqChannel) Subscribe(key string) error {
 
 // Unsubscribe 取消订阅
 func (c *MqChannel) Unsubscribe(key string) error {
-	log.Debugf("Unsubscribe %s", key)
+	logger.Debugf("Unsubscribe %s", key)
 	if c.kind == TopicChannelType {
 		err := c.ch.QueueUnbind(c.queue.Name, key, c.kind.Name(), nil)
 		if err != nil {
-			log.Errorf("Topic Unsubscribe err:%v", err)
+			logger.Errorf("Topic Unsubscribe err:%v", err)
 			return err
 		}
 		return nil
 	} else if c.kind == FanoutChannelType {
-		log.Errorf("Fanou Unsubscribe")
+		logger.Errorf("Fanou Unsubscribe")
 		return nil
 	} else if c.kind == WorkerChannelType {
-		log.Errorf("Worker Unsubscribe")
+		logger.Errorf("Worker Unsubscribe")
 		return nil
 	}
 	return fmt.Errorf("Unsubscribe Kind type:%d err", c.kind)
@@ -217,27 +211,27 @@ func (c *MqChannel) Unsubscribe(key string) error {
 
 // Receive 接受
 func (c *MqChannel) Receive(reader func(value Delivery)) error {
-	log.Debug("Receive")
+	logger.Debug("Receive")
 	if c.kind == WorkerChannelType {
 		err := c.ch.Qos(1, 0, false)
 		if err != nil {
-			log.Errorf("Workder Receive Qos err:%v", err)
+			logger.Errorf("Workder Receive Qos err:%v", err)
 			return err
 		}
 	} else if c.kind == FanoutChannelType {
 		err := c.ch.QueueBind(c.queue.Name, "", c.kind.Name(), false, nil)
 		if err != nil {
-			log.Errorf("Fanout Subscribe err:%v", err)
+			logger.Errorf("Fanout Subscribe err:%v", err)
 			return err
 		}
 	} else if c.kind != TopicChannelType {
-		log.Errorf("Receive Kind type:%d err", c.kind)
+		logger.Errorf("Receive Kind type:%d err", c.kind)
 		return fmt.Errorf("Receive Kind type:%d err", c.kind)
 	}
 
 	msgs, err := c.ch.Consume(c.queue.Name, "", true, false, false, false, nil)
 	if err != nil {
-		log.Errorf("Topic Receive err:%v", err)
+		logger.Errorf("Topic Receive err:%v", err)
 		return err
 	}
 	go func() {
