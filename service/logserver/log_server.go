@@ -42,6 +42,7 @@ func (s *logServer) Init(opts ...Option) error {
 
 func (s *logServer) Run() error {
 	mqwrap.Startup()
+
 	s.App.Run()
 	return nil
 }

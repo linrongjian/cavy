@@ -126,6 +126,21 @@ func NewChannel(kind channelType, name string) (*MqChannel, error) {
 	return channel, nil
 }
 
+func ChannelBind() error {
+
+	ch, err := mqConnect.Channel()
+	if err != nil {
+		logger.Errorf("ChannelBind Err:%v", err)
+		return err
+	}
+	err = ch.ExchangeBind("xw", "", "xw_exchange_fanout", false, nil)
+	if nil != err {
+
+	}
+
+	return nil
+}
+
 // Close 关闭
 func (c *MqChannel) Close() {
 	c.ch.QueueDelete(c.queue.Name, false, false, false)
