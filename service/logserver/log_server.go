@@ -3,6 +3,11 @@ package logserver
 import (
 	"fastserver/core/app"
 	"fastserver/core/network/protocols/mqwrap"
+	"fastserver/service/logserver/report"
+)
+
+var (
+	logReport *report.LogReport
 )
 
 type LogServer interface {
@@ -42,7 +47,8 @@ func (s *logServer) Init(opts ...Option) error {
 
 func (s *logServer) Run() error {
 	mqwrap.Startup()
-
+	logReport = report.NewLogReport()
+	logReport.Complete()
 	s.App.Run()
 	return nil
 }

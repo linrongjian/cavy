@@ -12,21 +12,21 @@ var (
 	Flags = []cli.Flag{
 		&cli.StringFlag{
 			Name:        "MQHOST",
-			Value:       "127.0.0.1:5672",
+			Value:       "127.0.0.1:5672/xw-dev",
 			Usage:       "-MQHOST 127.0.0.1",
 			EnvVars:     []string{"MQHOST"},
 			Destination: &Opts.Host,
 		},
 		&cli.StringFlag{
 			Name:        "MQACCOUNT",
-			Value:       "guest",
+			Value:       "xw",
 			Usage:       "-MQACCOUNT guest",
 			EnvVars:     []string{"MQACCOUNT"},
 			Destination: &Opts.Account,
 		},
 		&cli.StringFlag{
 			Name:        "MQPASSWORD",
-			Value:       "guest",
+			Value:       "123456",
 			Usage:       "-MQPASSWORD guest",
 			EnvVars:     []string{"MQPASSWORD"},
 			Destination: &Opts.Password,

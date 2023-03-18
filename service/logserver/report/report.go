@@ -1,24 +1,26 @@
 package report
 
 import (
+	"bufio"
 	"fastserver/core/logger"
 	"fastserver/core/network/protocols/mqwrap"
-	"fastserver/core/protocol/pb"
-
-	"google.golang.org/protobuf/proto"
+	"os"
+	"strings"
 )
 
 type LogReport struct {
+	mqChannel *mqwrap.MqChannel
 }
 
 func NewLogReport() *LogReport {
 	r := new(LogReport)
 
-	mqChannel, err := mqwrap.NewChannel(mqwrap.TopicChannelType, "")
+	mqChannel, err := mqwrap.NewChannel(mqwrap.TopicChannelType, "game-event-dev")
 	if err != nil {
 		logger.Errorf("NewMQChannel err:%v", err)
 		return nil
 	}
+	r.mqChannel = mqChannel
 
 	err = mqChannel.Subscribe("test")
 	if err != nil {
@@ -34,13 +36,32 @@ func NewLogReport() *LogReport {
 	return r
 }
 
-func (r *LogReport) rmqRecv(value mqwrap.Delivery) {
-	logger.Infof("onQmqRecv", "onRecvPush")
+func (r *LogReport) Complete() {
+	logger.Infof("onQmqRecv", "complete")
 
-	recvMsg := &pb.Message{}
-	err := proto.Unmarshal(value.Body, recvMsg)
-	if err != nil {
-		logger.Errorf("Unmarshal err:%v", err)
-		return
+	for {
+		reader := bufio.NewReader(os.Stdin)
+		input, _ := reader.ReadString('\n')
+		input = strings.Trim(input, "\r\n")
+		if input == "1" {
+			r.mqChannel.Publish("test", []byte("sadfsaf"))
+		}
+		// inputs := strings.Split(input, " ")
+		// for _, num := range inputs {
+		// 	n, _ := strconv.Atoi(num)
+		// 	fmt.Printf("%d ", n)
+		// }
 	}
+
+}
+
+func (r *LogReport) rmqRecv(value mqwrap.Delivery) {
+	logger.Infof("onQmqRecv", string(value.Body))
+
+	// recvMsg := &pb.Message{}
+	// err := proto.Unmarshal(value.Body, recvMsg)
+	// if err != nil {
+	// 	logger.Errorf("Unmarshal err:%v", err)
+	// 	return
+	// }
 }

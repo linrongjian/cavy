@@ -48,13 +48,13 @@ var (
 
 func Startup() {
 	logger.Infof("connect mq addr:%s account:%s password:%s", Opts.Host, Opts.Account, Opts.Password)
-	url := fmt.Sprintf("amqp://%s:%s@%s/", Opts.Account, Opts.Password, Opts.Host)
+	url := fmt.Sprintf("amqp://%s:%s@%s", Opts.Account, Opts.Password, Opts.Host)
 	conn, err := amqp.Dial(url)
 	if err != nil {
 		logger.Errorf("Conn MQ URL:%s err:%v", url, err)
 	}
 	mqConnect = conn
-	mqChannel, _ = NewChannel(TopicChannelType, "")
+	// mqChannel, _ = NewChannel(TopicChannelType, "")
 }
 
 func (c channelType) String() string {
@@ -89,12 +89,14 @@ func NewChannel(kind channelType, name string) (*MqChannel, error) {
 	channel.ch = ch
 
 	if kind == TopicChannelType {
-		err = ch.ExchangeDeclare(kind.Name(), kind.String(), true, false, false, false, nil)
+		// err = ch.ExchangeDeclare(kind.Name(), kind.String(), true, false, false, false, nil)
 		if err != nil {
 			logger.Errorf("ExchangeDeclare err:%v", err)
 			return nil, err
 		}
-		queue, err := ch.QueueDeclare("", false, false, true, false, nil)
+		// queue, err := ch.QueueDeclare("", false, false, true, false, nil)
+		agrs := amqp.Table{"x-message-ttl": 10000}
+		queue, err := ch.QueueDeclare(name, false, true, false, false, agrs)
 		if err != nil {
 			logger.Errorf("QueueDeclare err:%v", err)
 			return nil, err
@@ -113,7 +115,8 @@ func NewChannel(kind channelType, name string) (*MqChannel, error) {
 		}
 		channel.queue = queue
 	} else if kind == WorkerChannelType {
-		queue, err := ch.QueueDeclare(name, true, false, false, false, nil)
+		agrs := amqp.Table{"x-message-ttl": 10000}
+		queue, err := ch.QueueDeclare(name, false, true, false, false, agrs)
 		if err != nil {
 			logger.Errorf("QueueDeclare err:%v", err)
 			return nil, err
