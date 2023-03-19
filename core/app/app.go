@@ -1,7 +1,7 @@
 package app
 
 import (
-	"fastserver/core/logger"
+	"servergo/core/logger"
 	"os"
 	"os/signal"
 

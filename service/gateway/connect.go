@@ -1,10 +1,10 @@
 package gateway
 
 import (
-	"fastserver/core/logger"
-	"fastserver/core/network/protocols/httpwrap"
-	"fastserver/core/network/protocols/wswrap"
-	"fastserver/core/protocol/pb"
+	"servergo/core/logger"
+	"servergo/core/network/protocols/httpwrap"
+	"servergo/core/network/protocols/wswrap"
+	"servergo/core/protocol/pb"
 	"math/rand"
 	"strconv"
 

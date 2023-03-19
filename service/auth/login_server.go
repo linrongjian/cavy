@@ -1,8 +1,8 @@
 package auth
 
 import (
-	"fastserver/core/app"
-	"fastserver/core/logger"
+	"servergo/core/app"
+	"servergo/core/logger"
 	"os"
 	"os/signal"
 )

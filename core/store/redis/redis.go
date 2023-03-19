@@ -2,7 +2,7 @@ package redis
 
 import (
 	"context"
-	"fastserver/core/logger"
+	"servergo/core/logger"
 	"fmt"
 
 	"github.com/bsm/redislock"

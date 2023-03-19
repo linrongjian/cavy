@@ -2,11 +2,11 @@ package httpwrap
 
 import (
 	"context"
-	"fastserver/core/logger"
-	"fastserver/core/network/protocols/mqwrap"
-	"fastserver/core/protocol/pb"
-	"fastserver/core/store/mysql"
-	"fastserver/core/util"
+	"servergo/core/logger"
+	"servergo/core/network/protocols/mqwrap"
+	"servergo/core/protocol/pb"
+	"servergo/core/store/mysql"
+	"servergo/core/util"
 	"io/ioutil"
 	"net/http"
 	"net/url"

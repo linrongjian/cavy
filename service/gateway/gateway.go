@@ -1,10 +1,10 @@
 package gateway
 
 import (
-	"fastserver/core/app"
-	"fastserver/core/logger"
-	"fastserver/core/network/protocols/httpwrap"
-	"fastserver/core/network/protocols/mqwrap"
+	"servergo/core/app"
+	"servergo/core/logger"
+	"servergo/core/network/protocols/httpwrap"
+	"servergo/core/network/protocols/mqwrap"
 	"os"
 	"os/signal"
 )

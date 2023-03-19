@@ -1,6 +1,6 @@
 package main
 
-import "fastserver/service/logicserver"
+import "servergo/service/logicserver"
 
 func main() {
 	g := logicserver.NewLogicServer()

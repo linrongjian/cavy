@@ -1,7 +1,7 @@
 package log
 
 import (
-	"fastserver/core/util"
+	"servergo/core/util"
 	"fmt"
 )
 

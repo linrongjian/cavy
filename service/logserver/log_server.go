@@ -1,9 +1,9 @@
 package logserver
 
 import (
-	"fastserver/core/app"
-	"fastserver/core/network/protocols/mqwrap"
-	"fastserver/service/logserver/report"
+	"servergo/core/app"
+	"servergo/core/network/protocols/mqwrap"
+	"servergo/service/logserver/report"
 )
 
 var (

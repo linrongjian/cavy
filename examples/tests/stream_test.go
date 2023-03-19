@@ -1,8 +1,8 @@
 package tests
 
 import (
-	"fastserver/core/network/protocols/grpcwrap"
-	"fastserver/core/network/transport"
+	"servergo/core/network/protocols/grpcwrap"
+	"servergo/core/network/transport"
 	"net"
 	"testing"
 )

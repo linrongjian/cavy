@@ -1,11 +1,11 @@
 package report
 
 import (
-	"fastserver/core/app"
-	"fastserver/core/logger"
-	"fastserver/core/network/protocols/mqwrap"
-	"fastserver/core/network/protocols/wswrap"
-	"fastserver/core/protocol/pb"
+	"servergo/core/app"
+	"servergo/core/logger"
+	"servergo/core/network/protocols/mqwrap"
+	"servergo/core/network/protocols/wswrap"
+	"servergo/core/protocol/pb"
 	"fmt"
 	"sync"
 	"sync/atomic"

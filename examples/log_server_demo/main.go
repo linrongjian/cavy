@@ -1,8 +1,8 @@
 package main
 
 import (
-	"fastserver/core/logger"
-	"fastserver/service/logserver"
+	"servergo/core/logger"
+	"servergo/service/logserver"
 )
 
 func main() {

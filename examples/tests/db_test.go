@@ -1,8 +1,8 @@
 package tests
 
 import (
-	"fastserver/core/logger"
-	"fastserver/core/store/redis"
+	"servergo/core/logger"
+	"servergo/core/store/redis"
 	"os"
 
 	"github.com/urfave/cli/v2"

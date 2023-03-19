@@ -1,8 +1,8 @@
 package gateway
 
 import (
-	"fastserver/core/network/protocols/wswrap"
-	"fastserver/core/protocol/pb"
+	"servergo/core/network/protocols/wswrap"
+	"servergo/core/protocol/pb"
 
 	"github.com/golang/protobuf/proto"
 )

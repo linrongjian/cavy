@@ -3,9 +3,9 @@ package grpcwrap
 import (
 	"context"
 	"crypto/tls"
-	"fastserver/core/network/transport"
-	"fastserver/core/protocol/pbgrpc"
-	"fastserver/core/util"
+	"servergo/core/network/transport"
+	"servergo/core/protocol/pbgrpc"
+	"servergo/core/util"
 	"net"
 
 	"google.golang.org/grpc"

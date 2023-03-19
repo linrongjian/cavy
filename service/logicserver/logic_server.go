@@ -1,7 +1,7 @@
 package logicserver
 
 import (
-	"fastserver/core/app"
+	"servergo/core/app"
 )
 
 type LogicServer interface {

@@ -2,7 +2,7 @@ package logger
 
 import (
 	"context"
-	"fastserver/core/logger/log"
+	"servergo/core/logger/log"
 	"fmt"
 	"os"
 	"runtime"

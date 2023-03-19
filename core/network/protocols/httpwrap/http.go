@@ -2,7 +2,7 @@ package httpwrap
 
 import (
 	"context"
-	"fastserver/core/logger"
+	"servergo/core/logger"
 	"net/http"
 	"time"
 

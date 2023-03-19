@@ -2,8 +2,8 @@ package report
 
 import (
 	"bufio"
-	"fastserver/core/logger"
-	"fastserver/core/network/protocols/mqwrap"
+	"servergo/core/logger"
+	"servergo/core/network/protocols/mqwrap"
 	"os"
 	"strings"
 )

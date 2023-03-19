@@ -2,7 +2,7 @@ package gateway
 
 import (
 	"context"
-	"fastserver/core/store/redis"
+	"servergo/core/store/redis"
 )
 
 type Options struct {

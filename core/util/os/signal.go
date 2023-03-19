@@ -1,7 +1,7 @@
 package os
 
 import (
-	"fastserver/core/logger"
+	"servergo/core/logger"
 	"os"
 	"runtime"
 	"runtime/pprof"

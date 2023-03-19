@@ -2,7 +2,7 @@ package redis
 
 import (
 	"context"
-	"fastserver/core/util"
+	"servergo/core/util"
 	"fmt"
 	"sync"
 	"time"

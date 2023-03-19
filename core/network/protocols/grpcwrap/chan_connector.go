@@ -1,8 +1,8 @@
 package grpcwrap
 
 import (
-	"fastserver/core/network/transport"
-	"fastserver/core/protocol/pbgrpc"
+	"servergo/core/network/transport"
+	"servergo/core/protocol/pbgrpc"
 
 	"google.golang.org/grpc"
 )

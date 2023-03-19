@@ -1,6 +1,6 @@
 package main
 
-import "fastserver/service/auth"
+import "servergo/service/auth"
 
 func main() {
 	g := auth.NewLoginServer()

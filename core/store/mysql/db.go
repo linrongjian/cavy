@@ -1,7 +1,7 @@
 package mysql
 
 import (
-	"fastserver/core/logger"
+	"servergo/core/logger"
 	"flag"
 	"fmt"
 

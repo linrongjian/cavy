@@ -1,7 +1,7 @@
 package mqwrap
 
 import (
-	"fastserver/core/logger"
+	"servergo/core/logger"
 	"fmt"
 
 	"github.com/streadway/amqp"

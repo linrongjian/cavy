@@ -2,7 +2,7 @@ package memory
 
 import (
 	"errors"
-	"fastserver/core/util"
+	"servergo/core/util"
 	"sync"
 	"time"
 )

@@ -1,9 +1,9 @@
 package wswrap
 
 import (
-	"fastserver/core/logger"
-	"fastserver/core/network/transport"
-	"fastserver/core/protocol/pb"
+	"servergo/core/logger"
+	"servergo/core/network/transport"
+	"servergo/core/protocol/pb"
 	"fmt"
 	"sync"
 	"time"
