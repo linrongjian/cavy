@@ -1,13 +1,14 @@
 package mqwrap
 
 import (
-	"servergo/core/logger"
+	"errors"
 	"fmt"
+	"servergo/core/logger"
 
 	"github.com/streadway/amqp"
 )
 
-var mqChannel *MqChannel
+// var mqChannel *MqChannel
 
 type channelType int
 
@@ -123,26 +124,26 @@ func NewChannel(kind channelType, name string) (*MqChannel, error) {
 		}
 		channel.queue = queue
 	} else {
-		return nil, fmt.Errorf("Kind is Invald Type")
+		return nil, errors.New("x")
 	}
 
 	return channel, nil
 }
 
-func ChannelBind() error {
+// func ChannelBind() error {
 
-	ch, err := mqConnect.Channel()
-	if err != nil {
-		logger.Errorf("ChannelBind Err:%v", err)
-		return err
-	}
-	err = ch.ExchangeBind("xw", "", "xw_exchange_fanout", false, nil)
-	if nil != err {
+// 	ch, err := mqConnect.Channel()
+// 	if err != nil {
+// 		logger.Errorf("ChannelBind Err:%v", err)
+// 		return err
+// 	}
+// 	err = ch.ExchangeBind("xw", "", "xw_exchange_fanout", false, nil)
+// 	if nil != err {
 
-	}
+// 	}
 
-	return nil
-}
+// 	return nil
+// }
 
 // Close 关闭
 func (c *MqChannel) Close() {
