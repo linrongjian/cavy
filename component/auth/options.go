@@ -1,12 +1,11 @@
-package gateway
+package auth
 
 import (
 	"context"
-	"servergo/core/store/redis"
+	"eventgo/core/store/redis"
 )
 
-type Opts struct {
-	// Server baseserver.Server
+type Options struct {
 	Rds *redis.Store
 	//mysql
 	//mq
@@ -16,12 +15,13 @@ type Opts struct {
 	AfterStop   []func() error
 
 	Context context.Context
+	cancel  context.CancelFunc
 
 	Signal bool
 }
 
-func newOptions(opts ...Option) Opts {
-	opt := Opts{
+func newOptions(opts ...Option) Options {
+	opt := Options{
 		Context: context.Background(),
 		Signal:  true,
 	}
@@ -34,37 +34,37 @@ func newOptions(opts ...Option) Opts {
 }
 
 func Context1(ctx context.Context) Option {
-	return func(o *Opts) {
+	return func(o *Options) {
 		o.Context = ctx
 	}
 }
 
 func HandleSignal(b bool) Option {
-	return func(o *Opts) {
+	return func(o *Options) {
 		o.Signal = b
 	}
 }
 
 func BeforeStart(fn func() error) Option {
-	return func(o *Opts) {
+	return func(o *Options) {
 		o.BeforeStart = append(o.BeforeStart, fn)
 	}
 }
 
 func BeforeStop(fn func() error) Option {
-	return func(o *Opts) {
+	return func(o *Options) {
 		o.BeforeStop = append(o.BeforeStop, fn)
 	}
 }
 
 func AfterStart(fn func() error) Option {
-	return func(o *Opts) {
+	return func(o *Options) {
 		o.AfterStart = append(o.AfterStart, fn)
 	}
 }
 
 func AfterStop(fn func() error) Option {
-	return func(o *Opts) {
+	return func(o *Options) {
 		o.AfterStop = append(o.AfterStop, fn)
 	}
 }

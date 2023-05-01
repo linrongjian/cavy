@@ -1,9 +1,9 @@
 package wswrap
 
 import (
-	"servergo/core/logger"
-	"servergo/core/network/transport"
-	"servergo/core/protocol/pb"
+	"eventgo/core/logger"
+	"eventgo/core/network/transport"
+	"eventgo/core/protocol/pb"
 	"fmt"
 	"sync"
 	"time"

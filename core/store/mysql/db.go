@@ -1,7 +1,7 @@
 package mysql
 
 import (
-	"servergo/core/logger"
+	"eventgo/core/logger"
 	"flag"
 	"fmt"
 

@@ -2,15 +2,13 @@ package mqwrap
 
 import (
 	"errors"
+	"eventgo/core/logger"
 	"fmt"
-	"servergo/core/logger"
 
 	"github.com/streadway/amqp"
 )
 
 // var mqChannel *MqChannel
-
-type channelType int
 
 // MqChannel 通道
 type MqChannel struct {
@@ -24,27 +22,8 @@ type MqChannel struct {
 // Channel.Get.
 type Delivery = amqp.Delivery
 
-const (
-	// TopicChannelType topic交换机
-	TopicChannelType = channelType(1)
-	// FanoutChannelType fanout 交换机
-	FanoutChannelType = channelType(2)
-	// WorkerChannelType Worker交换机
-	WorkerChannelType = channelType(3)
-)
-
 var (
-	mqConnect           *amqp.Connection
-	channelTypeValueMap = map[channelType]string{
-		TopicChannelType:  "topic",
-		FanoutChannelType: "fanout",
-		WorkerChannelType: "worker",
-	}
-	channelTypeNameMap = map[channelType]string{
-		TopicChannelType:  "amq.topic",
-		FanoutChannelType: "amq.fanout",
-		WorkerChannelType: "",
-	}
+	mqConnect *amqp.Connection
 )
 
 func Startup() {
@@ -56,20 +35,6 @@ func Startup() {
 	}
 	mqConnect = conn
 	// mqChannel, _ = NewChannel(TopicChannelType, "")
-}
-
-func (c channelType) String() string {
-	if v, ok := channelTypeValueMap[c]; ok {
-		return v
-	}
-	return ""
-}
-
-func (c channelType) Name() string {
-	if v, ok := channelTypeNameMap[c]; ok {
-		return v
-	}
-	return ""
 }
 
 // NewChannel 生成通道
@@ -261,38 +226,3 @@ func (c *MqChannel) Receive(reader func(value Delivery)) error {
 
 	return nil
 }
-
-// KickOutPlayer 踢掉玩家
-// func (c *Channel) KickOutPlayer(userID string, code goddess.MessageCode) error {
-// 	msg := []byte("1")
-
-// 	if mqChannel == nil {
-// 		ch, err := NewChannel(TopicChannelType, "")
-// 		if err != nil {
-// 			log.Errorf("KickOutPlayer newChannel TopicChannelType err:%v", err)
-// 			return err
-// 		}
-// 		mqChannel = ch
-// 	}
-
-// 	messageCode := goddess.MessageCode(code)
-// 	pushMsg := &goddess.Message{
-// 		Cmd:  &messageCode,
-// 		Data: []byte(msg),
-// 	}
-// 	buf, err := proto.Marshal(pushMsg)
-// 	if err != nil {
-// 		log.Errorf("KickOutPlayer Marshal pushMsg:%v err:%v", pushMsg, err)
-// 		return err
-// 	}
-
-// 	err = mqChannel.Publish(userID, buf)
-// 	if err != nil {
-// 		log.Errorf("KickOutPlayer publish userID:%v err:%v", userID, err)
-// 		mqChannel.Close()
-// 		mqChannel = nil
-// 		return err
-// 	}
-
-// 	return nil
-// }

@@ -2,7 +2,7 @@ package redis
 
 import (
 	"context"
-	"servergo/core/util"
+	"eventgo/core/util"
 	"fmt"
 	"sync"
 	"time"

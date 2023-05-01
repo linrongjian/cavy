@@ -2,7 +2,7 @@ package server
 
 import (
 	"context"
-	"servergo/core/store/redis"
+	"eventgo/core/store/redis"
 )
 
 type Options struct {

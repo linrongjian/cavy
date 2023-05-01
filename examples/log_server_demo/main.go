@@ -1,8 +1,8 @@
 package main
 
 import (
-	"servergo/core/logger"
-	"servergo/service/logserver"
+	"eventgo/component/logserver"
+	"eventgo/core/logger"
 )
 
 func main() {

@@ -2,7 +2,7 @@ package logger
 
 import (
 	"context"
-	"servergo/core/logger/log"
+	"eventgo/core/logger/log"
 	"fmt"
 	"os"
 	"runtime"

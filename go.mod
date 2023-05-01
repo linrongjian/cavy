@@ -1,6 +1,6 @@
-module servergo
+module eventgo
 
-go 1.19
+go 1.18
 
 require (
 	github.com/bsm/redislock v0.9.0

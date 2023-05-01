@@ -2,7 +2,7 @@ package httpwrap
 
 import (
 	"context"
-	"servergo/core/logger"
+	"eventgo/core/logger"
 	"net/http"
 	"time"
 
