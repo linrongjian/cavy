@@ -1,13 +1,13 @@
 package logserver
 
 import (
-	"servergo/core/app"
-	"servergo/core/network/protocols/mqwrap"
-	"servergo/service/logserver/report"
+	"eventgo/component/logserver/modules/journal"
+	"eventgo/core/app"
+	"eventgo/core/network/protocols/mqwrap"
 )
 
 var (
-	logReport *report.LogReport
+	logReport *journal.LogReport
 )
 
 type LogServer interface {
@@ -47,8 +47,8 @@ func (s *logServer) Init(opts ...Option) error {
 
 func (s *logServer) Run() error {
 	mqwrap.Startup()
-	logReport = report.NewLogReport()
-	logReport.Complete()
+	logReport = journal.NewLogReport()
+	logReport.Init()
 	s.App.Run()
 	return nil
 }

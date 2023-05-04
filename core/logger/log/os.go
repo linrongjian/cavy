@@ -1,7 +1,7 @@
 package log
 
 import (
-	"servergo/core/util"
+	"eventgo/core/util"
 	"sync"
 
 	"github.com/google/uuid"

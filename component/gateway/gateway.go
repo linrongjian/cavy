@@ -1,9 +1,9 @@
 package gateway
 
 import (
-	"servergo/core/app"
-	"servergo/core/network/protocols/httpwrap"
-	"servergo/core/network/protocols/mqwrap"
+	"eventgo/core/app"
+	"eventgo/core/network/protocols/httpwrap"
+	"eventgo/core/network/protocols/mqwrap"
 )
 
 type GateServer interface {

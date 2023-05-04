@@ -1,11 +1,12 @@
-package report
+package journal
 
 import (
 	"bufio"
-	"servergo/core/logger"
-	"servergo/core/network/protocols/mqwrap"
+	"eventgo/core/logger"
+	"eventgo/core/network/protocols/mqwrap"
 	"os"
 	"strings"
+	"time"
 )
 
 type LogReport struct {
@@ -36,7 +37,7 @@ func NewLogReport() *LogReport {
 	return r
 }
 
-func (r *LogReport) Complete() {
+func (r *LogReport) Init() {
 	logger.Infof("onQmqRecv", "complete")
 
 	for {
@@ -44,7 +45,12 @@ func (r *LogReport) Complete() {
 		input, _ := reader.ReadString('\n')
 		input = strings.Trim(input, "\r\n")
 		if input == "1" {
-			r.mqChannel.Publish("test", []byte("sadfsaf"))
+			for {
+				time.Sleep(10 * time.Nanosecond)
+				for i := 0; i < 1000; i++ {
+					r.mqChannel.Publish("test", []byte("sadfsaf"))
+				}
+			}
 		}
 		// inputs := strings.Split(input, " ")
 		// for _, num := range inputs {
@@ -56,7 +62,7 @@ func (r *LogReport) Complete() {
 }
 
 func (r *LogReport) rmqRecv(value mqwrap.Delivery) {
-	logger.Infof("onQmqRecv", string(value.Body))
+	// logger.Infof("onQmqRecv", string(value.Body))
 
 	// recvMsg := &pb.Message{}
 	// err := proto.Unmarshal(value.Body, recvMsg)

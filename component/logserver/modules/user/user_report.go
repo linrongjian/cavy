@@ -1,11 +1,11 @@
 package report
 
 import (
-	"servergo/core/app"
-	"servergo/core/logger"
-	"servergo/core/network/protocols/mqwrap"
-	"servergo/core/network/protocols/wswrap"
-	"servergo/core/protocol/pb"
+	"eventgo/core/app"
+	"eventgo/core/logger"
+	"eventgo/core/network/protocols/mqwrap"
+	"eventgo/core/network/protocols/wswrap"
+	"eventgo/core/protocol/pb"
 	"fmt"
 	"sync"
 	"sync/atomic"

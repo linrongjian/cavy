@@ -1,7 +1,7 @@
 package app
 
 import (
-	"servergo/core/logger"
+	"eventgo/core/logger"
 	"os"
 	"os/signal"
 

@@ -1,10 +1,13 @@
-package logicserver
+package auth
 
 import (
-	"servergo/core/app"
+	"eventgo/core/app"
+	"eventgo/core/logger"
+	"os"
+	"os/signal"
 )
 
-type LogicServer interface {
+type LoginServer interface {
 	app.Server
 	Init(...Option) error
 	Options() Options
@@ -12,27 +15,36 @@ type LogicServer interface {
 
 type Option func(*Options)
 
-type logicServer struct {
+type loginServer struct {
 	*app.App
 	opts Options
 }
 
-func (s *logicServer) Run() error {
-	s.App.Run()
+func (g *loginServer) Run() error {
+
+	// Ctx = s.Options().Context
+	// CreateHTTPServer()
+	// ClearOnline()
+
+	c := make(chan os.Signal, 1)
+	signal.Notify(c, os.Interrupt, os.Kill)
+	sig := <-c
+	logger.Info("Leaf closing down (signal: %v)", sig)
+
 	return nil
 }
 
-func (s *logicServer) Stop() error {
+func (g *loginServer) Stop() error {
 	return nil
 }
 
-func (s *logicServer) Options() Options {
-	return s.opts
+func (g *loginServer) Options() Options {
+	return g.opts
 }
 
-func (s *logicServer) Init(opts ...Option) error {
+func (g *loginServer) Init(opts ...Option) error {
 	for _, o := range opts {
-		o(&s.opts)
+		o(&g.opts)
 	}
 
 	// cmd.AddFlags(defaultFlags)
@@ -53,16 +65,12 @@ func (s *logicServer) Init(opts ...Option) error {
 	return nil
 }
 
-func NewLogicServer(opts ...Option) LogicServer {
+func NewLoginServer(opts ...Option) LoginServer {
 	options := Options{}
 	for _, o := range opts {
 		o(&options)
 	}
-
-	app := app.NewApp()
-	app.Init()
-	return &logicServer{
-		App:  app,
+	return &loginServer{
 		opts: options,
 	}
 }

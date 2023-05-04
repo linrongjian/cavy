@@ -1,8 +1,8 @@
 package grpcwrap
 
 import (
-	"servergo/core/network/transport"
-	"servergo/core/protocol/pbgrpc"
+	"eventgo/core/network/transport"
+	"eventgo/core/protocol/pbgrpc"
 
 	"google.golang.org/grpc"
 )

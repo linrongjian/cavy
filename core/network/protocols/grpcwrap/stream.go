@@ -2,8 +2,8 @@ package grpcwrap
 
 import (
 	"crypto/tls"
-	"servergo/core/network/transport"
-	"servergo/core/util"
+	"eventgo/core/network/transport"
+	"eventgo/core/util"
 	"net"
 )
 

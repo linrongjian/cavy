@@ -1,8 +1,8 @@
 package tests
 
 import (
-	"servergo/core/network/protocols/grpcwrap"
-	"servergo/core/network/transport"
+	"eventgo/core/network/protocols/grpcwrap"
+	"eventgo/core/network/transport"
 	"net"
 	"testing"
 )

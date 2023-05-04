@@ -2,7 +2,7 @@ package memory
 
 import (
 	"errors"
-	"servergo/core/util"
+	"eventgo/core/util"
 	"sync"
 	"time"
 )

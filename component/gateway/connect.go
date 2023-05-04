@@ -1,10 +1,10 @@
 package gateway
 
 import (
-	"servergo/core/logger"
-	"servergo/core/network/protocols/httpwrap"
-	"servergo/core/network/protocols/wswrap"
-	"servergo/core/protocol/pb"
+	"eventgo/core/logger"
+	"eventgo/core/network/protocols/httpwrap"
+	"eventgo/core/network/protocols/wswrap"
+	"eventgo/core/protocol/pb"
 	"math/rand"
 	"strconv"
 

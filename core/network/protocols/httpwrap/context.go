@@ -2,11 +2,11 @@ package httpwrap
 
 import (
 	"context"
-	"servergo/core/logger"
-	"servergo/core/network/protocols/mqwrap"
-	"servergo/core/protocol/pb"
-	"servergo/core/store/mysql"
-	"servergo/core/util"
+	"eventgo/core/logger"
+	"eventgo/core/network/protocols/mqwrap"
+	"eventgo/core/protocol/pb"
+	"eventgo/core/store/mysql"
+	"eventgo/core/util"
 	"io/ioutil"
 	"net/http"
 	"net/url"

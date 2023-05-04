@@ -2,7 +2,7 @@ package redis
 
 import (
 	"context"
-	"servergo/core/logger"
+	"eventgo/core/logger"
 	"fmt"
 
 	"github.com/bsm/redislock"

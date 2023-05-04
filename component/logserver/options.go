@@ -1,14 +1,12 @@
-package auth
+package logserver
 
 import (
 	"context"
-	"servergo/core/store/redis"
+	"eventgo/core/store/redis"
 )
 
 type Options struct {
-	Rds *redis.Store
-	//mysql
-	//mq
+	Rds         *redis.Store
 	BeforeStart []func() error
 	BeforeStop  []func() error
 	AfterStart  []func() error
@@ -20,16 +18,16 @@ type Options struct {
 	Signal bool
 }
 
+type JournalHandle func(msg []byte)
+
 func newOptions(opts ...Option) Options {
 	opt := Options{
 		Context: context.Background(),
 		Signal:  true,
 	}
-
 	for _, o := range opts {
 		o(&opt)
 	}
-
 	return opt
 }
 
