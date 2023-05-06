@@ -2,6 +2,7 @@ package logserver
 
 import (
 	"context"
+	"eventgo/component/logserver/modules/logconsumer"
 	"eventgo/core/store/redis"
 )
 
@@ -14,6 +15,8 @@ type Options struct {
 
 	Context context.Context
 	cancel  context.CancelFunc
+
+	logConsumer logconsumer.LogConsumer
 
 	Signal bool
 }

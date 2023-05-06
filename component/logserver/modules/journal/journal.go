@@ -6,7 +6,6 @@ import (
 	"eventgo/core/network/protocols/mqwrap"
 	"os"
 	"strings"
-	"time"
 )
 
 type LogReport struct {
@@ -29,6 +28,12 @@ func NewLogReport() *LogReport {
 		return nil
 	}
 
+	err = mqChannel.Subscribe("test1")
+	if err != nil {
+		logger.Errorf("Subscribe id err:%v", err)
+		return nil
+	}
+
 	err = mqChannel.Receive(r.rmqRecv)
 	if err != nil {
 		logger.Errorf("Receive err:%v", err)
@@ -45,12 +50,20 @@ func (r *LogReport) Init() {
 		input, _ := reader.ReadString('\n')
 		input = strings.Trim(input, "\r\n")
 		if input == "1" {
-			for {
-				time.Sleep(10 * time.Nanosecond)
-				for i := 0; i < 1000; i++ {
-					r.mqChannel.Publish("test", []byte("sadfsaf"))
-				}
-			}
+			// for {
+			// 	time.Sleep(10 * time.Nanosecond)
+			// 	for i := 0; i < 1000; i++ {
+			r.mqChannel.Publish("test", []byte("sadfsaf"))
+			// 	}
+			// }
+		}
+		if input == "2" {
+			// for {
+			// 	time.Sleep(10 * time.Nanosecond)
+			// 	for i := 0; i < 1000; i++ {
+			r.mqChannel.Publish("test1", []byte("sadfsaf"))
+			// 	}
+			// }
 		}
 		// inputs := strings.Split(input, " ")
 		// for _, num := range inputs {
@@ -62,7 +75,7 @@ func (r *LogReport) Init() {
 }
 
 func (r *LogReport) rmqRecv(value mqwrap.Delivery) {
-	// logger.Infof("onQmqRecv", string(value.Body))
+	logger.Infof("onQmqRecv", value.RoutingKey, string(value.Body))
 
 	// recvMsg := &pb.Message{}
 	// err := proto.Unmarshal(value.Body, recvMsg)

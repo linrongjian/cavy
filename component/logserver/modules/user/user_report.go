@@ -243,8 +243,6 @@ func ClearOnline() {
 
 // ClearOnline 清除在线用户
 func PrintOnline() {
-
 	atomic.AddInt32(&countOnline, 1)
 	logger.Info("在线连接数:", countOnline)
-
 }
