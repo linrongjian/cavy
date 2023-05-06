@@ -1,4 +1,4 @@
-module eventgo
+module CavyGo
 
 go 1.18
 

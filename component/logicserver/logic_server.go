@@ -1,7 +1,7 @@
 package logicserver
 
 import (
-	"eventgo/core/app"
+	"CavyGo/core/app"
 )
 
 type LogicServer interface {

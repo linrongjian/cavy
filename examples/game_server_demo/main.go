@@ -1,6 +1,6 @@
 package main
 
-import "eventgo/component/logicserver"
+import "CavyGo/component/logicserver"
 
 func main() {
 	g := logicserver.NewLogicServer()

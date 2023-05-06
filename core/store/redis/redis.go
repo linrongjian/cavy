@@ -1,8 +1,8 @@
 package redis
 
 import (
+	"CavyGo/core/logger"
 	"context"
-	"eventgo/core/logger"
 	"fmt"
 
 	"github.com/bsm/redislock"

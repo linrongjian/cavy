@@ -1,7 +1,7 @@
 package logconsumer
 
 import (
-	"eventgo/core/network/amqp"
+	"CavyGo/core/network/amqp"
 	"fmt"
 	"os"
 )

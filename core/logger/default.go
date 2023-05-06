@@ -1,8 +1,8 @@
 package logger
 
 import (
+	"CavyGo/core/logger/log"
 	"context"
-	"eventgo/core/logger/log"
 	"fmt"
 	"os"
 	"runtime"

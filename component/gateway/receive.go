@@ -1,8 +1,8 @@
 package gateway
 
 import (
-	"eventgo/core/network/protocols/wswrap"
-	"eventgo/core/protocol/pb"
+	"CavyGo/core/network/protocols/wswrap"
+	"CavyGo/core/protocol/pb"
 
 	"github.com/golang/protobuf/proto"
 )

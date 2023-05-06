@@ -1,9 +1,9 @@
 package gateway
 
 import (
-	"eventgo/core/app"
-	"eventgo/core/network/protocols/httpwrap"
-	"eventgo/core/network/protocols/mqwrap"
+	"CavyGo/core/app"
+	"CavyGo/core/network/protocols/httpwrap"
+	"CavyGo/core/network/protocols/mqwrap"
 )
 
 type GateServer interface {
@@ -42,7 +42,6 @@ func (s *gateServer) Init(opts ...Option) error {
 	}
 	httpwrap.RegisterGetHandleNoUserID("/", onConnectHandle) //获取入口信息
 	s.AddFlags(mqwrap.Flags)
-	s.App.InitComplete()
 	return nil
 }
 

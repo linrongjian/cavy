@@ -1,11 +1,11 @@
 package report
 
 import (
-	"eventgo/core/app"
-	"eventgo/core/logger"
-	"eventgo/core/network/protocols/mqwrap"
-	"eventgo/core/network/protocols/wswrap"
-	"eventgo/core/protocol/pb"
+	"CavyGo/core/app"
+	"CavyGo/core/logger"
+	"CavyGo/core/network/protocols/mqwrap"
+	"CavyGo/core/network/protocols/wswrap"
+	"CavyGo/core/protocol/pb"
 	"fmt"
 	"sync"
 	"sync/atomic"

@@ -1,6 +1,6 @@
 package main
 
-import "eventgo/component/auth"
+import "CavyGo/component/auth"
 
 func main() {
 	g := auth.NewLoginServer()

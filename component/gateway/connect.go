@@ -1,10 +1,10 @@
 package gateway
 
 import (
-	"eventgo/core/logger"
-	"eventgo/core/network/protocols/httpwrap"
-	"eventgo/core/network/protocols/wswrap"
-	"eventgo/core/protocol/pb"
+	"CavyGo/core/logger"
+	"CavyGo/core/network/protocols/httpwrap"
+	"CavyGo/core/network/protocols/wswrap"
+	"CavyGo/core/protocol/pb"
 	"math/rand"
 	"strconv"
 

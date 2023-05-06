@@ -1,7 +1,7 @@
 package mysql
 
 import (
-	"eventgo/core/logger"
+	"CavyGo/core/logger"
 	"flag"
 	"fmt"
 

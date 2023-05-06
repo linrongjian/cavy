@@ -1,9 +1,9 @@
 package logserver
 
 import (
+	"CavyGo/component/logserver/modules/logconsumer"
+	"CavyGo/core/store/redis"
 	"context"
-	"eventgo/component/logserver/modules/logconsumer"
-	"eventgo/core/store/redis"
 )
 
 type Options struct {

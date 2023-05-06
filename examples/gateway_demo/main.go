@@ -1,8 +1,8 @@
 package main
 
 import (
-	"eventgo/component/gateway"
-	"eventgo/core/logger"
+	"CavyGo/component/gateway"
+	"CavyGo/core/logger"
 )
 
 func main() {

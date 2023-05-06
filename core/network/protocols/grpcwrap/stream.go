@@ -1,9 +1,9 @@
 package grpcwrap
 
 import (
+	"CavyGo/core/network/transport"
+	"CavyGo/core/util"
 	"crypto/tls"
-	"eventgo/core/network/transport"
-	"eventgo/core/util"
 	"net"
 )
 

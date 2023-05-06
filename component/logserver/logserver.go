@@ -1,10 +1,10 @@
 package logserver
 
 import (
-	"eventgo/component/logserver/modules/journal"
-	"eventgo/component/logserver/modules/logconsumer"
-	"eventgo/core/app"
-	"eventgo/core/network/protocols/mqwrap"
+	"CavyGo/component/logserver/modules/journal"
+	"CavyGo/component/logserver/modules/logconsumer"
+	"CavyGo/core/app"
+	"CavyGo/core/network/protocols/mqwrap"
 	"fmt"
 	"log"
 )

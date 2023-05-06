@@ -1,8 +1,8 @@
 package amqp
 
 import (
+	"CavyGo/core/logger"
 	"errors"
-	"eventgo/core/logger"
 	"fmt"
 
 	"github.com/streadway/amqp"

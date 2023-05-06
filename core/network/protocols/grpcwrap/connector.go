@@ -1,11 +1,11 @@
 package grpcwrap
 
 import (
+	"CavyGo/core/network/transport"
+	"CavyGo/core/protocol/pbgrpc"
+	"CavyGo/core/util"
 	"context"
 	"crypto/tls"
-	"eventgo/core/network/transport"
-	"eventgo/core/protocol/pbgrpc"
-	"eventgo/core/util"
 	"net"
 
 	"google.golang.org/grpc"

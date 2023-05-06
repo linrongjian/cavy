@@ -1,7 +1,7 @@
 package main
 
 import (
-	"eventgo/component/logserver"
+	"CavyGo/component/logserver"
 	"log"
 )
 

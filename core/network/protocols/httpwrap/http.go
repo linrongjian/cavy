@@ -1,8 +1,8 @@
 package httpwrap
 
 import (
+	"CavyGo/core/logger"
 	"context"
-	"eventgo/core/logger"
 	"net/http"
 	"time"
 

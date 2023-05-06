@@ -1,7 +1,7 @@
 package log
 
 import (
-	"eventgo/core/util"
+	"CavyGo/core/util"
 	"sync"
 
 	"github.com/google/uuid"

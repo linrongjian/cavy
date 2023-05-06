@@ -1,8 +1,8 @@
 package tests
 
 import (
-	"eventgo/core/network/protocols/grpcwrap"
-	"eventgo/core/network/transport"
+	"CavyGo/core/network/protocols/grpcwrap"
+	"CavyGo/core/network/transport"
 	"net"
 	"testing"
 )

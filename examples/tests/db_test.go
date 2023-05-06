@@ -1,8 +1,8 @@
 package tests
 
 import (
-	"eventgo/core/logger"
-	"eventgo/core/store/redis"
+	"CavyGo/core/logger"
+	"CavyGo/core/store/redis"
 	"os"
 
 	"github.com/urfave/cli/v2"

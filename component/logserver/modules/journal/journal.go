@@ -1,9 +1,9 @@
 package journal
 
 import (
+	"CavyGo/core/logger"
+	"CavyGo/core/network/protocols/mqwrap"
 	"bufio"
-	"eventgo/core/logger"
-	"eventgo/core/network/protocols/mqwrap"
 	"os"
 	"strings"
 )

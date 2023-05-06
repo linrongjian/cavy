@@ -1,8 +1,8 @@
 package auth
 
 import (
-	"eventgo/core/app"
-	"eventgo/core/logger"
+	"CavyGo/core/app"
+	"CavyGo/core/logger"
 	"os"
 	"os/signal"
 )
