@@ -2,13 +2,13 @@ package main
 
 import (
 	"eventgo/component/logserver"
-	"eventgo/core/logger"
+	"log"
 )
 
 func main() {
-	g := logserver.NewLogServer()
-	if g.Init() != nil {
-		logger.Error("gate init err")
+	ls, err := logserver.NewLogServer()
+	if err != nil {
+		log.Panicln("log server start failure")
 	}
-	g.Run()
+	ls.Run()
 }
