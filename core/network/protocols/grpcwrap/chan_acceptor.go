@@ -1,8 +1,8 @@
 package grpcwrap
 
 import (
-	"servergo/core/network/transport"
-	"servergo/core/protocol/pbgrpc"
+	"CavyGo/core/network/transport"
+	"CavyGo/core/protocol/pbgrpc"
 )
 
 type grpcStreamChanAcceptor struct {

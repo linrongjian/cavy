@@ -1,7 +1,7 @@
 package log
 
 import (
-	"servergo/core/util"
+	"CavyGo/core/util"
 	"fmt"
 )
 

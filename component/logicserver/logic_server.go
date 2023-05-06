@@ -1,13 +1,10 @@
-package auth
+package logicserver
 
 import (
-	"servergo/core/app"
-	"servergo/core/logger"
-	"os"
-	"os/signal"
+	"CavyGo/core/app"
 )
 
-type LoginServer interface {
+type LogicServer interface {
 	app.Server
 	Init(...Option) error
 	Options() Options
@@ -15,36 +12,27 @@ type LoginServer interface {
 
 type Option func(*Options)
 
-type loginServer struct {
+type logicServer struct {
 	*app.App
 	opts Options
 }
 
-func (g *loginServer) Run() error {
-
-	// Ctx = s.Options().Context
-	// CreateHTTPServer()
-	// ClearOnline()
-
-	c := make(chan os.Signal, 1)
-	signal.Notify(c, os.Interrupt, os.Kill)
-	sig := <-c
-	logger.Info("Leaf closing down (signal: %v)", sig)
-
+func (s *logicServer) Run() error {
+	s.App.Run()
 	return nil
 }
 
-func (g *loginServer) Stop() error {
+func (s *logicServer) Stop() error {
 	return nil
 }
 
-func (g *loginServer) Options() Options {
-	return g.opts
+func (s *logicServer) Options() Options {
+	return s.opts
 }
 
-func (g *loginServer) Init(opts ...Option) error {
+func (s *logicServer) Init(opts ...Option) error {
 	for _, o := range opts {
-		o(&g.opts)
+		o(&s.opts)
 	}
 
 	// cmd.AddFlags(defaultFlags)
@@ -65,12 +53,16 @@ func (g *loginServer) Init(opts ...Option) error {
 	return nil
 }
 
-func NewLoginServer(opts ...Option) LoginServer {
+func NewLogicServer(opts ...Option) LogicServer {
 	options := Options{}
 	for _, o := range opts {
 		o(&options)
 	}
-	return &loginServer{
+
+	app := app.NewApp()
+	app.Init()
+	return &logicServer{
+		App:  app,
 		opts: options,
 	}
 }

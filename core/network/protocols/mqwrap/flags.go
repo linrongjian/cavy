@@ -12,7 +12,7 @@ var (
 	Flags = []cli.Flag{
 		&cli.StringFlag{
 			Name:        "MQHOST",
-			Value:       "127.0.0.1:5672/xw-dev",
+			Value:       "127.0.0.1:5672/xw-debug",
 			Usage:       "-MQHOST 127.0.0.1",
 			EnvVars:     []string{"MQHOST"},
 			Destination: &Opts.Host,

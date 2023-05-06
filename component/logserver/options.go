@@ -1,35 +1,36 @@
-package gateway
+package logserver
 
 import (
+	"CavyGo/component/logserver/modules/logconsumer"
+	"CavyGo/core/store/redis"
 	"context"
-	"servergo/core/store/redis"
 )
 
 type Options struct {
-	// Server baseserver.Server
-	Rds *redis.Store
-	//mysql
-	//mq
+	Rds         *redis.Store
 	BeforeStart []func() error
 	BeforeStop  []func() error
 	AfterStart  []func() error
 	AfterStop   []func() error
 
 	Context context.Context
+	cancel  context.CancelFunc
+
+	logConsumer logconsumer.LogConsumer
 
 	Signal bool
 }
+
+type JournalHandle func(msg []byte)
 
 func newOptions(opts ...Option) Options {
 	opt := Options{
 		Context: context.Background(),
 		Signal:  true,
 	}
-
 	for _, o := range opts {
 		o(&opt)
 	}
-
 	return opt
 }
 

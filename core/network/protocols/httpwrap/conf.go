@@ -9,7 +9,7 @@ type Config struct {
 
 var (
 	Conf = Config{
-		Port: 5001,
+		Port: 15001,
 		Test: true,
 	}
 

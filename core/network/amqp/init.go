@@ -1,0 +1,5 @@
+package amqp
+
+func init() {
+
+}

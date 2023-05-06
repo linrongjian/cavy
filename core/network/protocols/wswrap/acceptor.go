@@ -1,9 +1,9 @@
 package wswrap
 
 import (
-	"servergo/core/logger"
-	"servergo/core/network/transport"
-	"servergo/core/protocol/pb"
+	"CavyGo/core/logger"
+	"CavyGo/core/network/transport"
+	"CavyGo/core/protocol/pb"
 	"fmt"
 	"sync"
 	"time"

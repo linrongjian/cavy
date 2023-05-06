@@ -1,8 +1,8 @@
 package tests
 
 import (
-	"servergo/core/network/protocols/grpcwrap"
-	"servergo/core/network/transport"
+	"CavyGo/core/network/protocols/grpcwrap"
+	"CavyGo/core/network/transport"
 	"net"
 	"testing"
 )

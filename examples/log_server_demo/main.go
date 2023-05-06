@@ -1,14 +1,14 @@
 package main
 
 import (
-	"servergo/core/logger"
-	"servergo/service/logserver"
+	"CavyGo/component/logserver"
+	"log"
 )
 
 func main() {
-	g := logserver.NewLogServer()
-	if g.Init() != nil {
-		logger.Error("gate init err")
+	ls, err := logserver.NewLogServer()
+	if err != nil {
+		log.Panicln("log server start failure")
 	}
-	g.Run()
+	ls.Run()
 }

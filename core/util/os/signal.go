@@ -1,7 +1,7 @@
 package os
 
 import (
-	"servergo/core/logger"
+	"CavyGo/core/logger"
 	"os"
 	"runtime"
 	"runtime/pprof"

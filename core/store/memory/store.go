@@ -1,8 +1,8 @@
 package memory
 
 import (
+	"CavyGo/core/util"
 	"errors"
-	"servergo/core/util"
 	"sync"
 	"time"
 )

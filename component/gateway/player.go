@@ -1,11 +1,11 @@
 package gateway
 
 import (
-	"servergo/core/app"
-	"servergo/core/logger"
-	"servergo/core/network/protocols/mqwrap"
-	"servergo/core/network/protocols/wswrap"
-	"servergo/core/protocol/pb"
+	"CavyGo/core/app"
+	"CavyGo/core/logger"
+	"CavyGo/core/network/protocols/mqwrap"
+	"CavyGo/core/network/protocols/wswrap"
+	"CavyGo/core/protocol/pb"
 	"fmt"
 	"sync"
 	"sync/atomic"
@@ -30,9 +30,9 @@ type Player struct {
 }
 
 var (
-	playerManager sync.Map
-	lock          = &sync.Mutex{}
-	countOnline   int32
+	conns       sync.Map
+	lock        = &sync.Mutex{}
+	countOnline int32
 )
 
 // NewPlayer 创建用户
@@ -41,7 +41,7 @@ func NewPlayer(playerID string, session string, conn *wswrap.GWsConn) *Player {
 	defer lock.Unlock()
 
 	// 相同session不踢
-	if p, has := playerManager.Load(playerID); has && p.(*Player).session != session {
+	if p, has := conns.Load(playerID); has && p.(*Player).session != session {
 		logger.Infof("kick, close ws playerid:%s %s", playerID, p.(*Player).GetConnectID())
 		if err := p.(*Player).SendKick(KickAlreadyLogin); err != nil {
 			logger.Error("Send kick err:", err.Error())
@@ -54,7 +54,7 @@ func NewPlayer(playerID string, session string, conn *wswrap.GWsConn) *Player {
 	// 这里要wait一下，等playerdelete完
 	startts := time.Now().Unix()
 	for {
-		if _, has := playerManager.Load(playerID); !has {
+		if _, has := conns.Load(playerID); !has {
 			break
 		}
 
@@ -109,14 +109,14 @@ func NewPlayer(playerID string, session string, conn *wswrap.GWsConn) *Player {
 		return nil
 	}
 
-	playerManager.Store(playerID, player)
+	conns.Store(playerID, player)
 
 	return player
 }
 
 // GetPlayer 获得用户
 func GetPlayer(id string) *Player {
-	player, has := playerManager.Load(id)
+	player, has := conns.Load(id)
 	if !has {
 		return nil
 	}
@@ -125,7 +125,7 @@ func GetPlayer(id string) *Player {
 
 // FindPlayer 查找用户
 func FindPlayer(playerID string) *Player {
-	if p, exists := playerManager.Load(playerID); exists {
+	if p, exists := conns.Load(playerID); exists {
 		return p.(*Player)
 	}
 	return nil
@@ -140,7 +140,7 @@ func DeletePlayer(playerID string) {
 		player.mqChannel = nil
 	}
 
-	playerManager.Delete(playerID)
+	conns.Delete(playerID)
 }
 
 // 用户接收推送函数
@@ -243,8 +243,6 @@ func ClearOnline() {
 
 // ClearOnline 清除在线用户
 func PrintOnline() {
-
 	atomic.AddInt32(&countOnline, 1)
 	logger.Info("在线连接数:", countOnline)
-
 }
