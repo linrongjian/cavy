@@ -1,7 +1,7 @@
 package redis
 
 import (
-	"CavyGo/core/logger"
+	"cavy/core/logger"
 	"context"
 	"fmt"
 

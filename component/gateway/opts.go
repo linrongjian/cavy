@@ -1,7 +1,7 @@
 package gateway
 
 import (
-	"CavyGo/core/store/redis"
+	"cavy/core/store/redis"
 	"context"
 )
 

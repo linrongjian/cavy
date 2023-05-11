@@ -1,10 +1,10 @@
 package gateway
 
 import (
-	"CavyGo/core/logger"
-	"CavyGo/core/network/protocols/httpwrap"
-	"CavyGo/core/network/protocols/wswrap"
-	"CavyGo/core/protocol/pb"
+	"cavy/core/logger"
+	"cavy/core/network/protocols/httpwrap"
+	"cavy/core/network/protocols/wswrap"
+	"cavy/core/protocol/pb"
 	"math/rand"
 	"strconv"
 

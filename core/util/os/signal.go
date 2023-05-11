@@ -1,7 +1,7 @@
 package os
 
 import (
-	"CavyGo/core/logger"
+	"cavy/core/logger"
 	"os"
 	"runtime"
 	"runtime/pprof"

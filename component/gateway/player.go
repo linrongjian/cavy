@@ -1,11 +1,11 @@
 package gateway
 
 import (
-	"CavyGo/core/app"
-	"CavyGo/core/logger"
-	"CavyGo/core/network/protocols/mqwrap"
-	"CavyGo/core/network/protocols/wswrap"
-	"CavyGo/core/protocol/pb"
+	"cavy/core/app"
+	"cavy/core/logger"
+	"cavy/core/network/protocols/mqwrap"
+	"cavy/core/network/protocols/wswrap"
+	"cavy/core/protocol/pb"
 	"fmt"
 	"sync"
 	"sync/atomic"
@@ -88,7 +88,7 @@ func NewPlayer(playerID string, session string, conn *wswrap.GWsConn) *Player {
 	}
 
 	// 注意，这里是单服通知
-	subKey := fmt.Sprintf("allplayer-%v", app.Conf.ServerID)
+	subKey := fmt.Sprintf("allplayer-%v", app.Opt.ServerID)
 	// log.Infof("subkey:%v", subKey)
 	err = mqChannel.Subscribe(subKey)
 	if err != nil {

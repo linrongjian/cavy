@@ -1,7 +1,7 @@
 package redis
 
 import (
-	"CavyGo/core/util"
+	"cavy/core/util"
 	"context"
 	"fmt"
 	"sync"

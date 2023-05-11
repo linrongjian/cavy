@@ -1,9 +1,9 @@
 package wswrap
 
 import (
-	"CavyGo/core/logger"
-	"CavyGo/core/network/transport"
-	"CavyGo/core/protocol/pb"
+	"cavy/core/logger"
+	"cavy/core/network/transport"
+	"cavy/core/protocol/pb"
 	"fmt"
 	"sync"
 	"time"

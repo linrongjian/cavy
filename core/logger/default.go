@@ -1,7 +1,7 @@
 package logger
 
 import (
-	"CavyGo/core/logger/log"
+	"cavy/core/logger/log"
 	"context"
 	"fmt"
 	"os"

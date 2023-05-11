@@ -1,9 +1,9 @@
 package grpcwrap
 
 import (
-	"CavyGo/core/network/transport"
-	"CavyGo/core/protocol/pbgrpc"
-	"CavyGo/core/util"
+	"cavy/core/network/transport"
+	"cavy/core/protocol/pbgrpc"
+	"cavy/core/util"
 	"context"
 	"crypto/tls"
 	"net"

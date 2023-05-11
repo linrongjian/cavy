@@ -10,3 +10,20 @@ type Options struct {
 type ChannelOptions struct {
 	RabbitmqURL string
 }
+
+type ConsumerOptions struct {
+	Uri          string
+	exchange     string
+	exchangeType string
+	que          string
+	Tag          string
+	Key          string
+	Handle       ConsumerHandle
+	Conn         *amqp.Connection
+	Channel      *amqp.Channel
+}
+
+type ConsumerOption func(*ConsumerOptions)
+
+type Config struct {
+}

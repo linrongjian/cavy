@@ -1,9 +1,9 @@
 package gateway
 
 import (
-	"CavyGo/core/app"
-	"CavyGo/core/network/protocols/httpwrap"
-	"CavyGo/core/network/protocols/mqwrap"
+	"cavy/core/app"
+	"cavy/core/network/protocols/httpwrap"
+	"cavy/core/network/protocols/mqwrap"
 )
 
 type GateServer interface {
@@ -24,7 +24,6 @@ func (s *gateServer) Run() error {
 	httpwrap.CreateHTTPServer()
 	// ClearOnline()
 	mqwrap.Startup()
-	s.App.Run()
 	return nil
 }
 

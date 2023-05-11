@@ -1,9 +1,12 @@
 package main
 
-import "CavyGo/component/auth"
+import (
+	"cavy/component/auth"
+	"cavy/core/app"
+)
 
 func main() {
 	g := auth.NewLoginServer()
 	g.Init()
-	g.Run()
+	app.Run(g)
 }

@@ -1,7 +1,7 @@
 package httpwrap
 
 import (
-	"CavyGo/core/logger"
+	"cavy/core/logger"
 	"context"
 	"net/http"
 	"time"

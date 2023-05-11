@@ -1,8 +1,8 @@
 package tests
 
 import (
-	"CavyGo/core/logger"
-	"CavyGo/core/store/redis"
+	"cavy/core/logger"
+	"cavy/core/store/redis"
 	"os"
 
 	"github.com/urfave/cli/v2"

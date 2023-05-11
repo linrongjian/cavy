@@ -1,8 +1,10 @@
 package logserver
 
 import (
-	"CavyGo/component/logserver/modules/logconsumer"
-	"CavyGo/core/store/redis"
+	"cavy/component/logserver/journal"
+	"cavy/component/logserver/logconsumer"
+	"cavy/core/network/amqp"
+	"cavy/core/store/redis"
 	"context"
 )
 
@@ -16,7 +18,9 @@ type Options struct {
 	Context context.Context
 	cancel  context.CancelFunc
 
-	logConsumer logconsumer.LogConsumer
+	LogConsumer logconsumer.LogConsumer
+	logReport   journal.LogReport
+	handle      amqp.ConsumerHandle
 
 	Signal bool
 }

@@ -1,14 +1,19 @@
 package main
 
 import (
-	"CavyGo/component/logserver"
+	"cavy"
 	"log"
 )
 
 func main() {
-	ls, err := logserver.NewLogServer()
+	_, err := cavy.NewLogconsumer(handle)
 	if err != nil {
-		log.Panicln("log server start failure")
+		log.Panicf("logconsumer err: %s", err)
 	}
-	ls.Run()
+
+	select {}
+}
+
+func handle(body []byte) {
+	log.Println(string(body))
 }

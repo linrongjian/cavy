@@ -1,7 +1,7 @@
 package amqp
 
 import (
-	"CavyGo/core/logger"
+	"cavy/core/logger"
 	"errors"
 	"fmt"
 
@@ -13,8 +13,6 @@ type MqChannel struct {
 	queue amqp.Queue
 	kind  channelType
 }
-
-type Delivery = amqp.Delivery
 
 var (
 	RabbitmqConn *amqp.Connection

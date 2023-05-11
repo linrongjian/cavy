@@ -1,4 +1,4 @@
-module CavyGo
+module cavy
 
 go 1.18
 

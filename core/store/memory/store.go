@@ -1,7 +1,7 @@
 package memory
 
 import (
-	"CavyGo/core/util"
+	"cavy/core/util"
 	"errors"
 	"sync"
 	"time"

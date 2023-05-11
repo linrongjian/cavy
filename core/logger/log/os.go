@@ -1,7 +1,7 @@
 package log
 
 import (
-	"CavyGo/core/util"
+	"cavy/core/util"
 	"sync"
 
 	"github.com/google/uuid"

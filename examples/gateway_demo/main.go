@@ -1,8 +1,9 @@
 package main
 
 import (
-	"CavyGo/component/gateway"
-	"CavyGo/core/logger"
+	"cavy/component/gateway"
+	"cavy/core/app"
+	"cavy/core/logger"
 )
 
 func main() {
@@ -10,7 +11,7 @@ func main() {
 	if g.Init() != nil {
 		logger.Error("gate init err")
 	}
-	g.Run()
+	app.Run(g)
 }
 
 // KickOutPlayer 踢掉玩家

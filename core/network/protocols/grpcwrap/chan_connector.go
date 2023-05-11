@@ -1,8 +1,8 @@
 package grpcwrap
 
 import (
-	"CavyGo/core/network/transport"
-	"CavyGo/core/protocol/pbgrpc"
+	"cavy/core/network/transport"
+	"cavy/core/protocol/pbgrpc"
 
 	"google.golang.org/grpc"
 )

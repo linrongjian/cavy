@@ -2,16 +2,18 @@ package app
 
 import (
 	"fmt"
+	"log"
 	"os"
-	"os/signal"
-	"syscall"
 	"time"
 
 	"github.com/urfave/cli/v2"
 )
 
+var (
+	Opt = Options{}
+)
+
 type Server interface {
-	Run() error
 	Stop() error
 }
 
@@ -23,43 +25,29 @@ type App struct {
 
 func NewApp(opts ...Option) *App {
 	options := Options{}
+	app := &App{
+		opts: options,
+	}
+
 	for _, o := range opts {
 		o(&options)
 	}
-	return &App{
-		opts: options,
-	}
+	return app
 }
 
 func (a *App) Init(opts ...Option) error {
 	for _, o := range opts {
 		o(&a.opts)
 	}
+	a.opts.Cli.Flags = append(a.opts.Cli.Flags, DefaultFlags...)
 	a.opts.Cli.Run(os.Args)
 	return nil
 }
 
-func (a *App) Run() error {
-	c := make(chan os.Signal)
-	signal.Notify(c, syscall.SIGHUP, syscall.SIGINT,
-		syscall.SIGTERM, syscall.SIGQUIT, syscall.SIGUSR1, syscall.SIGUSR2)
-	go func() {
-		for s := range c {
-			switch s {
-			case syscall.SIGHUP, syscall.SIGINT, syscall.SIGTERM, syscall.SIGQUIT:
-				fmt.Println("Program Exit...", s)
-				a.Stop()
-			case syscall.SIGUSR1:
-				fmt.Println("usr1 signal", s)
-			case syscall.SIGUSR2:
-				fmt.Println("usr2 signal", s)
-			default:
-				fmt.Println("other signal", s)
-			}
-		}
-	}()
+func Run(app Server) error {
+	waitSignal(app)
 
-	fmt.Println("Program Start...")
+	fmt.Println("cavy start...")
 	sum := 0
 	for {
 		sum++
@@ -68,8 +56,9 @@ func (a *App) Run() error {
 }
 
 func (a *App) Stop() error {
+	log.Println("app an elegant exit")
 	os.Exit(0)
-	return fmt.Errorf("app stop")
+	return nil
 }
 
 func (a *App) AddFlags(flags []cli.Flag) {

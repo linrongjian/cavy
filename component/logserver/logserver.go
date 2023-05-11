@@ -1,17 +1,12 @@
 package logserver
 
 import (
-	"CavyGo/component/logserver/modules/journal"
-	"CavyGo/component/logserver/modules/logconsumer"
-	"CavyGo/core/app"
-	"CavyGo/core/network/protocols/mqwrap"
-	"fmt"
+	"cavy/core/app"
+	"cavy/core/network/protocols/mqwrap"
 	"log"
 )
 
-var (
-	logReport *journal.LogReport
-)
+var ()
 
 type LogServer interface {
 	app.Server
@@ -31,7 +26,6 @@ func NewLogServer(opts ...Option) (LogServer, error) {
 	for _, o := range opts {
 		o(&options)
 	}
-
 	s := logServer{
 		App:  app.NewApp(),
 		opts: options,
@@ -45,7 +39,7 @@ func NewLogServer(opts ...Option) (LogServer, error) {
 }
 
 func (s *logServer) Init(opts ...Option) error {
-	var err error
+	// var err error
 	for _, o := range opts {
 		o(&s.opts)
 	}
@@ -53,10 +47,10 @@ func (s *logServer) Init(opts ...Option) error {
 
 	s.App.Init()
 
-	s.opts.logConsumer, err = logconsumer.NewLogConsumer()
-	if err != nil {
-		return fmt.Errorf("log consumer: %s", err)
-	}
+	// s.opts.logConsumer, err = logconsumer.NewLogConsumer()
+	// if err != nil {
+	// 	return fmt.Errorf("log consumer: %s", err)
+	// }
 
 	mqwrap.Startup()
 
@@ -67,14 +61,9 @@ func (s *logServer) Init(opts ...Option) error {
 	return nil
 }
 
-// func (s *logServer) Run() error {
-
-// 	s.App.Run()
-// 	return nil
-// }
-
 func (s *logServer) Stop() error {
 	log.Printf("log server is stopping")
+	s.App.Stop()
 	return nil
 }
 

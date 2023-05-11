@@ -1,7 +1,7 @@
 package mysql
 
 import (
-	"CavyGo/core/logger"
+	"cavy/core/logger"
 	"flag"
 	"fmt"
 

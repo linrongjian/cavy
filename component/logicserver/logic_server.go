@@ -1,7 +1,7 @@
 package logicserver
 
 import (
-	"CavyGo/core/app"
+	"cavy/core/app"
 )
 
 type LogicServer interface {
@@ -15,11 +15,6 @@ type Option func(*Options)
 type logicServer struct {
 	*app.App
 	opts Options
-}
-
-func (s *logicServer) Run() error {
-	s.App.Run()
-	return nil
 }
 
 func (s *logicServer) Stop() error {

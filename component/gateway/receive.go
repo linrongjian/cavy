@@ -1,8 +1,8 @@
 package gateway
 
 import (
-	"CavyGo/core/network/protocols/wswrap"
-	"CavyGo/core/protocol/pb"
+	"cavy/core/network/protocols/wswrap"
+	"cavy/core/protocol/pb"
 
 	"github.com/golang/protobuf/proto"
 )

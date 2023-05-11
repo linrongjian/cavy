@@ -17,3 +17,11 @@ type Connection interface {
 	Options() Options
 	Reconnect() error
 }
+
+type Consumer interface {
+	Init(...ConsumerOption) error
+	Options() ConsumerOptions
+	Shutdown() error
+}
+
+type ConsumerHandle func(delivery Delivery, done chan error)

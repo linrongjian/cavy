@@ -1,7 +1,7 @@
 package mqwrap
 
 import (
-	"CavyGo/core/logger"
+	"cavy/core/logger"
 	"errors"
 	"fmt"
 

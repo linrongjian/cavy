@@ -1,11 +1,11 @@
 package httpwrap
 
 import (
-	"CavyGo/core/logger"
-	"CavyGo/core/network/protocols/mqwrap"
-	"CavyGo/core/protocol/pb"
-	"CavyGo/core/store/mysql"
-	"CavyGo/core/util"
+	"cavy/core/logger"
+	"cavy/core/network/protocols/mqwrap"
+	"cavy/core/protocol/pb"
+	"cavy/core/store/mysql"
+	"cavy/core/util"
 	"context"
 	"io/ioutil"
 	"net/http"

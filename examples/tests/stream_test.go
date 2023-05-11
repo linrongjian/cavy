@@ -1,8 +1,8 @@
 package tests
 
 import (
-	"CavyGo/core/network/protocols/grpcwrap"
-	"CavyGo/core/network/transport"
+	"cavy/core/network/protocols/grpcwrap"
+	"cavy/core/network/transport"
 	"net"
 	"testing"
 )

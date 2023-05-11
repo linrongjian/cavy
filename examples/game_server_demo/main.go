@@ -1,9 +1,12 @@
 package main
 
-import "CavyGo/component/logicserver"
+import (
+	"cavy/component/logicserver"
+	"cavy/core/app"
+)
 
 func main() {
 	g := logicserver.NewLogicServer()
 	g.Init()
-	g.Run()
+	app.Run(g)
 }
