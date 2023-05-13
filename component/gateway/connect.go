@@ -1,12 +1,13 @@
 package gateway
 
 import (
-	"cavy/core/logger"
-	"cavy/core/network/protocols/httpwrap"
-	"cavy/core/network/protocols/wswrap"
-	"cavy/core/protocol/pb"
 	"math/rand"
 	"strconv"
+
+	"github.com/linrongjian/cavy/core/logger"
+	"github.com/linrongjian/cavy/core/network/protocols/httpwrap"
+	"github.com/linrongjian/cavy/core/network/protocols/wswrap"
+	"github.com/linrongjian/cavy/core/protocol/pb"
 
 	"github.com/golang/protobuf/proto"
 )

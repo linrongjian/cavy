@@ -1,9 +1,10 @@
 package logserver
 
 import (
-	"cavy/core/app"
-	"cavy/core/network/protocols/mqwrap"
 	"log"
+
+	"github.com/linrongjian/cavy/core/app"
+	"github.com/linrongjian/cavy/core/network/protocols/mqwrap"
 )
 
 var ()

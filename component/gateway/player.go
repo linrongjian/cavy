@@ -1,15 +1,16 @@
 package gateway
 
 import (
-	"cavy/core/app"
-	"cavy/core/logger"
-	"cavy/core/network/protocols/mqwrap"
-	"cavy/core/network/protocols/wswrap"
-	"cavy/core/protocol/pb"
 	"fmt"
 	"sync"
 	"sync/atomic"
 	"time"
+
+	"github.com/linrongjian/cavy/core/app"
+	"github.com/linrongjian/cavy/core/logger"
+	"github.com/linrongjian/cavy/core/network/protocols/mqwrap"
+	"github.com/linrongjian/cavy/core/network/protocols/wswrap"
+	"github.com/linrongjian/cavy/core/protocol/pb"
 
 	"github.com/golang/protobuf/proto"
 )

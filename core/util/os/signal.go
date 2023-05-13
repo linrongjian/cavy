@@ -1,10 +1,11 @@
 package os
 
 import (
-	"cavy/core/logger"
 	"os"
 	"runtime"
 	"runtime/pprof"
+
+	"github.com/linrongjian/cavy/core/logger"
 )
 
 func dumpGoRoutinesInfo() {

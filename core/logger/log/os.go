@@ -1,8 +1,9 @@
 package log
 
 import (
-	"cavy/core/util"
 	"sync"
+
+	"github.com/linrongjian/cavy/core/util"
 
 	"github.com/google/uuid"
 )

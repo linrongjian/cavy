@@ -1,10 +1,11 @@
 package auth
 
 import (
-	"cavy/core/app"
-	"cavy/core/logger"
 	"os"
 	"os/signal"
+
+	"github.com/linrongjian/cavy/core/app"
+	"github.com/linrongjian/cavy/core/logger"
 )
 
 type LoginServer interface {

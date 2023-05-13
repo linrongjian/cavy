@@ -1,8 +1,9 @@
 package log
 
 import (
-	"cavy/core/util"
 	"fmt"
+
+	"github.com/linrongjian/cavy/core/util"
 )
 
 // memoryLog is default micro log

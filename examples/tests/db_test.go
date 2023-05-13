@@ -1,9 +1,10 @@
 package tests
 
 import (
-	"cavy/core/logger"
-	"cavy/core/store/redis"
 	"os"
+
+	"github.com/linrongjian/cavy/core/logger"
+	"github.com/linrongjian/cavy/core/store/redis"
 
 	"github.com/urfave/cli/v2"
 )

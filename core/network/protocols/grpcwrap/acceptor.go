@@ -1,10 +1,11 @@
 package grpcwrap
 
 import (
-	"cavy/core/network/transport"
-	"cavy/core/protocol/pbgrpc"
 	"crypto/tls"
 	"net"
+
+	"github.com/linrongjian/cavy/core/network/transport"
+	"github.com/linrongjian/cavy/core/protocol/pbgrpc"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"

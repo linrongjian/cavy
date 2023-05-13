@@ -1,9 +1,10 @@
 package logproducer
 
 import (
-	"cavy/core/network/amqp/rmqproducer"
 	"fmt"
 	"os"
+
+	"github.com/linrongjian/cavy/core/network/amqp/rmqproducer"
 )
 
 type LogProducer interface {

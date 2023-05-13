@@ -1,8 +1,9 @@
 package client
 
 import (
-	"cavy/core/store/redis"
 	"context"
+
+	"github.com/linrongjian/cavy/core/store/redis"
 )
 
 type Options struct {

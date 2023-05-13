@@ -1,9 +1,9 @@
 package main
 
 import (
-	"cavy/component/gateway"
-	"cavy/core/app"
-	"cavy/core/logger"
+	"github.com/linrongjian/cavy/component/gateway"
+	"github.com/linrongjian/cavy/core/app"
+	"github.com/linrongjian/cavy/core/logger"
 )
 
 func main() {

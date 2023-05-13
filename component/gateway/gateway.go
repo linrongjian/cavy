@@ -1,9 +1,9 @@
 package gateway
 
 import (
-	"cavy/core/app"
-	"cavy/core/network/protocols/httpwrap"
-	"cavy/core/network/protocols/mqwrap"
+	"github.com/linrongjian/cavy/core/app"
+	"github.com/linrongjian/cavy/core/network/protocols/httpwrap"
+	"github.com/linrongjian/cavy/core/network/protocols/mqwrap"
 )
 
 type GateServer interface {

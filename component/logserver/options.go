@@ -1,11 +1,12 @@
 package logserver
 
 import (
-	"cavy/component/logserver/journal"
-	"cavy/component/logserver/logconsumer"
-	"cavy/core/network/amqp"
-	"cavy/core/store/redis"
 	"context"
+
+	"github.com/linrongjian/cavy/component/logserver/journal"
+	"github.com/linrongjian/cavy/component/logserver/logconsumer"
+	"github.com/linrongjian/cavy/core/network/amqp"
+	"github.com/linrongjian/cavy/core/store/redis"
 )
 
 type Options struct {

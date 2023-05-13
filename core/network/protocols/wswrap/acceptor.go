@@ -1,12 +1,13 @@
 package wswrap
 
 import (
-	"cavy/core/logger"
-	"cavy/core/network/transport"
-	"cavy/core/protocol/pb"
 	"fmt"
 	"sync"
 	"time"
+
+	"github.com/linrongjian/cavy/core/logger"
+	"github.com/linrongjian/cavy/core/network/transport"
+	"github.com/linrongjian/cavy/core/protocol/pb"
 
 	"github.com/golang/protobuf/proto"
 	"github.com/gorilla/websocket"

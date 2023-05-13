@@ -1,9 +1,10 @@
 package mysql
 
 import (
-	"cavy/core/logger"
 	"flag"
 	"fmt"
+
+	"github.com/linrongjian/cavy/core/logger"
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/go-xorm/xorm"

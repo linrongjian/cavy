@@ -1,10 +1,11 @@
 package memory
 
 import (
-	"cavy/core/util"
 	"errors"
 	"sync"
 	"time"
+
+	"github.com/linrongjian/cavy/core/util"
 )
 
 // 内存数据存储

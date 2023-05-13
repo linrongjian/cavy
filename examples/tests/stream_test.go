@@ -1,10 +1,11 @@
 package tests
 
 import (
-	"cavy/core/network/protocols/grpcwrap"
-	"cavy/core/network/transport"
 	"net"
 	"testing"
+
+	"github.com/linrongjian/cavy/core/network/protocols/grpcwrap"
+	"github.com/linrongjian/cavy/core/network/transport"
 )
 
 func expectedPort(t *testing.T, expected string, lsn transport.Acceptor) {

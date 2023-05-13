@@ -1,7 +1,6 @@
 package logger
 
 import (
-	"cavy/core/logger/log"
 	"context"
 	"fmt"
 	"os"
@@ -10,6 +9,8 @@ import (
 	"strings"
 	"sync"
 	"time"
+
+	"github.com/linrongjian/cavy/core/logger/log"
 )
 
 func init() {

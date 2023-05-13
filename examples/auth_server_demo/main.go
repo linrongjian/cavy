@@ -1,8 +1,8 @@
 package main
 
 import (
-	"cavy/component/auth"
-	"cavy/core/app"
+	"github.com/linrongjian/cavy/component/auth"
+	"github.com/linrongjian/cavy/core/app"
 )
 
 func main() {

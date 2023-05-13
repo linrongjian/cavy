@@ -1,13 +1,14 @@
 package main
 
 import (
-	"cavy"
 	"fmt"
 	"log"
 	"runtime"
 	"strconv"
 	"sync/atomic"
 	"time"
+
+	"github.com/linrongjian/cavy"
 )
 
 var (

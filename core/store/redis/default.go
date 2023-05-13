@@ -1,11 +1,12 @@
 package redis
 
 import (
-	"cavy/core/util"
 	"context"
 	"fmt"
 	"sync"
 	"time"
+
+	"github.com/linrongjian/cavy/core/util"
 
 	"github.com/bsm/redislock"
 	"github.com/go-redis/redis/v8"

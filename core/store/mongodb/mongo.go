@@ -1,16 +1,11 @@
-// MongoDB 连接
-// * 查找单个文档时, 如果未找到文件, 则会返回 ErrNoDocuments 错误
-// * 查找多个文档时, 如果未找到任何文档, 则会返回 ErrNilDocument 错误
-// * bson.M 是无序的 doc 描述
-// * bson.D 是有序的 doc 描述
-// * bsonx.Doc 是类型安全的 doc 描述
 package mongodb
 
 import (
-	"cavy/core/logger"
 	"context"
 	"strings"
 	"time"
+
+	"github.com/linrongjian/cavy/core/logger"
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"

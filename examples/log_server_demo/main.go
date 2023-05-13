@@ -1,8 +1,9 @@
 package main
 
 import (
-	"cavy"
 	"log"
+
+	"github.com/linrongjian/cavy"
 )
 
 func main() {
