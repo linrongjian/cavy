@@ -5,8 +5,7 @@ import (
 	"sync"
 
 	"github.com/linrongjian/cavy/core/logger"
-
-	"github.com/cbwfree/micro-game/utils/tool"
+	"github.com/linrongjian/cavy/core/util"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
@@ -98,7 +97,7 @@ func (mts *Tables) Check(mdb *Store) error {
 
 		for _, tab := range mts.tables {
 			// 判断集合是否已存在
-			if !tool.InStrSlice(tab.name, names) {
+			if !util.InStrSlice(tab.name, names) {
 				// 获取MongoDB的集合对象
 				col := cdb.Collection(tab.name)
 

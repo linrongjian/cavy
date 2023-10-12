@@ -4,7 +4,6 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/cbwfree/micro-game/utils/dtype"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -12,7 +11,7 @@ import (
 
 // SelectOne 通过反射查询单条记录
 func SelectOne(col *mongo.Collection, filter interface{}, model reflect.Type, options ...*options.FindOneOptions) (interface{}, error) {
-	var res = dtype.Elem(model).Addr().Interface()
+	var res = Elem(model).Addr().Interface()
 	if err := FindOne(col, filter, res, options...); err != nil {
 		return nil, err
 	}
@@ -21,7 +20,7 @@ func SelectOne(col *mongo.Collection, filter interface{}, model reflect.Type, op
 
 // SelectAll 通过反射查询多条记录
 func SelectAll(col *mongo.Collection, filter interface{}, model reflect.Type, options ...*options.FindOptions) ([]interface{}, error) {
-	rows := dtype.SliceElem(model)
+	rows := SliceElem(model)
 	if err := FindAll(col, filter, rows.Addr().Interface(), options...); err != nil {
 		return nil, err
 	}

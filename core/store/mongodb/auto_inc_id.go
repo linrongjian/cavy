@@ -2,8 +2,8 @@ package mongodb
 
 import (
 	"context"
+	"fmt"
 
-	"github.com/cbwfree/micro-game/utils/errors"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -39,7 +39,7 @@ func GetIncId(ctx context.Context, db *mongo.Database, id string) (int64, error)
 	if err := res.Decode(&incId); err != nil {
 		return 0, err
 	} else if incId.Num == 0 {
-		return 0, errors.Invalid("invalid inc id")
+		return 0, fmt.Errorf("invalid inc id")
 	}
 
 	return incId.Num, nil
