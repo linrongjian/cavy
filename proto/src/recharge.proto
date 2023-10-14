@@ -1,0 +1,416 @@
+syntax = "proto2";
+
+package minGamePb;
+
+message QianZH5Req {
+    optional string appid = 1;              // 千智支付appid(点点点:20001)
+    optional int64  appUserId = 2;          // 千智支付appUserId(玩家id)
+    optional string commId = 3;             // 商品Id编号
+    optional int64 h5paytype = 4;           // 1为微信H5支付，2为支付宝H5支付
+}
+
+message QianZH5Rsp {
+    optional string payurl = 1;             // 支付地址
+}
+
+message WXPayReq {
+    optional string appid = 1;              // 微信公众号appid
+    optional string mchid = 2;              // 微信支付平台mchid
+    optional string openid = 3;             // 下单微信用户openid
+    optional string mchkey = 4;             // 微信支付平台mchkey
+}
+
+message ApplyPayReq {
+    optional string product_id = 1;         // product_id
+    optional int64 appleid = 2;
+}
+
+message BBPayReq {
+    optional string openid = 1; // 玩家openid
+    optional string gameid = 2; // 小游戏id
+    optional string username = 3; // 用户昵称
+    optional string notifyurl = 4; // 支付回调地址
+    optional string appsecret = 5;
+}
+
+message BBPayRsp {
+    optional string customerid = 1;
+    optional string merchantcode = 2;
+    optional string cointype = 3;
+    optional string customerusertype = 4;
+    optional string customeruserid = 5;
+    optional string platformtype = 6;
+    optional string transamount = 7;
+    optional string customerseq = 8;
+    optional string smallgamename = 9;
+    optional string sign = 10;
+}
+
+message WXPayRsp {
+    optional string prepayid = 1;
+}
+
+message QQPayReq {
+    optional string appid = 1;              // QQ小程序的appid
+    optional string session_key = 2;        // QQ小程序的session_key
+    optional string openid = 3;             // 下单QQ用户openid
+    optional string goodid = 4;             // 在开发者管理端上架道具的id
+    optional string secret = 5;             // QQ小程序的Secret
+    optional string rechargeRoute = 6;      // 支付服的地址rechargeRoute
+}
+
+message QQPayRsp {
+    optional string prepayid = 1;
+}
+
+message YiJiePayRsp {
+    optional string paybackurl = 1; // 支付回调地址
+}
+
+message OPPOPayReq {
+    optional string appid = 1;
+    optional string token = 2;
+    optional string engineVersion = 3;  //快应用引擎版本(通过getSystemInfo获取platformVersion)
+    optional string secret = 4; //密钥
+    optional string notifyUrl = 5;  //oppo回调地址
+    optional string appKey = 6; // oppo下单appkey
+}
+
+message OPPOPayResp {
+    optional string orderNo = 1;
+    optional int64 timestamp = 2;
+    optional string paySign = 3;
+}
+
+message HuaweiPayReq {
+    optional string applicationID = 1;       // 应用ID，在华为开发者联盟上获取的APP ID。
+    optional string country = 2;             // 国家码，用于区分国家信息。如US、CN、MY，符合ISO 3166标准。
+    optional string currency = 3;            // 币种，用于支付的币种。如USD、CNY、MYR等，符合ISO 4217。
+    optional string url = 4;                 // 支付结果回调地址 。
+    optional string merchantId = 5;          // 商户ID。
+    optional string urlver = 6;              // 支付结果回调版本。
+    optional int32 sdkChannel = 7;           // 渠道信息，快游戏请设置为3。
+    optional string payPrivateKey = 8;       // 支付私钥
+    optional string payPublicKey = 9;        // 支付公钥
+}
+
+message HuaweiPayRsp {
+    optional string sign = 1;                // 支付签名
+    optional string country = 2;             // 国家码，用于区分国家信息。如US、CN、MY，符合ISO 3166标准。
+    optional string currency = 3;            // 币种，用于支付的币种。如USD、CNY、MYR等，符合ISO 4217。
+    optional string urlver = 4;              // 支付结果回调版本。
+    optional int32 sdkChannel = 5;           // 渠道信息，快游戏请设置为3。
+    optional string url = 6;                 // 支付结果回调地址
+}
+
+message BingChuanPayReq {
+    optional string productID = 1;
+}
+
+message BingChuanPayRsp {
+    optional string paybackurl = 1; // 支付回调地址
+}
+
+// 创建订单请求
+message CreateOrderReq {
+    optional int32 ordertype = 1;           // 充值类型 1-米大师支付 2-千智H5 3-玩吧支付 4-微信支付 6-ApplePay
+    optional int64 price = 2;               // 充值金额，单位分
+    optional string paybackurl = 3;         // 支付回调地址
+    optional string commname = 4;           // 商品名称
+    optional string clientip = 5;           // 支付客户端ip
+    optional string version = 6;            // 客户端版本号
+    optional QianZH5Req qianzh5 = 7;        // 千智h5支付特有参数
+    optional WXPayReq wxpay = 8;            // 微信支付特有参数
+    optional QQPayReq qQpay = 9;            // QQ支付特有参数
+    optional BBPayReq bbpay = 10;           // B站支付特有参数
+    optional string rechargeRoute = 11;     // 支付服地址
+    optional OPPOPayReq oppoPay = 12;       //oppo支付
+    optional string userid = 13;
+    optional HuaweiPayReq huaweiPay = 14;   // 华为支付
+    optional BingChuanPayReq bcPay = 15;    // 冰川支付
+}
+
+// 创建订单返回
+message CreateOrderRsp {
+    optional bool success = 1;              // 下单结果，true-成功 false-失败
+    optional string errmsg = 2;             // success为false时返回错误值
+    optional string orderid = 3;            // 订单id
+    optional QianZH5Rsp qianzh5 = 4;        // 千智h5下单返回
+    optional WXPayRsp wxpay = 5;            // 微信支付返回
+    optional QQPayRsp qQpay = 6;            // QQ支付返回
+    optional YiJiePayRsp yijiepay = 7;      // 易接支付返回
+    optional OPPOPayResp oppopay = 8;
+    optional HuaweiPayRsp huaweipay = 9;    // 华为支付返回
+    optional BBPayRsp bbpay = 10;           // B站返回
+    optional BingChuanPayRsp bcpay = 11;    // 冰川支付返回
+}
+
+// 支付回调通知(path:/shop/orderresult)
+message PayNotifyResult {
+    optional bool success = 1;              // 支付结果，true-成功 false-失败
+    optional string errmsg = 2;             // 错误信息
+    optional string orderid = 3;            // 订单id
+    optional int64 price = 4;               // 订单价格
+    optional string iosreceiptdata = 5;     // 苹果支付完成后的订单
+    optional string userid = 6;
+}
+
+// 米大师获取货币请求
+message MidasGetBalanceReq {
+    optional bool testmode = 1;              // 是否是测试环境
+    optional string wxopenid = 2;            // 微信用户openid
+    optional string wxsessionkey = 3;        // 微信用户sessionkey
+    optional string wxappid = 4;             // 小程序appid
+    optional string wxappsecret = 5;         // 小程序appsecret
+    optional string midasappkey = 6;         // 米大师appkey
+    optional string midasofferid = 7;        // 米大师offerid
+    optional string midaszoneid = 8;         // 米大师zoneid
+    optional string midaspf = 9;             // 米大师pf
+}
+
+// 米大师获取货币响应
+message MidasGetBalanceRsp {
+    optional bool success = 1;               // 接口调用结果 true-成功 false-失败
+    optional string errmsg = 2;              // 错误信息
+    optional int64 balance = 3;              // 身上货币数
+    optional int64 saveamt = 4;              // 历史充值总额
+}
+
+// 米大师消耗货币请求
+message MidasPayReq {
+    optional bool testmode = 1;              // 是否是测试环境
+    optional string wxopenid = 2;            // 微信用户openid
+    optional string wxsessionkey = 3;        // 微信用户sessionkey
+    optional string wxappid = 4;             // 小程序appid
+    optional string wxappsecret = 5;         // 小程序appsecret
+    optional string midasappkey = 6;         // 米大师appkey
+    optional string midasofferid = 7;        // 米大师offerid
+    optional string midaszoneid = 8;         // 米大师zoneid
+    optional string midaspf = 9;             // 米大师pf
+    optional int64 midasamt = 10;            // 米大师消耗货币数
+    optional string midasbillno = 11;        // 米大师该次接口对应的自定义订单号
+}
+
+// 米大师消耗货币响应
+message MidasPayRsp {
+    optional bool success = 1;               // 接口调用结果 true-成功 false-失败
+    optional string errmsg = 2;              // 错误信息
+}
+
+// 米大师赠送货币请求
+message MidasPresentReq {
+    optional bool testmode = 1;              // 是否是测试环境
+    optional string wxopenid = 2;            // 微信用户openid
+    optional string wxsessionkey = 3;        // 微信用户sessionkey
+    optional string wxappid = 4;             // 小程序appid
+    optional string wxappsecret = 5;         // 小程序appsecret
+    optional string midasappkey = 6;         // 米大师appkey
+    optional string midasofferid = 7;        // 米大师offerid
+    optional string midaszoneid = 8;         // 米大师zoneid
+    optional string midaspf = 9;             // 米大师pf
+    optional int64 midaspresentcounts = 10;  // 米大师赠送货币数
+    optional string midasbillno = 11;        // 米大师该次接口对应的自定义订单号
+}
+
+// 米大师赠送货币响应
+message MidasPresentRsp {
+    optional bool success = 1;               // 接口调用结果 true-成功 false-失败
+    optional string errmsg = 2;              // 错误信息
+}
+
+// 玩吧获取货币请求
+message WanbaGetBalanceReq {
+    optional bool testmode = 1;              // 是否是测试环境
+    optional string wbappid = 2;             // 玩吧appid
+    optional string wbappsecret = 3;         // 玩吧appsecret
+    optional string wbopenid = 4;            // 玩吧用户openid
+    optional string wbopenkey = 5;           // 玩吧用户openkey
+    optional string wbpf = 6;                // 玩吧用户pf
+    optional string wbclientip = 7;          // 玩吧用户ip
+}
+
+// 玩吧获取货币响应
+message WanbaGetBalanceRsp {
+    optional bool success = 1;               // 接口调用结果 true-成功 false-失败
+    optional string errmsg = 2;              // 错误信息
+    optional int64 balance = 3;              // 玩吧货币数
+}
+
+// 玩吧消耗货币请求
+message WanbaPayReq {
+    optional bool testmode = 1;              // 是否是测试环境
+    optional string wbappid = 2;             // 玩吧appid
+    optional string wbappsecret = 3;         // 玩吧appsecret
+    optional string wbopenid = 4;            // 玩吧用户openid
+    optional string wbopenkey = 5;           // 玩吧用户openkey
+    optional string wbpf = 6;                // 玩吧用户pf
+    optional string wbclientip = 7;          // 玩吧用户ip
+    optional string billno = 8;              // 订单号
+    optional string itemid = 9;              // 商品ID
+}
+
+// 玩吧消耗货币响应
+message WanbaPayRsp {
+    optional bool success = 1;               // 接口调用结果 true-成功 false-失败
+    optional string errmsg = 2;              // 错误信息
+}
+
+// 玩吧查询订单号请求
+message WanbaQueryRecordReq{
+    optional bool testmode = 1;              // 是否是测试环境
+    optional string wbappid = 2;             // 玩吧appid
+    optional string wbappsecret = 3;         // 玩吧appsecret
+    optional string wbopenid = 4;            // 玩吧用户openid
+    optional string wbopenkey = 5;           // 玩吧用户openkey
+    optional string wbpf = 6;                // 玩吧用户pf
+    optional string wbclientip = 7;          // 玩吧用户ip
+    optional string billno = 8;              // 订单号
+}
+
+// 玩吧查询订单号响应
+message WanbaQueryRecordRsp{
+    optional bool success = 1;               // 接口调用结果 true-成功 false-失败
+    optional string errmsg = 2;              // 错误信息
+    optional bool isbillNoValid = 3;         // 订单支付是否OK，true-成功 false-失败
+    optional int64 billTime = 4;             // 订单记录时间
+}
+
+// 桥接信息
+message BridgeData {
+    optional int64 playerid = 1;             // 玩家id
+    optional int32 serverid = 2;             // 服务器id
+    optional bytes data = 3;                 // 桥接信息
+}
+
+
+// 头条获取货币请求
+message ToutiaoGetBalanceReq {
+    optional bool testmode = 1;              // 是否是测试环境
+    optional string ttappid = 2;             // 头条appid
+    optional string ttappsecret = 3;         // 头条appsecret
+    optional string ttopenid = 4;            // 头条用户openid
+    optional string ttopenkey = 5;           // 头条用户openkey
+    optional string ttpf = 6;                // 头条用户pf
+    optional string ttclientip = 7;          // 头条用户ip
+    optional string ttappkey = 8;            // 头条appKey(支付加密)
+    optional string zondid = 9;             // 游戏服务器大区id
+}
+
+// 头条获取货币响应
+message ToutiaoGetBalanceRsp {
+    optional bool success = 1;               // 接口调用结果 true-成功 false-失败
+    optional string errmsg = 2;              // 错误信息
+    optional int64 balance = 3;              // 身上货币数
+    optional int64 saveamt = 4;              // 历史充值总额
+}
+
+// 头条消耗货币请求
+message ToutiaoPayReq {
+    optional bool testmode = 1;              // 是否是测试环境
+    optional string ttappid = 2;             // 头条appid
+    optional string ttappsecret = 3;         // 头条appsecret
+    optional string ttopenid = 4;            // 头条用户openid
+    optional string ttopenkey = 5;           // 头条用户openkey
+    optional string ttpf = 6;                // 头条用户pf
+    optional string ttclientip = 7;          // 头条用户ip
+    optional string ttappkey = 8;            // 头条appKey(支付加密)
+    optional string billno = 9;              // 订单号
+    optional int64 costcoin = 10;            // 扣除游戏币数量，不能为0
+    optional string item = 11;               // 道具名称
+    optional string zondid = 12;             // 游戏服务器大区id
+}
+
+// 头条消耗货币响应
+message ToutiaoPayRsp {
+    optional bool success = 1;               // 接口调用结果 true-成功 false-失败
+    optional string errmsg = 2;              // 错误信息
+    optional string billno = 3;              // 订单号
+    optional int64 balance = 4;              // 预扣后余额
+    optional int64 usedgenamt = 5;           // 本次扣的赠送币的金额
+}
+
+
+// 头条赠送货币请求
+message ToutiaoAddReq {
+    optional bool testmode = 1;              // 是否是测试环境
+    optional string ttappid = 2;             // 头条appid
+    optional string ttappsecret = 3;         // 头条appsecret
+    optional string ttopenid = 4;            // 头条用户openid
+    optional string ttopenkey = 5;           // 头条用户openkey
+    optional string ttpf = 6;                // 头条用户pf
+    optional string ttclientip = 7;          // 头条用户ip
+    optional string ttappkey = 8;            // 头条appKey(支付加密)
+    optional string billno = 9;              // 订单号
+    optional int64 addcoin = 10;            // 赠送游戏币数量，不能为0
+    optional string zondid = 11;             // 游戏服务器大区id
+}
+
+// 头条赠送货币响应
+message ToutiaoAddRsp {
+    optional bool success = 1;               // 接口调用结果 true-成功 false-失败
+    optional string errmsg = 2;              // 错误信息
+    optional int64 balance = 3;              // 赠送后的余额
+    optional string billno = 4;              // 赠送游戏币的订单号
+}
+
+// bilibili查询订单号请求
+message BilibiliQueryRecordReq{
+    optional string orderId = 1;            // 业务订单id
+}
+
+// bilibili查询订单号响应
+message BilibiliQueryRecordRsp{
+    optional bool success = 1;               // 订单支付是否OK，true-成功 false-失败
+    optional string errmsg = 2;              // 错误信息
+    optional int64 billTime = 3;             // 订单记录时间
+}
+
+// bilibili获取货币请求
+message BilibiliGetBalanceReq {
+    optional string customerID = 1;          // 请求业务方ID
+    optional string merchantCode = 2;        // 平台
+    optional string coinType = 3;            // 虚拟币类型
+    optional int32 customerUserType = 4;     // 账号类型 0:B 站账号，1:B 站小程序账号 默认 0
+    optional string customerUserID = 5;      // 账号类型对应的id
+    optional string platformType = 6;        // 平台类型 0.未知 1. IOS 端 2. 安卓端 3.PC 4.H5 5.微信公众号
+    optional int32 gameID = 7;              // 游戏ID
+}
+
+
+// bilibili获取货币响应
+message BilibiliGetBalanceRsp {
+    optional bool success = 1;               // 接口调用结果 true-成功 false-失败
+    optional string errmsg = 2;              // 错误信息
+    optional int64 balance = 3;              // 身上货币数
+}
+
+// bilibili消耗货币请求
+message BilibiliPayReq {
+    optional string customerID = 1;          // 请求业务方ID
+    optional int32  customerUserType = 2;    // 账号类型 0:B 站账号，1:B 站小程序账号 默认 0
+    optional string customerUserID = 3;      // 账号类型对应的id
+    optional string customerSeq = 4;         // 消费订单号(不可与充值单号,退款单号,赠送单号重复)
+    optional string merchantCode = 5;        // 平台类型(可用于分区)
+    optional string coinType = 6;            // 虚拟币类型
+    optional int32 transBalance = 7;         // 需要消费的数量(小数点后最多保留4位)
+    optional int32 platformType = 8;         // 平台类型 0.未知 1. IOS 端 2. 安卓端 3.PC 4.H5 5.微信公众号
+    optional string showTitle = 9;           // 支付订单显示标题
+    optional int32 gameID = 10;              // 游戏ID
+}
+
+
+// bilibili消耗货币响应
+message BilibiliPayRsp {
+    optional bool success = 1;               // 接口调用结果 true-成功 false-失败
+    optional string errmsg = 2;              // 错误信息
+    optional string transOrderNo = 3;        // 资产订单号
+    optional int64 transBalance = 4;         // 消费的总数量
+}
+
+// QQ会员激活码响应
+message QQmemberCDKRsp {
+    optional string cdk = 1;               // CDK
+}
+
+
+

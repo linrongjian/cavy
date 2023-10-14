@@ -21,7 +21,7 @@ type loginServer struct {
 	opts Options
 }
 
-func (g *loginServer) Run() error {
+func (g *loginServer) Start() error {
 
 	// Ctx = s.Options().Context
 	// CreateHTTPServer()

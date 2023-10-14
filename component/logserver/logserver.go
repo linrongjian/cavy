@@ -62,6 +62,12 @@ func (s *logServer) Init(opts ...Option) error {
 	return nil
 }
 
+func (s *logServer) Start() error {
+	log.Printf("log server is stopping")
+	s.App.Stop()
+	return nil
+}
+
 func (s *logServer) Stop() error {
 	log.Printf("log server is stopping")
 	s.App.Stop()

@@ -3,7 +3,6 @@ package grpcwrap
 import (
 	"github.com/linrongjian/cavy/core/network/transport"
 	"github.com/linrongjian/cavy/core/protocol/pbgrpc"
-
 	"google.golang.org/grpc"
 )
 

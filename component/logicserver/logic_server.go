@@ -25,6 +25,10 @@ func (s *logicServer) Options() Options {
 	return s.opts
 }
 
+func (s *logicServer) Start() error {
+	return nil
+}
+
 func (s *logicServer) Init(opts ...Option) error {
 	for _, o := range opts {
 		o(&s.opts)

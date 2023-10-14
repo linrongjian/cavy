@@ -19,7 +19,7 @@ type gateServer struct {
 	opts Opts
 }
 
-func (s *gateServer) Run() error {
+func (s *gateServer) Start() error {
 	// Ctx = s.Options().Context
 	httpwrap.CreateHTTPServer()
 	// ClearOnline()
