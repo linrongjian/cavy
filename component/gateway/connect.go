@@ -7,7 +7,7 @@ import (
 	"github.com/linrongjian/cavy/core/httpsvr"
 	"github.com/linrongjian/cavy/core/logger"
 	"github.com/linrongjian/cavy/core/network/protocols/wswrap"
-	"github.com/linrongjian/cavy/protocol/pb"
+	"github.com/linrongjian/cavy/proto/pb"
 )
 
 var (

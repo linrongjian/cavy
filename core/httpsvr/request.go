@@ -2,18 +2,17 @@ package httpsvr
 
 import (
 	"bytes"
+	"encoding/json"
 	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strconv"
 
-	"encoding/json"
-
-	"github.com/golang/protobuf/proto"
 	"github.com/linrongjian/cavy/common/api"
 	"github.com/linrongjian/cavy/common/gerrors"
 	"github.com/linrongjian/cavy/common/mlog"
-	"github.com/linrongjian/cavy/protocol/pb"
+	"github.com/linrongjian/cavy/proto/pb"
+	"google.golang.org/protobuf/proto"
 )
 
 // Request 请求结构

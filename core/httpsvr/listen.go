@@ -9,7 +9,6 @@ import (
 	"os/signal"
 	"sort"
 	"strings"
-	"sync"
 
 	"bytes"
 	"encoding/json"
@@ -21,33 +20,25 @@ import (
 	"github.com/linrongjian/cavy/common/hook"
 	"github.com/linrongjian/cavy/common/mlog"
 	"github.com/linrongjian/cavy/common/servercfg"
-	"github.com/linrongjian/cavy/protocol/pb"
+	"github.com/linrongjian/cavy/proto/pb"
 	"google.golang.org/protobuf/proto"
 )
 
 type httpHandler struct{}
 
-// HttpRecv http数据接收
-type HttpRecv func(r *Request) (gerrors.Error, proto.Message)
-
-// JSONRecv 接收数据
-type JSONRecv func(r *Request) (int, interface{})
-
-// StringRecv 接收数据
-type StringRecv func(r *Request) string
-
-// ContentRecv 接收数据
-type ContentRecv func(r *Request) []byte
+type PbReply func(r *Request) (proto.Message, int32)
+type JsonReply func(r *Request) (int, interface{})
+type StrReply func(r *Request) string
+type ByteReply func(r *Request) []byte
 
 var (
 	intercept      = map[string]bool{"/health": true}
-	handlerMap     = map[string]func(*Request) []byte{}
+	handlerMap     = make(map[string]func(*Request) []byte)
 	tokenWhiteList = map[string]bool{}
 	serverID       = ""
 	disableSign    = false
 	signWhiteList  = map[string]bool{}
 	contentPath    = map[string]bool{}
-	lock           sync.Mutex
 )
 
 func init() {
@@ -55,111 +46,36 @@ func init() {
 	serverID = api.NewUUID().String()
 }
 
-// Register 注册协议
-func Register(paths map[string]HttpRecv, check bool) {
-	for k, v := range paths {
+func Register(paths map[string]PbReply, check bool) {
+	for k, fn := range paths {
 		if _, ok := handlerMap[k]; ok {
 			msg := fmt.Sprintf("path %s is exists!!!", k)
 			panic(msg)
 		}
-		f := v
 		handlerMap[k] = func(r *Request) []byte {
-			code, msg := f(r)
-			if msg != nil {
-				r.Log.Debugf("Result:%d Msg:%v", code, msg)
-			} else {
-				r.Log.Debugf("Result:%d Msg:%s", code, code.String())
+			data, errcode := fn(r)
+			reply := &pb.HttpReply{
+				Errcode: errcode,
 			}
-
-			remsg := ""
-			dataBuf := []byte{}
-			if code == gerrors.Success {
+			if errcode == 0 {
 				if r.isSetCookie {
 					r.w.Header().Set("Set-Session", r.cookie.Encode())
 				}
-
-				if msg != nil {
-					buf, err := proto.Marshal(msg)
+				if data != nil {
+					var err error
+					reply.Data, err = proto.Marshal(data)
 					if err != nil {
 						r.Log.Errorf("SendSuccess Marshal data err:%v", err)
-						return []byte(err.Error())
 					}
-					dataBuf = buf
 				}
-			} else {
-				remsg = code.String()
 			}
-
-			resp := &pb.HttpReply{
-				Errcode: int32(code),
-				Msg:     remsg,
-				Data:    dataBuf,
-			}
-
-			buf, err := proto.Marshal(resp)
+			buf, err := proto.Marshal(reply)
 			if err != nil {
 				r.Log.Errorf("SendSuccess Marshal resp err:%v", err)
 				return []byte(err.Error())
 			}
 			return buf
 		}
-
-		if !check {
-			tokenWhiteList[k] = true
-			signWhiteList[k] = true
-		}
-	}
-}
-
-// RegisterHTTPRecvJSON  注册协议
-func RegisterHTTPRecvJSON(paths map[string]HttpRecv, check bool) {
-	for k, v := range paths {
-		if _, ok := handlerMap[k]; ok {
-			msg := fmt.Sprintf("path %s is exists!!!", k)
-			panic(msg)
-		}
-		f := v
-		handlerMap[k] = func(r *Request) []byte {
-			code, msg := f(r)
-			if msg != nil {
-				r.Log.Debugf("Result:%d Msg:%v", code, msg)
-			} else {
-				r.Log.Debugf("Result:%d Msg:%s", code, code.String())
-			}
-
-			remsg := ""
-			dataBuf := []byte{}
-			if code == gerrors.Success {
-				if r.isSetCookie {
-					r.w.Header().Set("Set-Session", r.cookie.Encode())
-				}
-
-				if msg != nil {
-					buf, err := json.Marshal(msg)
-					if err != nil {
-						r.Log.Errorf("SendSuccess Marshal data err:%v", err)
-						return []byte(err.Error())
-					}
-					dataBuf = buf
-				}
-			} else {
-				remsg = code.String()
-			}
-
-			resp := &pb.HttpReply{
-				Errcode: int32(code),
-				Msg:     remsg,
-				Data:    dataBuf,
-			}
-
-			buf, err := json.Marshal(resp)
-			if err != nil {
-				r.Log.Errorf("SendSuccess Marshal resp err:%v", err)
-				return []byte(err.Error())
-			}
-			return buf
-		}
-
 		if !check {
 			tokenWhiteList[k] = true
 			signWhiteList[k] = true
@@ -168,7 +84,7 @@ func RegisterHTTPRecvJSON(paths map[string]HttpRecv, check bool) {
 }
 
 // RegisterJSON 注册函数
-func RegisterJSON(paths map[string]JSONRecv) {
+func RegisterJSON(paths map[string]JsonReply) {
 	for k, v := range paths {
 		if _, ok := handlerMap[k]; ok {
 			msg := fmt.Sprintf("path %s is exists!!!", k)
@@ -204,7 +120,7 @@ func RegisterJSON(paths map[string]JSONRecv) {
 }
 
 // RegisterContent 注册函数
-func RegisterContent(paths map[string]ContentRecv) {
+func RegisterContent(paths map[string]ByteReply) {
 	for k, v := range paths {
 		if _, has := handlerMap[k]; has {
 			msg := fmt.Sprintf("path %s is exists!!!", k)
@@ -227,7 +143,7 @@ func RegisterContent(paths map[string]ContentRecv) {
 }
 
 // RegisterString 注册函数
-func RegisterString(paths map[string]StringRecv) {
+func RegisterString(paths map[string]StrReply) {
 	for k, v := range paths {
 		if _, ok := handlerMap[k]; ok {
 			msg := fmt.Sprintf("path %s is exists!!!", k)
@@ -417,10 +333,9 @@ func (*httpHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Credentials", "true")
 	w.Header().Set("Access-Control-Max-Age", fmt.Sprintf("%d", 60*60*24))
 	w.Header().Set("Access-Control-Expose-Headers", "Set-Session")
-	req := NewRequest(w, r)
 
+	req := NewRequest(w, r)
 	if intercept[req.Path] {
-		//req.Log.Infof("intercept request:%s", req.Path)
 		handleIntercept(req)
 		return
 	}
@@ -440,8 +355,6 @@ func (*httpHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}()
 
 	if handler, ok := handlerMap[req.Path]; ok {
-
-		//验证token
 		if req.Path == "/" || (verifyToken(req, req.Path) && verifySign(req, req.Path)) {
 			if !contentPath[req.Path] {
 				req.send(200, handler(req))
@@ -461,7 +374,6 @@ func (*httpHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		}
 		wildcardPath := strings.Join(paths, "/")
 		if handler, ok := handlerMap[wildcardPath]; ok {
-			//验证token
 			if req.Path == "/" || (verifyToken(req, wildcardPath) && verifySign(req, wildcardPath)) {
 				if !contentPath[wildcardPath] {
 					req.send(200, handler(req))
@@ -486,12 +398,10 @@ func handleIntercept(req *Request) {
 	}
 }
 
-// GetServerID 获得服务器ID
 func GetServerID() string {
 	return serverID
 }
 
-// GetLocalServer 获取本地服务器地址
 func GetLocalServer() string {
 	return fmt.Sprintf("https://%s:%d", servercfg.Cfg.GetIPAddr(), servercfg.Cfg.GetIPPort())
 }
