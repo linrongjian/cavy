@@ -5,20 +5,17 @@ import (
 	"sync"
 	"time"
 
-	"github.com/linrongjian/cavy/core/logger"
 	"github.com/linrongjian/cavy/core/network/transport"
-	"github.com/linrongjian/cavy/core/protocol/pb"
 
 	"github.com/golang/protobuf/proto"
 	"github.com/gorilla/websocket"
-	uuid "github.com/satori/go.uuid"
 )
 
 type GWsConn struct {
 	id           string //连接ID
 	Ws           *websocket.Conn
 	wg           *sync.WaitGroup
-	wsLock       *sync.Mutex //ws 并发写锁
+	lock         *sync.Mutex //ws 并发写锁
 	UserData     interface{} //给上层使用，可以继连接绑定数据
 	lastRecvTime time.Time
 	lastPingTime time.Time
@@ -39,9 +36,9 @@ func (c *GWsConn) SendText(data []byte) error {
 		msg := fmt.Sprintf("SendText Ws is nil")
 		return fmt.Errorf(msg)
 	}
-	c.wsLock.Lock()
+	c.lock.Lock()
 	err := c.Ws.WriteMessage(websocket.TextMessage, data)
-	c.wsLock.Unlock()
+	c.lock.Unlock()
 	return err
 }
 
@@ -51,9 +48,9 @@ func (c *GWsConn) SendKick(kickcode int) error {
 		msg := fmt.Sprintf("SendText Ws is nil")
 		return fmt.Errorf(msg)
 	}
-	c.wsLock.Lock()
+	c.lock.Lock()
 	err := c.Ws.WriteMessage(websocket.TextMessage, []byte(fmt.Sprintf("kick_%d", kickcode)))
-	c.wsLock.Unlock()
+	c.lock.Unlock()
 	return err
 }
 
@@ -66,50 +63,50 @@ func (c *GWsConn) onClose(code int, msg string) error {
 }
 
 // WaitWebSocket 等待
-func (c *GWsConn) WaitWebSocket(recv func(c *GWsConn, cmd pb.Cmd, data []byte)) {
-	if recv == nil {
-		return
-	}
+// func (c *GWsConn) WaitWebSocket(recv func(c *GWsConn, cmd pb.Cmd, data []byte)) {
+// 	if recv == nil {
+// 		return
+// 	}
 
-	for {
-		_, message, err := c.Ws.ReadMessage()
-		if err != nil {
+// 	for {
+// 		_, message, err := c.Ws.ReadMessage()
+// 		if err != nil {
 
-			logger.Errorf("read message err:", err)
-			if err := c.Close(); err != nil {
-				return
-			}
-			break
-		}
-		c.lastRecvTime = time.Now()
+// 			logger.Errorf("read message err:", err)
+// 			if err := c.Close(); err != nil {
+// 				return
+// 			}
+// 			break
+// 		}
+// 		c.lastRecvTime = time.Now()
 
-		recvMsg := &pb.Message{}
-		err = proto.Unmarshal(message, recvMsg)
-		if err != nil {
-			continue
-		}
+// 		recvMsg := &pb.Message{}
+// 		err = proto.Unmarshal(message, recvMsg)
+// 		if err != nil {
+// 			continue
+// 		}
 
-		if recvMsg.GetCmd() == pb.Cmd_Ping {
-			heartMsg := &pb.HeartBeat{}
-			err = proto.Unmarshal(recvMsg.GetData(), heartMsg)
-			if err != nil {
-				continue
-			}
-			nowTime := int32(time.Now().Unix())
-			heartMsg.NowTime = &nowTime
-			buf, err := proto.Marshal(heartMsg)
-			if err != nil {
-				continue
-			}
-			c.sendPong(buf)
-		} else if recvMsg.GetCmd() == pb.Cmd_Pong {
-			c.lastPingTime = time.Now()
-		} else if recv != nil {
-			recv(c, recvMsg.GetCmd(), recvMsg.GetData())
-		}
-	}
-	c.wg.Wait()
-}
+// 		if recvMsg.GetCmd() == pb.Cmd_Ping {
+// 			heartMsg := &pb.HeartBeat{}
+// 			err = proto.Unmarshal(recvMsg.GetData(), heartMsg)
+// 			if err != nil {
+// 				continue
+// 			}
+// 			nowTime := int32(time.Now().Unix())
+// 			heartMsg.NowTime = &nowTime
+// 			buf, err := proto.Marshal(heartMsg)
+// 			if err != nil {
+// 				continue
+// 			}
+// 			c.sendPong(buf)
+// 		} else if recvMsg.GetCmd() == pb.Cmd_Pong {
+// 			c.lastPingTime = time.Now()
+// 		} else if recv != nil {
+// 			recv(c, recvMsg.GetCmd(), recvMsg.GetData())
+// 		}
+// 	}
+// 	c.wg.Wait()
+// }
 
 func (c *GWsConn) Rev(*transport.Message) error {
 	return nil
@@ -121,9 +118,9 @@ func (c *GWsConn) Send(m *transport.Message) error {
 		msg := fmt.Sprintf("Send Ws is nil")
 		return fmt.Errorf(msg)
 	}
-	c.wsLock.Lock()
+	c.lock.Lock()
 	err := c.Ws.WriteMessage(websocket.BinaryMessage, m.Body)
-	c.wsLock.Unlock()
+	c.lock.Unlock()
 
 	return err
 }
@@ -168,28 +165,28 @@ func (c *GWsConn) SendBytes(data []byte) error {
 		msg := fmt.Sprintf("Send Ws is nil")
 		return fmt.Errorf(msg)
 	}
-	c.wsLock.Lock()
+	c.lock.Lock()
 	err := c.Ws.WriteMessage(websocket.BinaryMessage, data)
-	c.wsLock.Unlock()
+	c.lock.Unlock()
 
 	return err
 }
 
 // sendPong 发送pong
-func (c *GWsConn) sendPong(data []byte) {
-	pongCmd := pb.Cmd_Pong
+// func (c *GWsConn) sendPong(data []byte) {
+// 	pongCmd := pb.Cmd_Pong
 
-	pongMsg := &pb.PushMessage{
-		Id:   proto.String(uuid.NewV4().String()),
-		Cmd:  &pongCmd,
-		Data: data,
-	}
+// 	pongMsg := &pb.PushMessage{
+// 		Id:   proto.String(uuid.NewV4().String()),
+// 		Cmd:  &pongCmd,
+// 		Data: data,
+// 	}
 
-	buf, err := proto.Marshal(pongMsg)
-	if err != nil {
-		return
-	}
-	if err := c.SendBytes(buf); err != nil {
-		return
-	}
-}
+// 	buf, err := proto.Marshal(pongMsg)
+// 	if err != nil {
+// 		return
+// 	}
+// 	if err := c.SendBytes(buf); err != nil {
+// 		return
+// 	}
+// }

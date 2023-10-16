@@ -10,9 +10,6 @@ import (
 	"github.com/linrongjian/cavy/core/logger"
 	"github.com/linrongjian/cavy/core/network/protocols/mqwrap"
 	"github.com/linrongjian/cavy/core/network/protocols/wswrap"
-	"github.com/linrongjian/cavy/core/protocol/pb"
-
-	"github.com/golang/protobuf/proto"
 )
 
 const (
@@ -104,11 +101,11 @@ func NewPlayer(playerID string, session string, conn *wswrap.GWsConn) *Player {
 	// 	return nil
 	// }
 
-	err = mqChannel.Receive(player.onRecvPush)
-	if err != nil {
-		logger.Errorf("Receive err:%v", err)
-		return nil
-	}
+	// err = mqChannel.Receive(player.onRecvPush)
+	// if err != nil {
+	// 	logger.Errorf("Receive err:%v", err)
+	// 	return nil
+	// }
 
 	playerManager.Store(playerID, player)
 
@@ -145,42 +142,42 @@ func DeletePlayer(playerID string) {
 }
 
 // 用户接收推送函数
-func (p *Player) onRecvPush(value mqwrap.Delivery) {
+// func (p *Player) onRecvPush(value mqwrap.Delivery) {
 
-	logger.Info("func", "onRecvPush")
+// 	logger.Info("func", "onRecvPush")
 
-	recvMsg := &pb.Message{}
-	err := proto.Unmarshal(value.Body, recvMsg)
-	if err != nil {
-		logger.Errorf("Unmarshal err:%v", err)
-		return
-	}
+// 	recvMsg := &pb.Message{}
+// 	err := proto.Unmarshal(value.Body, recvMsg)
+// 	if err != nil {
+// 		logger.Errorf("Unmarshal err:%v", err)
+// 		return
+// 	}
 
-	if *recvMsg.Cmd == pb.Cmd_KickBlackList {
-		if err := p.SendKick(KickBlackList); err != nil {
-			logger.Error("Send kick err:", err.Error())
-		}
-		p.ws.Close()
-		return
-	} else if *recvMsg.Cmd == pb.Cmd_KickSealPlayer {
-		if err := p.SendKick(KickSealPlayer); err != nil {
-			logger.Error("Send kick err:", err.Error())
-		}
-		p.ws.Close()
-		return
-	}
+// 	if *recvMsg.Cmd == pb.Cmd_KickBlackList {
+// 		if err := p.SendKick(KickBlackList); err != nil {
+// 			logger.Error("Send kick err:", err.Error())
+// 		}
+// 		p.ws.Close()
+// 		return
+// 	} else if *recvMsg.Cmd == pb.Cmd_KickSealPlayer {
+// 		if err := p.SendKick(KickSealPlayer); err != nil {
+// 			logger.Error("Send kick err:", err.Error())
+// 		}
+// 		p.ws.Close()
+// 		return
+// 	}
 
-	// id := uuid.NewV4().String()
-	// log.Infof("Player:%s Recv Push ID:%s Cmd:%d DataLen:%d", p.id, id, int(*recvMsg.Cmd), len(recvMsg.Data))
-	//msgAckMap[id] = value
+// 	// id := uuid.NewV4().String()
+// 	// log.Infof("Player:%s Recv Push ID:%s Cmd:%d DataLen:%d", p.id, id, int(*recvMsg.Cmd), len(recvMsg.Data))
+// 	//msgAckMap[id] = value
 
-	pushMsg := &pb.PushMessage{
-		Id:   proto.String(""),
-		Cmd:  recvMsg.Cmd,
-		Data: recvMsg.Data,
-	}
-	p.ws.SendProto(pushMsg)
-}
+// 	pushMsg := &pb.PushMessage{
+// 		Id:   proto.String(""),
+// 		Cmd:  recvMsg.Cmd,
+// 		Data: recvMsg.Data,
+// 	}
+// 	p.ws.SendProto(pushMsg)
+// }
 
 // GetPlayerID 获取ID
 func (p *Player) GetPlayerID() string {

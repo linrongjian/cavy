@@ -1,6 +1,6 @@
-# EventGo
+# cavy
 
-Go language high-performance server framework
+simple server
 
 
 ## Core

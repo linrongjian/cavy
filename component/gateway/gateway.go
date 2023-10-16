@@ -2,7 +2,7 @@ package gateway
 
 import (
 	"github.com/linrongjian/cavy/core/app"
-	"github.com/linrongjian/cavy/core/network/protocols/httpwrap"
+	"github.com/linrongjian/cavy/core/httpsvr"
 	"github.com/linrongjian/cavy/core/network/protocols/mqwrap"
 )
 
@@ -21,7 +21,7 @@ type gateServer struct {
 
 func (s *gateServer) Start() error {
 	// Ctx = s.Options().Context
-	httpwrap.CreateHTTPServer()
+	httpsvr.CreateHTTPServer()
 	// ClearOnline()
 	mqwrap.Startup()
 	return nil
@@ -39,7 +39,7 @@ func (s *gateServer) Init(opts ...Option) error {
 	for _, o := range opts {
 		o(&s.opts)
 	}
-	httpwrap.RegisterGetHandleNoUserID("/", onConnectHandle) //获取入口信息
+	httpsvr.RegisterGetHandleNoUserID("/", onConnectHandle) //获取入口信息
 	s.AddFlags(mqwrap.Flags)
 	return nil
 }

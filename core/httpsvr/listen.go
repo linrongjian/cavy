@@ -15,21 +15,20 @@ import (
 	"encoding/json"
 	"time"
 
-	"github.com/golang/protobuf/proto"
 	"github.com/linrongjian/cavy/common/api"
 	"github.com/linrongjian/cavy/common/consul"
 	"github.com/linrongjian/cavy/common/gerrors"
 	"github.com/linrongjian/cavy/common/hook"
 	"github.com/linrongjian/cavy/common/mlog"
 	"github.com/linrongjian/cavy/common/servercfg"
-
-	protobuf "github.com/linrongjian/cavy/proto/go"
+	"github.com/linrongjian/cavy/protocol/pb"
+	"google.golang.org/protobuf/proto"
 )
 
 type httpHandler struct{}
 
-// HTTPRecv http数据接收
-type HTTPRecv func(r *Request) (gerrors.Error, proto.Message)
+// HttpRecv http数据接收
+type HttpRecv func(r *Request) (gerrors.Error, proto.Message)
 
 // JSONRecv 接收数据
 type JSONRecv func(r *Request) (int, interface{})
@@ -57,7 +56,7 @@ func init() {
 }
 
 // Register 注册协议
-func Register(paths map[string]HTTPRecv, check bool) {
+func Register(paths map[string]HttpRecv, check bool) {
 	for k, v := range paths {
 		if _, ok := handlerMap[k]; ok {
 			msg := fmt.Sprintf("path %s is exists!!!", k)
@@ -67,7 +66,7 @@ func Register(paths map[string]HTTPRecv, check bool) {
 		handlerMap[k] = func(r *Request) []byte {
 			code, msg := f(r)
 			if msg != nil {
-				r.Log.Debugf("Result:%d Msg:%v", code, msg.String())
+				r.Log.Debugf("Result:%d Msg:%v", code, msg)
 			} else {
 				r.Log.Debugf("Result:%d Msg:%s", code, code.String())
 			}
@@ -91,10 +90,10 @@ func Register(paths map[string]HTTPRecv, check bool) {
 				remsg = code.String()
 			}
 
-			resp := &protobuf.HTTPResponse{
-				Result: proto.Int(int(code)),
-				Msg:    proto.String(remsg),
-				Data:   dataBuf,
+			resp := &pb.HttpReply{
+				Errcode: int32(code),
+				Msg:     remsg,
+				Data:    dataBuf,
 			}
 
 			buf, err := proto.Marshal(resp)
@@ -113,7 +112,7 @@ func Register(paths map[string]HTTPRecv, check bool) {
 }
 
 // RegisterHTTPRecvJSON  注册协议
-func RegisterHTTPRecvJSON(paths map[string]HTTPRecv, check bool) {
+func RegisterHTTPRecvJSON(paths map[string]HttpRecv, check bool) {
 	for k, v := range paths {
 		if _, ok := handlerMap[k]; ok {
 			msg := fmt.Sprintf("path %s is exists!!!", k)
@@ -123,7 +122,7 @@ func RegisterHTTPRecvJSON(paths map[string]HTTPRecv, check bool) {
 		handlerMap[k] = func(r *Request) []byte {
 			code, msg := f(r)
 			if msg != nil {
-				r.Log.Debugf("Result:%d Msg:%v", code, msg.String())
+				r.Log.Debugf("Result:%d Msg:%v", code, msg)
 			} else {
 				r.Log.Debugf("Result:%d Msg:%s", code, code.String())
 			}
@@ -147,10 +146,10 @@ func RegisterHTTPRecvJSON(paths map[string]HTTPRecv, check bool) {
 				remsg = code.String()
 			}
 
-			resp := &protobuf.HTTPResponse{
-				Result: proto.Int(int(code)),
-				Msg:    proto.String(remsg),
-				Data:   dataBuf,
+			resp := &pb.HttpReply{
+				Errcode: int32(code),
+				Msg:     remsg,
+				Data:    dataBuf,
 			}
 
 			buf, err := json.Marshal(resp)

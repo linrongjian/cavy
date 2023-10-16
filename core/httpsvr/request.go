@@ -13,7 +13,7 @@ import (
 	"github.com/linrongjian/cavy/common/api"
 	"github.com/linrongjian/cavy/common/gerrors"
 	"github.com/linrongjian/cavy/common/mlog"
-	protobuf "github.com/linrongjian/cavy/proto/go"
+	"github.com/linrongjian/cavy/protocol/pb"
 )
 
 // Request 请求结构
@@ -84,9 +84,9 @@ func (r *Request) sendFailed(code gerrors.Error) error {
 
 	result := int32(code)
 	msg := code.String()
-	resp := &protobuf.HTTPResponse{
-		Result: &result,
-		Msg:    &msg,
+	resp := &pb.HttpReply{
+		Errcode: result,
+		Msg:     msg,
 	}
 
 	buf, err := proto.Marshal(resp)
@@ -152,9 +152,9 @@ func (r *Request) sendSuccess(data proto.Message) error {
 	}
 
 	result := int32(0)
-	resp := &protobuf.HTTPResponse{
-		Result: &result,
-		Data:   dataBuf,
+	resp := &pb.HttpReply{
+		Errcode: result,
+		Data:    dataBuf,
 	}
 
 	buf, err := proto.Marshal(resp)

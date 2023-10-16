@@ -4,12 +4,10 @@ import (
 	"math/rand"
 	"strconv"
 
+	"github.com/linrongjian/cavy/core/httpsvr"
 	"github.com/linrongjian/cavy/core/logger"
-	"github.com/linrongjian/cavy/core/network/protocols/httpwrap"
 	"github.com/linrongjian/cavy/core/network/protocols/wswrap"
-	"github.com/linrongjian/cavy/core/protocol/pb"
-
-	"github.com/golang/protobuf/proto"
+	"github.com/linrongjian/cavy/protocol/pb"
 )
 
 var (
@@ -17,18 +15,18 @@ var (
 )
 
 // onConnectHandle 连接
-func onConnectHandle(c *httpwrap.Context) {
+func onConnectHandle(c *httpsvr.Context) {
 	//logger.Info("connectHandle enter")
 
-	httpRsp := pb.HTTPResponse{
-		Result: proto.Int32(int32(UnknownError)),
+	httpRsp := pb.HttpReply{
+		Errcode: int32(UnknownError),
 	}
 	defer c.WriteRsp(&httpRsp)
 
 	playerId := strconv.Itoa(rand.Int()) //c.Query.Get("playerid")
 	if playerId == "" {
-		httpRsp.Result = proto.Int32(int32(ErrParamNil))
-		httpRsp.Msg = proto.String("playerid请求参数为空")
+		httpRsp.Errcode = int32(ErrParamNil)
+		httpRsp.Msg = "playerid请求参数为空"
 		return
 	}
 
@@ -55,8 +53,8 @@ func onConnectHandle(c *httpwrap.Context) {
 	// 升级为websocket
 	ws, err := wswrap.NewConn(c.W, c.GetHTTPRequest())
 	if err != nil {
-		httpRsp.Result = proto.Int32(int32(ErrConnect))
-		httpRsp.Msg = proto.String("连接失败")
+		httpRsp.Errcode = int32(ErrConnect)
+		httpRsp.Msg = "连接失败"
 		return
 	}
 
@@ -83,8 +81,8 @@ func onConnectHandle(c *httpwrap.Context) {
 
 	// zlgame.PrintOnline()
 
-	ws.WaitWebSocket(receiveHandle)
+	// ws.WaitWebSocket(receiveHandle)
 
-	httpRsp.Result = proto.Int32(int32(SUCCESS))
+	httpRsp.Errcode = SUCCESS
 	return
 }

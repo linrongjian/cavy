@@ -1,13 +1,6 @@
 package api
 
 import (
-	"fmt"
-
-	"github.com/golang/protobuf/proto"
-	"github.com/linrongjian/cavy/common/gerrors"
-
-	protobuf "github.com/linrongjian/cavy/proto/go"
-
 	"crypto/tls"
 	"io"
 	"io/ioutil"
@@ -59,14 +52,14 @@ func HTTPPostToken(url string, playerID int64, contentType string, body io.Reade
 }
 
 // HTTPResponse data数据解析成pb协议
-func HTTPResponse(data []byte) *protobuf.HTTPResponse {
-	result := &protobuf.HTTPResponse{
-		Result: proto.Int32(int32(gerrors.ParseErr)),
-	}
-	err := proto.Unmarshal(data, result)
-	if err != nil {
-		result.Msg = proto.String(fmt.Sprintf("protobuf解析失败,err:%v", err.Error()))
-	}
-	return result
+// func HTTPResponse(data []byte) *protobuf.HTTPResponse {
+// 	result := &protobuf.HTTPResponse{
+// 		Result: proto.Int32(int32(gerrors.ParseErr)),
+// 	}
+// 	err := proto.Unmarshal(data, result)
+// 	if err != nil {
+// 		result.Msg = proto.String(fmt.Sprintf("protobuf解析失败,err:%v", err.Error()))
+// 	}
+// 	return result
 
-}
+// }

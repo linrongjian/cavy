@@ -1,4 +1,4 @@
-package httpwrap
+package httpsvr
 
 import (
 	"context"
@@ -8,9 +8,9 @@ import (
 
 	"github.com/linrongjian/cavy/core/logger"
 	"github.com/linrongjian/cavy/core/network/protocols/mqwrap"
-	"github.com/linrongjian/cavy/core/protocol/pb"
 	"github.com/linrongjian/cavy/core/store/mysql"
 	"github.com/linrongjian/cavy/core/util"
+	"github.com/linrongjian/cavy/protocol/pb"
 
 	"github.com/go-redis/redis/v8"
 	"github.com/go-xorm/xorm"
@@ -53,10 +53,10 @@ func newReqContext(r *http.Request, requiredUserID bool) (*Context, error) {
 }
 
 // WriteRsp send protobuf messsage to peer
-func (ctx *Context) WriteRsp(m *pb.HTTPResponse) {
-	if m.GetResult() != 0 {
-		if m.GetMsg() == "" {
-			m.Msg = proto.String(util.StatusText(m.GetResult()))
+func (ctx *Context) WriteRsp(m *pb.HttpReply) {
+	if m.Errcode != 0 {
+		if m.Msg == "" {
+			m.Msg = util.StatusText(m.Errcode)
 		}
 	}
 	buf, err := proto.Marshal(m)
@@ -85,9 +85,9 @@ func replyClientWithTokenError(w http.ResponseWriter, err error) {
 	// 	result = int32(ErrTokenExpired)
 	// }
 
-	httpRsp := pb.HTTPResponse{}
-	httpRsp.Result = proto.Int32(-1)
-	httpRsp.Msg = proto.String(err.Error())
+	httpRsp := pb.HttpReply{}
+	httpRsp.Errcode = -1
+	httpRsp.Msg = err.Error()
 
 	// 退出函数时发送回复给客户端
 	bytes, err := proto.Marshal(&httpRsp)

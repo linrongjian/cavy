@@ -25,7 +25,7 @@ func NewConn(w http.ResponseWriter, r *http.Request) (*GWsConn, error) {
 	conn := &GWsConn{
 		id:           id,
 		Ws:           ws,
-		wsLock:       &sync.Mutex{},
+		lock:         &sync.Mutex{},
 		UserData:     nil,
 		lastRecvTime: time.Now(),
 		lastPingTime: time.Now(),
