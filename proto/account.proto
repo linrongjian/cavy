@@ -1,0 +1,308 @@
+syntax = "proto2";
+
+import "common.proto";
+
+package minGamePb;
+
+
+// 微信登录数据
+message WxLoginData {
+  optional string code = 1;           // 微信code
+  optional string encrypteddata = 2;  // 微信参数
+  optional string iv = 3;             // 微信参数
+  optional string mainplatform = 4;   // 渠道
+  optional string subplateform = 5;   // 平台
+  optional int64 inviter = 6;         // 邀请人
+  optional string addr = 7;           // 客户端ip
+  optional string openid = 8;         // 授权用户唯一标识
+}
+
+// 玩吧登录数据
+message WanBaLoginData {
+  optional string openid = 1;         // openid
+  optional string openkey = 2;      // openkey
+  optional string platform = 3;       // 玩吧平台 ios or android
+  optional string mainplatform = 4;   // 渠道
+  optional string subplateform = 5;   // 平台
+  optional string addr = 6;           // 客户端ip
+}
+
+// ToutiaoLoginData 头条登录数据
+message ToutiaoLoginData {
+  optional string code = 1;
+  optional string encrypteddata = 2;  // 头条参数
+  optional string iv = 3;             // 头条参数
+  optional string mainplatform = 4;   // 渠道
+  optional string subplateform = 5;   // 平台
+  optional string anonymous_code = 6;  //头条游客登入code
+}
+
+// YiJieLoginData 易接登录数据
+message YiJieLoginData {
+  optional string sdk = 1;   // 渠道在易接服务器上的ID。由易接提供。
+  optional string app = 2;   // CP游戏在易接服务器上的ID。由易接提供。
+  optional string uin = 3;   // 在渠道上的用户ID。
+  optional string sess = 4;  // 用户在登陆渠道后，由渠道返回给客户端的SessionId
+  optional string mainplatform = 5;   // 渠道
+  optional string subplateform = 6;   // 平台
+}
+
+//  YiJieDanJiLoginData 易接单机登录数据
+message YiJieDanJiLoginData {
+  optional string deviceId = 1;       // 机器码
+  optional string mainplatform = 4;   // 渠道
+  optional string subplateform = 5;   // 平台
+  optional int64 inviter = 6;         // 邀请人
+}
+
+// QQLoginData QQ登录数据
+message QQLoginData {
+  optional string code = 1;
+  optional string encrypteddata = 2;  // QQ参数
+  optional string iv = 3;             // QQ参数
+  optional string mainplatform = 4;   // 渠道
+  optional string subplateform = 5;   // 平台
+  optional string openid = 6;         // QQopenID
+}
+
+// BilibiliLoginData b站登录数据
+message BilibiliLoginData {
+  optional string code = 1;
+  optional string encrypteddata = 2;  // 头条参数
+  optional string iv = 3;             // 头条参数
+  optional string mainplatform = 4;   // 渠道
+  optional string subplateform = 5;   // 平台
+}
+
+// PasswordData 账号密码登录
+message PasswordData {
+  optional string userid = 1;    // 用户ID
+  optional string password = 2;   // 用户密码
+}
+
+// OPPOLoginData oppo登录数据
+message OPPOLoginData {
+  optional string code = 1;
+  optional string pkgName = 2;    // 游戏包名
+  optional string mainplatform = 3;   // 渠道
+  optional string subplateform = 4;   // 平台
+}
+
+// HuaweiLoginData 华为登录数据
+message HuaweiLoginData {
+  optional string ts = 1;             // 时间戳，取自当前玩家的Player对象。
+  optional string playerid = 2;       // 玩家ID，取自当前玩家的Player对象。
+  optional string playerlevel = 3;    // 玩家等级，取自当前玩家的Player对象的PlayerLevelInfo对象。
+  optional string playersign = 4;     // 登录签名，取自当前玩家的Player对象。
+  optional string mainplatform = 5;   // 渠道
+  optional string subplateform = 6;   // 平台
+}
+
+// BingChuanLoginData 冰川登录数据
+message BingChuanLoginData {
+  optional string session = 1;        // 用户登录的session
+  optional string mainplatform = 2;   // 渠道
+  optional string subplateform = 3;   // 平台
+}
+
+// PhoneLoginData 手机登录数据
+message PhoneLoginData {
+  optional string phoneno = 1;    // 手机号码
+  optional string phonecode = 2;  // 手机验证码
+  optional string password = 3;   // 手机密码
+}
+
+// BasicData 基础数据
+message BasicData {
+  optional string subChannel = 1; // 子渠道
+}
+
+// 账号认证请求
+message AuthReq {
+  optional GameId gameId = 1;                        // 游戏ID
+  optional WxLoginData wxData = 2;                // 微信登录数据
+  optional WanBaLoginData wanbaData = 3;          // 玩吧登录数据
+  optional ToutiaoLoginData toutiaoData = 4;      // 头条登录数据
+  optional string nick = 5;                        // 昵称
+  optional int32  sex = 6;                        // 性别
+  optional string avatarUrl = 7;                  // 头像
+  optional YiJieLoginData yijiData = 8;            // 易接登录数据
+  optional QQLoginData QQData = 9;                // QQ登录数据(path:/auth/qqlogin)
+  optional BilibiliLoginData bbData = 10;          // b站登录数据(path:/auth/bblogin)
+  optional YiJieDanJiLoginData yijiedanjiData = 11; // 易接单机登录数据(path:/auth/yijiedanjilogin)
+  optional OPPOLoginData oppoData = 12;        // oppo登录数据(path:/auth/phonelogin)
+  optional PasswordData passwordData = 13;           // 账号密码数据(path:/auth/password)
+  optional PhoneLoginData phoneData = 14;           // 手机数据
+  optional BasicData basicData = 15;                // 基础数据
+  optional HuaweiLoginData huaweiData = 16;         // 华为登录数据(path:/auth/huawei)
+  optional BingChuanLoginData bingchuanData = 17;   // 冰川登录数据(path:/auth/bingchuan)
+  optional QQBindLoginData QQBindData = 18;         // QQ无授权登录数据(path:/auth/qqlogin)
+  optional XCLoginData xcwl = 19;         // 星辰网络登录数据(path:/auth/xcwl)
+}
+
+//防沉迷状态
+enum FcmState {
+    //成功
+    Success = 0;
+    //认证失败
+    Fail = 1;
+    //未成年,该时间段不能玩游戏
+    Monage= 2;
+}
+
+// 防沉迷
+message FcmInfo {
+  optional FcmState state = 1;           // 是否已经绑定第三方平台
+  optional int64 enforceLogoutTime = 2;     // 强制退出游戏时间(防沉迷)
+}
+
+// 账号认证响应
+message AuthRsp {
+  optional string code = 1;                 // 授权码
+  optional string openid = 2;               // 授权用户唯一标识
+  optional bytes account = 3;               // tables.Account序列化
+  optional bool hasBind = 4;                // 是否已经绑定第三方平台
+  optional FcmInfo fcm = 5;                 // 是否防沉迷
+}
+
+// 账号验证请求
+message VerifyReq {
+  optional string checkCode = 1;     // 校验码
+  optional string server = 2;        // 服务器ID
+  optional GameId gameId = 3;        // 游戏ID
+  optional string version = 4;       // 版本号
+}
+
+// 账号验证响应
+message VerifyRsp {
+  optional bytes account = 1;   // tables.Account序列化
+}
+
+message AccountUser {
+  optional string server = 1;         // 服务器ID
+  optional GameId gameId = 2;         // 游戏ID
+  optional string version = 3;        // 版本号
+  optional int64 createTime = 4;      // 注册时间
+  optional int64 lastLoginTime = 5;   // 上次登录时间
+}
+
+// 账号游戏信息请求
+message AccountGameInfoReq {
+  optional int64  accountId = 1;      // 账号ID
+  optional GameId gameId = 2;         // 游戏ID
+  optional string server = 3;         // 服务器ID(若为空,则返回此游戏该账号下的所有用户信息)
+}
+
+// 账号游戏信息响应
+message AccountGameInfoRsp {
+  repeated AccountUser user = 1;     // 用户信息
+}
+
+// 用户信息请求
+message GetUserInfoReq {
+  optional int64 userId = 1;    // 用户ID
+}
+
+// 用户信息响应
+message GetUserInfoRsp {
+  optional AccountUser user = 1;     // 用户信息
+}
+
+// 用户密码设置
+message SetPasswordReq {
+  optional string userId = 1;    // 用户ID
+  optional string password = 2;  // 用户密码
+}
+
+
+// 用户密码修改
+message ModifyPasswordReq {
+  optional GameId gameId = 1;    // 游戏ID
+  optional string phoneno = 2;   // 手机号码
+  optional string phonecode = 3; // 手机验证码
+  optional string password = 4;  // 修改后的用户密码
+}
+
+// 账号服获取手机验证码请求(path:/account/phone/sendcode)
+message GetPhoneCodeReq {
+  required string phoneno = 1;  // 手机号码
+  required string gamename = 2; // 客户端游戏名称
+  required int32 type = 3;      // 类型(1:用户注册;2:修改密码)
+}
+
+// 账号服获取手机验证码响应
+message GetPhoneCodeRsp {
+  required int32 remaintime = 1; // 获取验证码剩余时间
+}
+
+// 微信解绑请求
+message WechatUnbindReq {
+  optional GameId gameId = 1;   // 游戏ID
+  required int32 accountId = 2; //账号ID
+}
+
+
+// 设置账号信息请求
+message SetAccounfoReq {
+  optional int64  accountId = 1;      // 账号ID
+  optional string cardcode = 2;       // 身份证号码
+  optional string cardname = 3;       // 身份证姓名
+}
+
+// 绑定第三方账号请求
+message bindAccounPlatformReq {
+  optional int32 type = 1;        // 绑定平台 1QQ
+  optional string authCode = 2;   // 授权码
+  optional QQBindLoginData QQBindData = 3;         // 绑定数据
+  optional GameId gameId = 4;                        // 游戏ID
+}
+
+// 绑定WX账号请求
+message bindAccounWxPlatformReq {
+  optional int32 type = 1;        // 绑定平台 2 WX
+  optional string authCode = 2;   // 授权码
+  optional WxLoginData wxData = 3;                // 绑定的信息
+  optional GameId gameId = 4;                        // 游戏ID
+}
+
+// QQBindLoginData QQ登录数据
+message QQBindLoginData {
+  optional string code = 1;
+  optional string encrypteddata = 2;  // QQ参数
+  optional string iv = 3;             // QQ参数
+  optional string mainplatform = 4;   // 渠道
+  optional string subplateform = 5;   // 平台
+  optional string openid = 6;         // QQopenID
+}
+
+//XCLoginData星辰网络登陆数据
+message XCLoginData {
+	optional string token = 1; //用户token
+	optional string uid = 2;   //用户id
+  optional string mainplatform = 3;   // 渠道
+  optional string subplateform = 4;   // 平台
+}
+
+// 获取绑定QQ号验证请求
+message GetBindQQReq {
+  optional string code = 1;     // 校验码
+}
+
+// 获取绑定QQ号验证响应
+message GetBindQQRsp {
+  optional string qq = 1;   // tables.Account序列化
+}
+
+// 绑定QQ账号请求
+message BindAccounQQReq {
+  optional string authCode = 1;   // 授权码
+  optional string qq = 2;         // 绑定数据
+  optional int32  gameId = 3;     // 游戏ID
+}
+
+// 防沉迷身份认证请求
+message AuthenticationReq {
+  optional string openId = 1;         // 唯一标识
+  optional string cardcode = 2;       // 身份证号码
+  optional string cardname = 3;       // 身份证姓名
+}
