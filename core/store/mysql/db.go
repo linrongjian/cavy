@@ -37,19 +37,15 @@ func Startup() {
 	}
 }
 
-// 连接数据库
 func connect(addr string, name string, account string, password string) (*xorm.Engine, error) {
 	sqlInfo := fmt.Sprintf("%s:%s@tcp(%s)/%s", account, password, addr, name)
 	engine, err := xorm.NewEngine("mysql", sqlInfo)
-
 	if err != nil {
 		return nil, err
 	}
-
 	if showSQL {
 		engine.ShowSQL()
 	}
-
 	err = engine.Ping()
 	if err != nil {
 		return nil, err

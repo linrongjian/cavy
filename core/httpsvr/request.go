@@ -9,7 +9,6 @@ import (
 	"strconv"
 
 	"github.com/linrongjian/cavy/common/api"
-	"github.com/linrongjian/cavy/common/gerrors"
 	"github.com/linrongjian/cavy/common/mlog"
 	"github.com/linrongjian/cavy/proto/pb"
 	"google.golang.org/protobuf/proto"
@@ -78,14 +77,11 @@ func (r *Request) Body() []byte {
 }
 
 // SendFailedProto 发送失败
-func (r *Request) sendFailed(code gerrors.Error) error {
+func (r *Request) sendFailed(errcode int32) error {
 	r.w.WriteHeader(200)
 
-	result := int32(code)
-	msg := code.String()
 	resp := &pb.HttpReply{
-		Errcode: result,
-		Msg:     msg,
+		Errcode: errcode,
 	}
 
 	buf, err := proto.Marshal(resp)

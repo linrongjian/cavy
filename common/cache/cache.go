@@ -1,6 +1,7 @@
 package cache
 
 import (
+	"errors"
 	"fmt"
 	"time"
 
@@ -57,6 +58,20 @@ func Startup(server string, database int) bool {
 		panic(msg)
 	}
 	return true
+}
+
+func Connect(host string, port int, database int) error {
+	addr := fmt.Sprintf("%s:%d", host, port)
+	if pool == nil {
+		pool = newPool(addr, database)
+	}
+	rsp := fmt.Sprintf("RedisConnect: %s", addr)
+	if !CheckRedisConnect() {
+
+		return errors.New("Err" + rsp)
+	}
+	fmt.Print(rsp)
+	return nil
 }
 
 func newPool(addr string, database int) *redis.Pool {

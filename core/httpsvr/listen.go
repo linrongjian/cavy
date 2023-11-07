@@ -52,8 +52,9 @@ func Register(paths map[string]PbReply, check bool) {
 			msg := fmt.Sprintf("path %s is exists!!!", k)
 			panic(msg)
 		}
+		handle := fn
 		handlerMap[k] = func(r *Request) []byte {
-			data, errcode := fn(r)
+			data, errcode := handle(r)
 			reply := &pb.HttpReply{
 				Errcode: errcode,
 			}
@@ -76,11 +77,50 @@ func Register(paths map[string]PbReply, check bool) {
 			}
 			return buf
 		}
+
 		if !check {
 			tokenWhiteList[k] = true
 			signWhiteList[k] = true
 		}
+		contentPath[k] = true
 	}
+}
+
+func PostPb(path string, handle PbReply, check bool) {
+	if _, ok := handlerMap[path]; ok {
+		msg := fmt.Sprintf("path %s is exists!!!", path)
+		panic(msg)
+	}
+	handlerMap[path] = func(r *Request) []byte {
+		data, errcode := handle(r)
+		reply := &pb.HttpReply{
+			Errcode: errcode,
+		}
+		if errcode == 0 {
+			if r.isSetCookie {
+				r.w.Header().Set("Set-Session", r.cookie.Encode())
+			}
+			if data != nil {
+				var err error
+				reply.Data, err = proto.Marshal(data)
+				if err != nil {
+					r.Log.Errorf("SendSuccess Marshal data err:%v", err)
+				}
+			}
+		}
+		buf, err := proto.Marshal(reply)
+		if err != nil {
+			r.Log.Errorf("SendSuccess Marshal resp err:%v", err)
+			return []byte(err.Error())
+		}
+		return buf
+	}
+
+	if !check {
+		tokenWhiteList[path] = true
+		signWhiteList[path] = true
+	}
+	contentPath[path] = true
 }
 
 // RegisterJSON 注册函数
@@ -359,7 +399,10 @@ func (*httpHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			if !contentPath[req.Path] {
 				req.send(200, handler(req))
 			} else {
-				handler(req)
+				data := handler(req)
+				if data != nil {
+					req.send(200, data)
+				}
 			}
 		}
 
