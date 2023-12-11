@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"cavy/core/network/amqp/rmqproducer"
+	"github.com/linrongjian/cavy/core/network/amqp/rmqproducer"
 )
 
 type LogProducer interface {

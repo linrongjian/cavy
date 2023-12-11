@@ -4,7 +4,7 @@ import (
 	"encoding/base64"
 	"testing"
 
-	"cavy/common/xlog"
+	"github.com/linrongjian/cavy/common/xlog"
 )
 
 var (

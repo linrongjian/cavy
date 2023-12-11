@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"testing"
 
-	"cavy/common/xlog"
+	"github.com/linrongjian/cavy/common/xlog"
 )
 
 var (

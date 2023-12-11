@@ -3,7 +3,7 @@ package auth
 import (
 	"context"
 
-	"cavy/core/store/redis"
+	"github.com/linrongjian/cavy/core/store/redis"
 )
 
 type Options struct {

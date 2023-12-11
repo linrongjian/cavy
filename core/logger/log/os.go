@@ -3,7 +3,7 @@ package log
 import (
 	"sync"
 
-	"cavy/core/util"
+	"github.com/linrongjian/cavy/core/util"
 
 	"github.com/google/uuid"
 )

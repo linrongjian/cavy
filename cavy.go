@@ -1,9 +1,9 @@
 package cavy
 
 import (
-	"cavy/component/logserver/logconsumer"
-	"cavy/component/logserver/logproducer"
-	"cavy/core/network/amqp/rmqconsumer"
+	"github.com/linrongjian/cavy/component/logserver/logconsumer"
+	"github.com/linrongjian/cavy/component/logserver/logproducer"
+	"github.com/linrongjian/cavy/core/network/amqp/rmqconsumer"
 )
 
 var (

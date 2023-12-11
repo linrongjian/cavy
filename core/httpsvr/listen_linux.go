@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	////"battlePlatform/wjrgit.qianz.com/common/api"
-	"cavy/common/api"
+	"github.com/linrongjian/cavy/common/api"
 
 	"github.com/fvbock/endless"
 )

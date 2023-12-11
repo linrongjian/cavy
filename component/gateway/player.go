@@ -6,10 +6,10 @@ import (
 	"sync/atomic"
 	"time"
 
-	"cavy/core/app"
-	"cavy/core/logger"
-	"cavy/core/network/protocols/mqwrap"
-	"cavy/core/network/protocols/wswrap"
+	"github.com/linrongjian/cavy/core/app"
+	"github.com/linrongjian/cavy/core/logger"
+	"github.com/linrongjian/cavy/core/network/protocols/mqwrap"
+	"github.com/linrongjian/cavy/core/network/protocols/wswrap"
 )
 
 const (

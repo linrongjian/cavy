@@ -5,7 +5,7 @@ import (
 	"crypto/cipher"
 	"fmt"
 
-	"cavy/common/util"
+	"github.com/linrongjian/cavy/common/util"
 )
 
 // AES-GCM 加密数据

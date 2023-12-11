@@ -1,8 +1,8 @@
 package httpsvr
 
 import (
-	"cavy/common/cache"
-	"cavy/common/mlog"
+	"github.com/linrongjian/cavy/common/cache"
+	"github.com/linrongjian/cavy/common/mlog"
 )
 
 //"battlePlatform/wjrgit.qianz.com/common/cache"

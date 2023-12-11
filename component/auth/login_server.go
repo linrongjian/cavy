@@ -4,8 +4,8 @@ import (
 	"os"
 	"os/signal"
 
-	"cavy/core/app"
-	"cavy/core/logger"
+	"github.com/linrongjian/cavy/core/app"
+	"github.com/linrongjian/cavy/core/logger"
 )
 
 type LoginServer interface {

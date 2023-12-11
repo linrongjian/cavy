@@ -4,7 +4,7 @@ import (
 	"flag"
 	"fmt"
 
-	"cavy/core/logger"
+	"github.com/linrongjian/cavy/core/logger"
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/go-xorm/xorm"

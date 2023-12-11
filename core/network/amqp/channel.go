@@ -3,7 +3,7 @@ package amqp
 import (
 	"fmt"
 
-	"cavy/core/logger"
+	"github.com/linrongjian/cavy/core/logger"
 
 	"github.com/streadway/amqp"
 )

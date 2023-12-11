@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"cavy/common/xlog"
+	"github.com/linrongjian/cavy/common/xlog"
 )
 
 func TestXtime(t *testing.T) {

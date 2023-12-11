@@ -1,7 +1,7 @@
 package cache
 
 import (
-	"cavy/common/stateless"
+	"github.com/linrongjian/cavy/common/stateless"
 
 	"github.com/gomodule/redigo/redis"
 )

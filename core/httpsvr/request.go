@@ -8,9 +8,9 @@ import (
 	"net/url"
 	"strconv"
 
-	"cavy/common/api"
-	"cavy/common/mlog"
-	"cavy/proto/pb"
+	"github.com/linrongjian/cavy/common/api"
+	"github.com/linrongjian/cavy/common/mlog"
+	"github.com/linrongjian/cavy/proto/pb"
 
 	"google.golang.org/protobuf/proto"
 )

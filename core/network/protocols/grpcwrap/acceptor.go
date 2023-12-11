@@ -4,8 +4,8 @@ import (
 	"crypto/tls"
 	"net"
 
-	"cavy/core/network/transport"
-	"cavy/core/protocol/pbgrpc"
+	"github.com/linrongjian/cavy/core/network/transport"
+	"github.com/linrongjian/cavy/core/protocol/pbgrpc"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"

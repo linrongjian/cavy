@@ -3,7 +3,7 @@ package xpem
 import (
 	"testing"
 
-	"cavy/common/xlog"
+	"github.com/linrongjian/cavy/common/xlog"
 )
 
 var (

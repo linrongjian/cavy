@@ -1,7 +1,7 @@
 package logicserver
 
 import (
-	"cavy/core/app"
+	"github.com/linrongjian/cavy/core/app"
 )
 
 type LogicServer interface {

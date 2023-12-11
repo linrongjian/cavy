@@ -5,7 +5,7 @@ import (
 	"sync"
 	"time"
 
-	"cavy/core/network/transport"
+	"github.com/linrongjian/cavy/core/network/transport"
 
 	"github.com/golang/protobuf/proto"
 	"github.com/gorilla/websocket"

@@ -6,11 +6,11 @@ import (
 	"net/http"
 	"net/url"
 
-	"cavy/core/logger"
-	"cavy/core/network/protocols/mqwrap"
-	"cavy/core/store/mysql"
-	"cavy/core/util"
-	"cavy/proto/pb"
+	"github.com/linrongjian/cavy/core/logger"
+	"github.com/linrongjian/cavy/core/network/protocols/mqwrap"
+	"github.com/linrongjian/cavy/core/store/mysql"
+	"github.com/linrongjian/cavy/core/util"
+	"github.com/linrongjian/cavy/proto/pb"
 
 	"github.com/go-redis/redis/v8"
 	"github.com/go-xorm/xorm"

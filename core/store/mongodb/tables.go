@@ -4,8 +4,8 @@ import (
 	"context"
 	"sync"
 
-	"cavy/core/logger"
-	"cavy/core/util"
+	"github.com/linrongjian/cavy/core/logger"
+	"github.com/linrongjian/cavy/core/util"
 
 	"go.mongodb.org/mongo-driver/mongo"
 )

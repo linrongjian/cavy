@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 
-	"cavy"
+	"github.com/linrongjian/cavy"
 )
 
 func main() {

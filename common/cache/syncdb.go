@@ -3,7 +3,7 @@ package cache
 import (
 	"encoding/json"
 
-	"cavy/common/stateless"
+	"github.com/linrongjian/cavy/common/stateless"
 
 	"github.com/gomodule/redigo/redis"
 )

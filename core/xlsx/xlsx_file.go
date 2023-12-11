@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"cavy/common/mlog"
+	"github.com/linrongjian/cavy/common/mlog"
 
 	"github.com/fsnotify/fsnotify"
 )

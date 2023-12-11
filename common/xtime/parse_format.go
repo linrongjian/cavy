@@ -4,7 +4,7 @@ import (
 	"strings"
 	"time"
 
-	"cavy/common/util"
+	"github.com/linrongjian/cavy/common/util"
 )
 
 // 解析时间

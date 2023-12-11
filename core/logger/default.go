@@ -10,7 +10,7 @@ import (
 	"sync"
 	"time"
 
-	"cavy/core/logger/log"
+	"github.com/linrongjian/cavy/core/logger/log"
 )
 
 func init() {

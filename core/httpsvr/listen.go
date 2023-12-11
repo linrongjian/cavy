@@ -14,13 +14,13 @@ import (
 	"encoding/json"
 	"time"
 
-	"cavy/common/api"
-	"cavy/common/consul"
-	"cavy/common/gerrors"
-	"cavy/common/hook"
-	"cavy/common/mlog"
-	"cavy/common/servercfg"
-	"cavy/proto/pb"
+	"github.com/linrongjian/cavy/common/api"
+	"github.com/linrongjian/cavy/common/consul"
+	"github.com/linrongjian/cavy/common/gerrors"
+	"github.com/linrongjian/cavy/common/hook"
+	"github.com/linrongjian/cavy/common/mlog"
+	"github.com/linrongjian/cavy/common/servercfg"
+	"github.com/linrongjian/cavy/proto/pb"
 
 	"google.golang.org/protobuf/proto"
 )

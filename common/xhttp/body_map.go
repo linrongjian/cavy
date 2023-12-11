@@ -9,7 +9,7 @@ import (
 	"sort"
 	"strings"
 
-	"cavy/common/util"
+	"github.com/linrongjian/cavy/common/util"
 )
 
 type BodyMap map[string]any

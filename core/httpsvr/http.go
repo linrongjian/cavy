@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"time"
 
-	"cavy/core/logger"
+	"github.com/linrongjian/cavy/core/logger"
 
 	"fmt"
 

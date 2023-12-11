@@ -1,7 +1,7 @@
 package cache
 
 import (
-	"cavy/common/mlog"
+	"github.com/linrongjian/cavy/common/mlog"
 
 	"github.com/gomodule/redigo/redis"
 )
