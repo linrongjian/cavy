@@ -4,8 +4,8 @@ import (
 	"crypto/tls"
 	"net"
 
-	"github.com/linrongjian/cavy/core/network/transport"
-	"github.com/linrongjian/cavy/core/util"
+	"cavy/core/network/transport"
+	"cavy/core/util"
 )
 
 func NewGameRpc(opts ...transport.Option) transport.Transport {

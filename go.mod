@@ -1,4 +1,4 @@
-module github.com/linrongjian/cavy
+module cavy
 
 go 1.18
 

@@ -1,6 +1,6 @@
 package hook
 
-import "github.com/linrongjian/cavy/common/api"
+import "cavy/common/api"
 
 var hooks = []func(s *api.Conf){}
 

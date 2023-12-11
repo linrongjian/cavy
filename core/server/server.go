@@ -1,6 +1,6 @@
 package server
 
-import "github.com/linrongjian/cavy/core/module"
+import "cavy/core/module"
 
 type SvrBase struct {
 	*module.ModuleContainer

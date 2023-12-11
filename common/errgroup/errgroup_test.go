@@ -7,7 +7,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/linrongjian/cavy/common/xlog"
+	"cavy/common/xlog"
 )
 
 func TestErrgroup(t *testing.T) {

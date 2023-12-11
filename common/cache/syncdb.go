@@ -3,8 +3,9 @@ package cache
 import (
 	"encoding/json"
 
+	"cavy/common/stateless"
+
 	"github.com/gomodule/redigo/redis"
-	"github.com/linrongjian/cavy/common/stateless"
 )
 
 type Syncdb struct {

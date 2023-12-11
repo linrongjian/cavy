@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 
-	"github.com/linrongjian/cavy/common/api"
+	"cavy/common/api"
 )
 
 // Cfg server config

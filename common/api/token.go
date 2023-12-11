@@ -7,7 +7,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/linrongjian/cavy/common/mlog"
+	"cavy/common/mlog"
 )
 
 const (

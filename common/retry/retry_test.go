@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/go-pay/gopay/pkg/xlog"
+	"cavy/common/xlog"
 )
 
 func TestRetry(t *testing.T) {

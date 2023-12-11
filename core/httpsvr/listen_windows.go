@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/linrongjian/cavy/common/api"
+	"cavy/common/api"
 )
 
 ////"battlePlatform/wjrgit.qianz.com/common/api")

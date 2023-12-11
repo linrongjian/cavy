@@ -3,7 +3,7 @@ package pb;
 option go_package = "../pb";
 
 message HttpReply{
-	int32 errcode = 1; // 结果码 - 0:成功 other:失败
-	string msg = 2; // 错误信息 - 失败时读取
-	bytes data = 3; // 消息包体 - 成功时读取
+	int32 errcode = 1;  // 结果码 - 0:成功 other:失败
+	string msg = 2; 	// 错误信息 - 失败时读取
+	bytes data = 3;     // 消息包体 - 成功时读取
 }

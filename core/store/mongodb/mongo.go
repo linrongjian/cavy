@@ -5,7 +5,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/linrongjian/cavy/core/logger"
+	"cavy/core/logger"
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"

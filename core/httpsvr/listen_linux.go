@@ -3,7 +3,11 @@ package httpsvr
 import (
 	"fmt"
 	"net/http"
-	////"battlePlatform/wjrgit.qianz.com/common/api"	"github.com/fvbock/endless"
+
+	////"battlePlatform/wjrgit.qianz.com/common/api"
+	"cavy/common/api"
+
+	"github.com/fvbock/endless"
 )
 
 // 监听https

@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/linrongjian/cavy/core/logger"
+	"cavy/core/logger"
 
 	"github.com/bsm/redislock"
 	"github.com/go-redis/redis/v8"

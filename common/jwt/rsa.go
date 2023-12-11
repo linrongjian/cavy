@@ -5,8 +5,6 @@ import (
 	"crypto/rand"
 	"crypto/rsa"
 	"fmt"
-
-	"github.com/go-pay/gopay"
 )
 
 // Implements the RSA family of signing methods signing methods
@@ -74,7 +72,7 @@ func (m *SigningMethodRSA) Verify(signingString, signature string, key any) erro
 
 	// Verify the signature
 	if err = rsa.VerifyPKCS1v15(rsaKey, crypto.SHA256, h.Sum(nil), sig); err != nil {
-		return fmt.Errorf("[%w]: %v", gopay.VerifySignatureErr, err)
+		return fmt.Errorf("[%w]: %v", "todo", err)
 	}
 	return nil
 }

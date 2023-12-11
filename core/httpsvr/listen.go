@@ -14,13 +14,14 @@ import (
 	"encoding/json"
 	"time"
 
-	"github.com/linrongjian/cavy/common/api"
-	"github.com/linrongjian/cavy/common/consul"
-	"github.com/linrongjian/cavy/common/gerrors"
-	"github.com/linrongjian/cavy/common/hook"
-	"github.com/linrongjian/cavy/common/mlog"
-	"github.com/linrongjian/cavy/common/servercfg"
-	"github.com/linrongjian/cavy/proto/pb"
+	"cavy/common/api"
+	"cavy/common/consul"
+	"cavy/common/gerrors"
+	"cavy/common/hook"
+	"cavy/common/mlog"
+	"cavy/common/servercfg"
+	"cavy/proto/pb"
+
 	"google.golang.org/protobuf/proto"
 )
 
@@ -30,6 +31,7 @@ type PbReply func(r *Request) (proto.Message, int32)
 type JsonReply func(r *Request) (int, interface{})
 type StrReply func(r *Request) string
 type ByteReply func(r *Request) []byte
+type PbReplyTs func(r *Request) proto.Message
 
 var (
 	intercept      = map[string]bool{"/health": true}
@@ -71,6 +73,39 @@ func Register(paths map[string]PbReply, check bool) {
 				}
 			}
 			buf, err := proto.Marshal(reply)
+			if err != nil {
+				r.Log.Errorf("SendSuccess Marshal resp err:%v", err)
+				return []byte(err.Error())
+			}
+			return buf
+		}
+
+		if !check {
+			tokenWhiteList[k] = true
+			signWhiteList[k] = true
+		}
+		contentPath[k] = true
+	}
+}
+
+func HandlePbReplyTs(paths map[string]PbReplyTs, check bool) {
+	for k, fn := range paths {
+		if _, ok := handlerMap[k]; ok {
+			msg := fmt.Sprintf("path %s is exists!!!", k)
+			panic(msg)
+		}
+		handle := fn
+		handlerMap[k] = func(r *Request) []byte {
+			data := handle(r)
+			if data == nil {
+				return nil
+			}
+
+			if r.isSetCookie {
+				r.w.Header().Set("Set-Session", r.cookie.Encode())
+			}
+
+			buf, err := proto.Marshal(data)
 			if err != nil {
 				r.Log.Errorf("SendSuccess Marshal resp err:%v", err)
 				return []byte(err.Error())

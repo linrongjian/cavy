@@ -5,10 +5,11 @@ import (
 	"fmt"
 	"time"
 
+	"cavy/common/api"
+	"cavy/common/hook"
+	"cavy/common/mlog"
+
 	"github.com/gomodule/redigo/redis"
-	"github.com/linrongjian/cavy/common/api"
-	"github.com/linrongjian/cavy/common/hook"
-	"github.com/linrongjian/cavy/common/mlog"
 )
 
 // baseCache 基础缓存数据结构

@@ -6,9 +6,10 @@ import (
 	"strings"
 	"time"
 
+	"cavy/common/api"
+	"cavy/common/hook"
+
 	consul "github.com/hashicorp/consul/api"
-	"github.com/linrongjian/cavy/common/api"
-	"github.com/linrongjian/cavy/common/hook"
 	"github.com/sirupsen/logrus"
 )
 

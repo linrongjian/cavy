@@ -4,9 +4,10 @@ import (
 	"encoding/json"
 	"time"
 
+	"cavy/common/mlog"
+	"cavy/common/stateless"
+
 	"github.com/gomodule/redigo/redis"
-	"github.com/linrongjian/cavy/common/mlog"
-	"github.com/linrongjian/cavy/common/stateless"
 )
 
 // 统计对象信息

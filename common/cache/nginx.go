@@ -1,8 +1,9 @@
 package cache
 
 import (
+	"cavy/common/stateless"
+
 	"github.com/gomodule/redigo/redis"
-	"github.com/linrongjian/cavy/common/stateless"
 )
 
 // WriteNginxAddr 写nginx地址

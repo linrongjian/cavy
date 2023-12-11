@@ -5,8 +5,8 @@ import (
 	"os"
 	"testing"
 
-	"github.com/linrongjian/cavy/common/util"
-	"github.com/linrongjian/cavy/common/xlog"
+	"cavy/common/util"
+	"cavy/common/xlog"
 )
 
 type HttpGet struct {

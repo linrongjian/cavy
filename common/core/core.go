@@ -1,7 +1,7 @@
 package core
 
 import (
-	"github.com/linrongjian/cavy/common/api"
+	"cavy/common/api"
 )
 
 type rechargeCore struct {

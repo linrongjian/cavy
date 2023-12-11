@@ -14,7 +14,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/linrongjian/cavy/common/util"
+	"cavy/common/util"
 )
 
 type Request struct {

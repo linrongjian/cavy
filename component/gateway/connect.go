@@ -4,10 +4,10 @@ import (
 	"math/rand"
 	"strconv"
 
-	"github.com/linrongjian/cavy/core/httpsvr"
-	"github.com/linrongjian/cavy/core/logger"
-	"github.com/linrongjian/cavy/core/network/protocols/wswrap"
-	"github.com/linrongjian/cavy/proto/pb"
+	"cavy/core/httpsvr"
+	"cavy/core/logger"
+	"cavy/core/network/protocols/wswrap"
+	"cavy/proto/pb"
 )
 
 var (

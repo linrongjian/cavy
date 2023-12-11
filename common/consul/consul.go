@@ -9,11 +9,12 @@ import (
 
 	////"battlePlatform/wjrgit.qianz.com/common/api"	//"battlePlatform/wjrgit.qianz.com/common/hook"
 
-	"github.com/linrongjian/cavy/common/api"
-	"github.com/linrongjian/cavy/common/hook"
+	"cavy/common/api"
+	"cavy/common/hook"
+
+	"cavy/common/mlog"
 
 	consul "github.com/hashicorp/consul/api"
-	"github.com/linrongjian/cavy/common/mlog"
 )
 
 var client *consul.Client

@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/linrongjian/cavy/component/logicserver"
-	"github.com/linrongjian/cavy/core/app"
+	"cavy/component/logicserver"
+	"cavy/core/app"
 )
 
 func main() {

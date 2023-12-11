@@ -5,8 +5,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com/linrongjian/cavy/core/logger"
-	"github.com/linrongjian/cavy/core/network/protocols/mqwrap"
+	"cavy/core/logger"
+	"cavy/core/network/protocols/mqwrap"
 )
 
 type LogReport struct {

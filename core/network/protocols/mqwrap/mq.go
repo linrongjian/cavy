@@ -4,7 +4,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/linrongjian/cavy/core/logger"
+	"cavy/core/logger"
 
 	"github.com/streadway/amqp"
 )

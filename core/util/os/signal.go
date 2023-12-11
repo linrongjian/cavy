@@ -5,7 +5,7 @@ import (
 	"runtime"
 	"runtime/pprof"
 
-	"github.com/linrongjian/cavy/core/logger"
+	"cavy/core/logger"
 )
 
 func dumpGoRoutinesInfo() {

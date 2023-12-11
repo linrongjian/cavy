@@ -8,7 +8,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/linrongjian/cavy"
+	"cavy"
 )
 
 var (

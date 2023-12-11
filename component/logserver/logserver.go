@@ -3,8 +3,8 @@ package logserver
 import (
 	"log"
 
-	"github.com/linrongjian/cavy/core/app"
-	"github.com/linrongjian/cavy/core/network/protocols/mqwrap"
+	"cavy/core/app"
+	"cavy/core/network/protocols/mqwrap"
 )
 
 var ()

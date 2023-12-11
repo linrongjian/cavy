@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/linrongjian/cavy/core/network/amqp/rmqconsumer"
+	"cavy/core/network/amqp/rmqconsumer"
 )
 
 type LogConsumer interface {

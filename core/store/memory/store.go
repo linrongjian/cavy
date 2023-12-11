@@ -5,7 +5,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/linrongjian/cavy/core/util"
+	"cavy/core/util"
 )
 
 // 内存数据存储

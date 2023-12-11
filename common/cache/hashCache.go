@@ -1,8 +1,9 @@
 package cache
 
 import (
+	"cavy/common/mlog"
+
 	"github.com/gomodule/redigo/redis"
-	"github.com/linrongjian/cavy/common/mlog"
 )
 
 // HashCache 哈希表缓存

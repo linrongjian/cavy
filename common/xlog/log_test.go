@@ -4,7 +4,7 @@ import (
 	"context"
 	"testing"
 
-	"github.com/linrongjian/cavy/common/errgroup"
+	"cavy/common/errgroup"
 )
 
 func TestLog(t *testing.T) {

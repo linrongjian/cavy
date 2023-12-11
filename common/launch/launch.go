@@ -1,6 +1,6 @@
 package launch
 
-import "github.com/linrongjian/cavy/core/module"
+import "cavy/core/module"
 
 type LaunchBase struct {
 	*module.Module

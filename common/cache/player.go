@@ -1,9 +1,10 @@
 package cache
 
 import (
+	"cavy/common/mlog"
+	"cavy/common/stateless"
+
 	"github.com/gomodule/redigo/redis"
-	"github.com/linrongjian/cavy/common/mlog"
-	"github.com/linrongjian/cavy/common/stateless"
 )
 
 // GetOnline 获取在线状态
